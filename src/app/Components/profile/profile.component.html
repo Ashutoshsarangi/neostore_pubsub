@@ -1,0 +1,292 @@
+<div class="container">
+
+    <p class="MyAccount">My Account</p>
+    <div class="col-md-3 mt-md-0 Profile">
+        <img src="assets/Defaults/DefaultUser.jpg" alt="Avatar" class="avatar">
+        <p class="UserName">{{customerName}}</p>
+        <a class="btn btn-info btn-lg" (click)="openOrder('Order')"
+            [ngClass]="{'btn-infoSeclected': selectedButton == 'Order'}" routerLink="profile/:option"
+            routerLinkActive="Active">
+            <span class="glyphicon glyphicon-shopping-cart"></span> Order&nbsp;
+        </a>
+        <a class="btn btn-info btn-lg" (click)="openProfile('Profile')"
+            [ngClass]="{'btn-infoSeclected' : selectedButton == 'Profile'}" routerLink="profile/:option"
+            routerLinkActive="Active">
+            <span class="glyphicon glyphicon-user"></span> Profile&nbsp;
+        </a>
+        <a class="btn btn-info btn-lg" (click)="openAddress('Address')"
+            [ngClass]="{'btn-infoSeclected' : selectedButton == 'Address'}" routerLink="profile/:option"
+            routerLinkActive="Active">
+            <span class="glyphicon glyphicon-list-alt"></span> Address&nbsp;
+        </a>
+        <a class="btn btn-info btn-lg" (click)="openPassword('Password')"
+            [ngClass]="{'btn-infoSeclected' : selectedButton == 'Password'}" routerLink="profile/:option"
+            routerLinkActive="Active">
+            <span class="glyphicon glyphicon-transfer"></span> Change Password&nbsp;
+        </a>
+    </div>
+
+    <div class="col-md-1 mt-md-0">
+
+    </div>
+
+    <div class="ContactFormDiv">
+
+        <div class="col-md-8 OrderDetails"
+            *ngIf="!noOrderFound && selectedButton=='Order' && selectedButton!='Profile' && selectedButton!='Address' && selectedButton!='Password'">
+            <div *ngFor="let o of orderDetailsArray">
+                <p class="Transit">
+                    TRANSIT
+                    <span class="OrderBy">Order By: &nbsp;{{o._id}}</span>
+                </p>
+                <p class="PlacedOn">
+                    Placed on:
+                    <span class="DateTime"> {{o.product_details[0].createdAt | date: 'EEEE, dd/MM/yyyy, h:mm a'}}
+                    </span>
+                    /
+                    <span class="Cost">₹ {{o.product_details[0].total_cartCost}}</span>
+                </p>
+                <div class="row ProductDiv">
+                    <div *ngFor="let oo of o.product_details">
+                        <div class="col-3" *ngFor="let ooo of oo.product_details">
+                            <img src="{{imageUrl}}{{ooo.product_image}}" class="ProductImage" />
+                        </div>
+                    </div>
+                </div>
+                <p class="Download">
+                    <a class="btn Edit" (click)="downloadOrderPdf(o)">
+                        Download Invoice as PDF
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-8"
+            *ngIf="noOrderFound && selectedButton=='Order' && selectedButton!='Profile' && selectedButton!='Address' && selectedButton!='Password'"
+            class="NoAddressDiv">
+            <p class="noAddress">
+                No Orders Found
+            </p>
+            <p class="addAddress1">
+                <a class="btn Add" routerLink="add-address" routerLinkActive="Active">
+                    Go to Product Page
+                </a>
+            </p>
+        </div>
+
+        <div class="col-md-8 ProfileDetails"
+            *ngIf="selectedButton!='Order' && selectedButton=='Profile' && selectedButton!='Address' && selectedButton!='Password' && !editProfileClicked">
+            <p class="ProfileTitle">Profile</p>
+            <div class="row">
+                <div class="col-3 ProfileFieldsL">
+                    <p class="Label">
+                        First Name
+                    </p>
+                    <p class="Label">
+                        Last Name
+                    </p>
+                    <p class="Label">
+                        Gender
+                    </p>
+                    <p class="Label">
+                        Date of Birth
+                    </p>
+                    <p class="Label">
+                        Mobile Number
+                    </p>
+                    <p class="Label">
+                        Email
+                    </p>
+                </div>
+                <div class="col-3 ProfileFields">
+                    <p class="Label">
+                        {{profileDetailsObject.first_name}}
+                    </p>
+                    <p class="Label">
+                        {{profileDetailsObject.last_name}}
+                    </p>
+                    <p class="Label">
+                        {{profileDetailsObject.gender}}
+                    </p>
+                    <p class="Label" *ngIf="profileDetailsObject.dob">
+                        {{profileDetailsObject.dob}}
+                    </p>
+                    <p class="Label" *ngIf="!profileDetailsObject.dob">
+                        N.A.
+                    </p>
+                    <p class="Label">
+                        {{profileDetailsObject.phone_no}}
+                    </p>
+                    <p class="Label">
+                        {{profileDetailsObject.email}}
+                    </p>
+                </div>
+            </div>
+            <p class="EditButton">
+                <a class="btn Edit" (click)="gotoEditProfile()">
+                    <span class="glyphicon glyphicon-pencil">
+                        Edit
+                    </span>
+                </a>
+            </p>
+        </div>
+
+        <div class="col-md-8 ProfileDetails1" *ngIf="selectedButton == 'Profile' && editProfileClicked">
+            <p class="ChangePasswordTitle">Edit Profile</p>
+            <form name="RegForm">
+                <div class="field">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" name="firstname" id="firstname" placeholder="Name">
+                    <label for="firstname">First Name</label>
+                </div>
+                <span id="firstname_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-user icon"></i>
+                    <input type="text" name="lastname" id="lastname" placeholder="Name">
+                    <label for="lastname">Last Name</label>
+                </div>
+                <span id="lastname_error" class="Error"></span>
+                <div class="GenderSelectionDiv">
+                    <p class="GenderSelection">
+                        Gender
+                        <i class="fa fa-user icon"></i>
+                    </p>
+                    <mat-radio-group name="gender" [(ngModel)]="gender" #radioGroup="matRadioGroup">
+                        <mat-radio-button value="Male">Male&nbsp;&nbsp;&nbsp;</mat-radio-button>
+                        <mat-radio-button value="Female">Female</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="field">
+                    <i class="fa fa-calendar icon"></i>
+                    <input type="date" name="dob" id="dob" placeholder="Date of Birth">
+                    <label for="dob">Date of Birth</label>
+                </div>
+                <span id="dob_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-mobile icon"></i>
+                    <input type="tel" name="mobile" id="mobile" placeholder="Mobile" maxlength="10">
+                    <label for="mobile">Mobile</label>
+                </div>
+                <span id="mobile_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-envelope icon"></i>
+                    <input type="email" name="email" id="email" placeholder="Email">
+                    <label for="email">Email</label>
+                </div>
+                <span id="email_error" class="Error"></span>
+                <!-- <div class="form-group">
+                    <input type="file" name="image" (change)="fileProgress($event)" />
+                </div>
+                <div class="image-preview mb-3" *ngIf="previewUrl">
+                    <img [src]="previewUrl" height="300" />
+                </div>
+                <div class="mb-3" *ngIf="uploadedFilePath">
+                    {{uploadedFilePath}}
+                </div> -->
+                <p class="formButtons">
+                    <a class="btn btn-light" (click)="save('Profile')">
+                        Update <span class="glyphicon glyphicon-floppy-save"></span>
+                    </a>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <a class="btn btn-light" (click)="cancel('Profile')">
+                        Cancel <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </p>
+            </form>
+        </div>
+
+        <div class="col-md-8 AddressDetails"
+            *ngIf="!noAddressFound && selectedButton!='Order' && selectedButton!='Profile' && selectedButton=='Address' && selectedButton!='Password'">
+            <p class="ContactFormTitle">Addresses</p>
+            <div class="row Details" *ngFor="let a of addresses; let i =index;">
+                <div class="col-11 TableHeader">
+                    <div class="row">
+                        <div class="col-8">
+                            <div>
+                                {{a.address}}
+                            </div>
+                            <div>
+                                {{a.city}}
+                            </div>
+                            <div>
+                                {{a.pincode}}
+                            </div>
+                            <div>
+                                {{a.country}}
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <a class="btn Edit" routerLink="profile/add-address" routerLinkActive="Active"
+                                        (click)="gotoEditAddress(a.address_id)">
+                                        Edit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1 TableHeader">
+                    <button type="button" class="btn btn-danger" (click)="deleteAddress(a.address_id)">
+                        <i class="fa fa-close"></i>
+                    </button>
+                </div>
+            </div>
+            <p class="addAddress">
+                <a class="btn Add1" (click)="gotoAddAddress()">
+                    Add Address
+                </a>
+            </p>
+        </div>
+
+        <div class="col-md-8"
+            *ngIf="noAddressFound && selectedButton!='Order' && selectedButton!='Profile' && selectedButton=='Address' && selectedButton!='Password'"
+            class="NoAddressDiv">
+            <p class="noAddress">
+                No Address Found
+            </p>
+            <p class="addAddress1">
+                <a class="btn Add" (click)="gotoAddAddress()">
+                    Add Address
+                </a>
+            </p>
+        </div>
+
+        <div class="col-md-8 PasswordDetails"
+            *ngIf="selectedButton!='Order' && selectedButton!='Profile' && selectedButton!='Address' && selectedButton=='Password'">
+            <p class="ChangePasswordTitle">Change Password</p>
+            <p class="ChangePasswordSubTitle">
+                NOTE : The password must contain at least 1 lowercase alphabetical character, 1 uppercase alphabetical
+                character, 1 numeric character, 1 special character, 8-12 characters
+                long.
+            </p>
+            <form name="RegForm">
+                <div class="field">
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" name="password1" id="password1" placeholder="Old Password" maxlength="12">
+                    <label for="password1">Old Password</label>
+                </div>
+                <span id="password1_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" name="password2" id="password2" placeholder="New Password" maxlength="12">
+                    <label for="password2">New Password</label>
+                </div>
+                <span id="password2_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-key icon"></i>
+                    <input type="password" name="password3" id="password3" placeholder="Confirm Password"
+                        maxlength="12">
+                    <label for="password3">Confirm Password</label>
+                </div>
+                <span id="password3_error" class="Error"></span>
+                <p class="button">
+                    <button type="button" class="btn btn-primary" (click)="formValidation()">Submit</button>
+                </p>
+            </form>
+        </div>
+
+    </div>
+
+</div>

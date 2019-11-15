@@ -1,0 +1,97 @@
+.ProductSubImage {
+    margin-top: 15px;
+    height: 80px;
+    width: 120px;
+    padding-left: 20px;
+}
+
+.ContactFormTitle {
+    margin-top: 35px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Price {
+    color: green;
+}
+
+.Color {
+   padding: 0px;
+}
+
+.PriceLabel {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.details {
+    border-top: 1px solid #CDCDCD;
+    margin-top: 10px;
+}
+
+.Share {
+    margin-top: 20px;
+    font-size: 20px;
+}
+
+.btn-primary {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 0px;
+    background: #29A7EC;
+}
+
+.btn-danger {
+    margin: 10px;
+    background: #744D12;
+}
+
+.mattab {
+    margin-left: 90px;
+    margin-right: 90px;
+    margin-top: 20px;
+}
+
+.btn-light {
+    color: #A3A3A3;
+    background-color: #DEDEDE;
+    border-color: #DEDEDE;
+}
+
+.divalign {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+::ng-deep .ngxImageZoomContainer > img{
+    max-height: 250px!important;
+    min-width: 480px!important;
+} 
+
+.fb {
+    padding: 0px;
+    height: 50px;
+}
+
+.google {
+    padding: 0px;
+    height: 50px;
+}
+
+.tweet {
+    padding: 0px;
+    height: 50px;
+}
+
+.share {
+    padding: 0px;
+    height: 50px;
+}
+
+.pint {
+    padding: 0px;
+    height: 50px;
+}

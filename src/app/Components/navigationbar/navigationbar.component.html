@@ -1,0 +1,42 @@
+<nav class="navbar navbar-expand-lg">
+
+    <div class="col-md-3 mt-md-0">
+        <a class="navbar-brand" href="#" routerLink="categories-carousel" routerLinkActive="Active">Neo<span
+                class="Store">STORE</span></a>
+    </div>
+
+    <div class="col-md-3 mt-md-0">
+        <a class="nav-link" href="#" routerLink="allproducts" routerLinkActive="Active">Products</a>
+    </div>
+
+    <div class="col-md-3 mt-md-0">
+        <a class="nav-link" href="#" routerLink="profile/:option" routerLinkActive="Active"
+            (click)="gotoProfile('Order')">Order</a>
+    </div>
+
+    <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit" routerLink="cart" routerLinkActive="Active">
+            <span class="glyphicon glyphicon-shopping-cart"></span>
+            <span class="badge">{{cartCount}}</span>
+        </button>
+    </form>
+
+    <div class="dropdown">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            <span class="glyphicon glyphicon-user"></span>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="#" routerLink="login" routerLinkActive="Active"
+                *ngIf="!showProfileOption">Login</a>
+            <a class="dropdown-item" href="#" routerLink="login/register" routerLinkActive="Active"
+                *ngIf="!showProfileOption">Register</a>
+            <a class="dropdown-item" href="#" routerLink="profile/:option" routerLinkActive="Active"
+                *ngIf="showProfileOption" (click)="gotoProfile('Profile')">Profile</a>
+            <a class="dropdown-item" href="#" routerLink="categories-carousel" routerLinkActive="Active"
+                *ngIf="showProfileOption" (click)="logout()">Logout</a>
+        </div>
+    </div>
+
+</nav>

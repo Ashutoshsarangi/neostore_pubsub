@@ -1,0 +1,171 @@
+.Cart {
+    background: transparent;
+    font-size: 20px;
+}
+
+.badge {
+    background: #4548B5;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.horizontalLine {
+    border-bottom: 1px solid #CDCDCD;
+    margin-bottom: 20px;
+}
+
+.CartDetails {
+    margin-top: 40px;
+    margin-bottom: 200px;
+    padding: 15px;
+}
+
+.AddressDetails {
+    margin-top: 40px;
+    margin-bottom: 200px;
+    padding: 15px;
+    border: 1px solid #CDCDCD;
+}
+
+a.Buy {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.card-header {
+    font-size: 25px;
+}
+
+.Value {
+    text-align: right;
+    position: relative;
+    margin-left: 300px;
+    margin-top: -20px;
+}
+
+.TableHeader {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.Header {
+    border: 1px solid #CDCDCD;
+}
+
+.minus {
+    background: #F1473A;
+    font-size: 15px;
+    border-radius: 50%;
+}
+
+.plus {
+    background: #F1473A;
+    font-size: 15px;
+    border-radius: 50%;
+}
+
+.quan {
+    border: 1px solid #CDCDCD;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.ProductImage {
+    height: 50px;
+    width: 70px;
+}
+
+.Details {
+    border: 1px solid #CDCDCD;
+}
+
+.EmptyCartDiv {
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.emptyCart {
+    text-align: center;
+}
+
+.emptyCartImage {
+    height: 90px;
+    width: 90px;
+}
+
+.emptyCart1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.emptyCart2 {
+    text-align: center;
+    font-size: 15px;
+}
+
+a.Return {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.glyphicon-trash {
+    color: red;
+}
+
+.NoAddressDiv {
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.noAddress {
+    text-align: center;
+    font-size: 50px;
+}
+
+.addAddress {
+    text-align: center;
+}
+
+a.Add {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 60px;
+}
+
+.Addresses {
+    font-size: 25px;
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 20px;
+}
+
+a.Edit {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-top: 7px;
+}
+
+.select {
+    margin-top: 15px;
+}
+
+.btn-light {
+    background: #DEDEDE;
+    color: #A3A3A3;
+    margin-right: 10px;
+}
+
+.btn-light:hover {
+    background: #3D40A1;
+    color: #FFFFFF;
+}
+
+.formButtons{
+    padding-top: 20px;
+}

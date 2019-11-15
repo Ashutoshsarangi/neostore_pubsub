@@ -1,0 +1,138 @@
+<!-- <div class="container">
+    <div class="col-md-6 mt-md-0 socialbutton">
+        <style>
+            .fa {
+                padding: 20px;
+                font-size: 30px;
+                width: 50px;
+                text-align: center;
+                text-decoration: none;
+            }
+
+            .fa:hover {
+                opacity: 0.7;
+            }
+
+            .fa-facebook {
+                background: #3B5998;
+                color: white;
+                width: 90%;
+                font-size: 25px;
+            }
+
+            .fa-google {
+                background: #dd4b39;
+                color: white;
+                width: 90%;
+                font-size: 25px;
+            }
+
+            .fa-twitter {
+                background: #55ACEE;
+                color: white;
+                width: 90%;
+                font-size: 25px;
+            }
+        </style>
+
+        <body>
+            <p>
+                <a href="#" class="fa fa-facebook" (click)="signInWithFB()" *ngIf="loggedIn===false">
+                    &nbsp;&nbsp;&nbsp;Login with Facebook
+                </a>
+                <a href="#" class="fa fa-facebook" (click)="signOutFromFB()" *ngIf="loggedIn===true">
+                    &nbsp;&nbsp;&nbsp;Logout from Facebook
+                </a>
+            </p>
+            <p>
+                <a href="#" class="fa fa-google" (click)="signInWithGoogle()" *ngIf="loggedIn===false">
+                    &nbsp;&nbsp;&nbsp;Login with Google
+                </a>
+                <a href="#" class="fa fa-google" (click)="signOutFromGoogle()" *ngIf="loggedIn===true">
+                    &nbsp;&nbsp;&nbsp;Logout from Google
+                </a>
+            </p>
+            <p>
+                <a href="#" class="fa fa-twitter" (click)="openTwitter()">&nbsp;&nbsp;&nbsp;Login with Twitter</a>
+            </p>
+        </body>
+    </div>
+
+    <div class="ContactFormDiv">
+        <p class="ContactFormTitle">Login to NeoSTORE</p>
+        <form name="RegForm">
+            <style>
+                .input-icons i {
+                    position: absolute;
+                }
+
+                .input-icons {
+                    width: 100%;
+                    margin-bottom: 10px;
+                }
+
+                .icon {
+                    padding: 10px;
+                    min-width: 40px;
+                    margin-inline-start: 90%;
+                    margin-top: -46px;
+                    z-index: 1000;
+                }
+
+                .input-field {
+                    width: 100%;
+                    padding: 10px;
+                    text-align: center;
+                }
+            </style>
+            <div class="field">
+                <i class="fa fa-envelope icon"></i>
+                <input type="email" name="email" id="email" placeholder="Enter your email address">
+                <label for="email">Email Address</label>
+            </div>
+            <div class="field">
+                <i class="fa fa-key icon"></i>
+                <input type="password" name="password" id="password" placeholder="Enter your password" maxlength="12">
+                <label for="password">Password</label>
+            </div>
+            <p>
+                <button type="button" class="btn btn-light" (click)="formValidation()">Login</button>
+            </p>
+        </form>
+    </div>
+
+</div> -->
+
+<div class="ContactFormDiv">
+
+    <p class="ContactFormTitle">Login to NeoSTORE</p>
+
+    <form name="RegForm">
+
+        <div class="field">
+            <i class="fa fa-envelope icon"></i>
+            <input type="email" name="email" id="email" placeholder="Email Address">
+            <label for="email">Email Address</label>
+        </div>
+        <span id="email_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-key icon"></i>
+            <input type="password" name="password" id="password" placeholder="Password" maxlength="12">
+            <label for="password">Password</label>
+        </div>
+        <span id="password_error" class="Error"></span>
+
+        <p class="RegisterButton">
+            <button type="button" class="btn btn-light" (click)="formValidation()">Login</button>
+        </p>
+
+    </form>
+
+    <p class="regFor">
+        <a class="nav-link reg" routerLink="register" routerLinkActive="Active">Register Now</a>
+        <span class="Divider">|</span>
+        <a class="nav-link for" routerLink="forgotpassword" routerLinkActive="Active">Forgotten ?</a>
+    </p>
+
+</div>

@@ -1,0 +1,192 @@
+<!-- <div class="row">
+    <div class="col-1">
+        <a class="btn Cart">
+            <span class="badge">1</span>
+            Cart
+        </a>
+    </div>
+    <div class="col-9 horizontalLine">
+    </div>
+    <div class="col-2">
+        <a class="btn Cart">
+            <span class="badge">2</span>
+            Address
+        </a>
+    </div>
+</div> -->
+
+<mat-tab-group class="mattab" [selectedIndex]="selectedTab">
+
+    <mat-tab label="Cart">
+
+        <div class="container CartDetails" *ngIf="!noCartData">
+            <div class="row">
+                <div class="col-8 container ProductListTable">
+                    <div class="row Header">
+                        <div class="col-6 TableHeader">
+                            Product
+                        </div>
+                        <div class="col-2 TableHeader">
+                            Quantity
+                        </div>
+                        <div class="col-2 TableHeader">
+                            Price
+                        </div>
+                        <div class="col-2 TableHeader">
+                            Total
+                        </div>
+                    </div>
+                    <div class="row Details" *ngFor="let c of cartData">
+                        <div class="col-6 TableHeader">
+                            <div class="row">
+                                <div class="col-4">
+                                    <img src="{{imageUrl}}{{c.product_id.product_image}}" class="ProductImage" />
+                                </div>
+                                <div class="col-8">
+                                    <div class="row">
+                                        {{c.product_id.product_name}}
+                                    </div>
+                                    <div class="row">
+                                        by {{c.product_id.product_producer}}
+                                    </div>
+                                    <div class="row">
+                                        Status: <span style="color: green">{{c.product_id.product_stock}} In
+                                            Stock</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-2 TableHeader">
+                            <span class="badge minus"
+                                (click)="decrementQuanity(c.product_id,c.quantity,c.product_id.product_cost,c.total_productCost)">-</span>
+                            <span class="quan">{{c.quantity}}</span>
+                            <span class="badge plus"
+                                (click)="incrementQuanity(c.product_id,c.quantity,c.product_id.product_cost,c.total_productCost)">+</span>
+                        </div>
+                        <div class="col-2 TableHeader">
+                            {{c.product_id.product_cost}}
+                        </div>
+                        <div class="col-1 TableHeader">
+                            {{c.total_productCost}}
+                        </div>
+                        <div class="col-1 TableHeader">
+                            <span class="glyphicon glyphicon-trash" (click)="deleteProduct(c.product_id)"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4 container ReviewOrderTable">
+                    <div class="card" style="width: 40rem;">
+                        <div class="card-header">
+                            Review Order
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Subtotal
+                                <p class="Value">
+                                    {{subtotal}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">GST(5%)
+                                <p class="Value">
+                                    {{gst}}
+                                </p>
+                            </li>
+                            <li class="list-group-item">Order Total
+                                <p class="Value">
+                                    {{ordertotal}}
+                                </p>
+                            </li>
+                            <a class="btn Buy" (click)="proceedToBuy()">
+                                Proceed To Buy
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div *ngIf="noCartData" class="EmptyCartDiv">
+            <p class="emptyCart">
+                <img src="assets/EmptyCart/emptycart.png" alt="" class="emptyCartImage">
+            </p>
+            <p class="emptyCart1">
+                YOUR CART IS CURRENTLY EMPTY
+            </p>
+            <p class="emptyCart2">
+                Before proceed to checkout you must add some products to you shopping cart.
+            </p>
+            <p class="emptyCart2">
+                You will find lots of intresting products on our products page
+            </p>
+            <p class="emptyCart">
+                <a class="btn Return" routerLink="allproducts" routerLinkActive="Active">
+                    Return to Product Page
+                </a>
+            </p>
+        </div>
+
+    </mat-tab>
+
+    <mat-tab label="Address">
+
+        <div class="container AddressDetails" *ngIf="!noAddressFound">
+            <p class="Addresses">Addresses</p>
+            <div class="row Details" *ngFor="let a of addresses; let i =index;">
+                <div class="col-12 TableHeader">
+                    <div class="row">
+                        <div class="col-8">
+                            <div>
+                                {{a.address}}
+                            </div>
+                            <div>
+                                {{a.city}}
+                            </div>
+                            <div>
+                                {{a.pincode}}
+                            </div>
+                            <div>
+                                {{a.country}}
+                            </div>
+                            <div class="row">
+                                <div class="col-3 select">
+                                    <mat-radio-group name="{{i}}" [(ngModel)]="selectedRadio"
+                                        #radioGroup="matRadioGroup" (change)="radioChange($event)">
+                                        <mat-radio-button value="{{i}}">Select
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="col-3">
+                                    <a class="btn Edit" routerLink="add-address" routerLinkActive="Active"
+                                        (click)="gotoEditAddress(a.address_id)">
+                                        Edit
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="formButtons">
+                <button type="button" class="btn btn-light" routerLink="add-address" routerLinkActive="Active">
+                    Add Address
+                </button>
+                <button type="button" class="btn" [style.background-color]="placeButtonColor"
+                    [style.color]="placeButtonTextColor" [disabled]="!placeOrderButton" (click)="placeOrder()">
+                    Place Order
+                </button>
+            </p>
+        </div>
+
+        <div *ngIf="noAddressFound" class="NoAddressDiv">
+            <p class="noAddress">
+                No Address Found
+            </p>
+            <p class="addAddress">
+                <a class="btn Add" routerLink="add-address" routerLinkActive="Active">
+                    Add Address
+                </a>
+            </p>
+        </div>
+
+    </mat-tab>
+
+</mat-tab-group>

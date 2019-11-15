@@ -1,0 +1,131 @@
+<div class="container">
+
+    <div class="col-md-6 mt-md-0">
+        <ngx-image-zoom [thumbImage]=myThumbnail [fullImage]=myFullresImage [magnification]="1"
+            [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="150"></ngx-image-zoom>
+        <div class="col-md-4" *ngFor="let s of productDetailsDetailsArray.subImages_id.product_subImages">
+            <img class="d-block ProductSubImage" src="{{imageUrl}}{{s}}" (click)="changeProductImage(s)">
+        </div>
+    </div>
+
+    <div class="ContactFormDiv">
+
+        <p class="ContactFormTitle">{{productDetailsDetailsArray.product_name}}</p>
+
+        <star-rating value="{{productDetailsDetailsArray.product_rating}}" checkedcolor="orange" uncheckedcolor="black"
+            size="15px" readonly="true" :star-size="5px" :increment="0.01">
+        </star-rating>
+
+        <div class="details">
+
+            <p class="PriceLabel">Price:
+                <span class="Price">₹ {{productDetailsDetailsArray.product_cost}}</span>
+            </p>
+
+            <div class="row">
+                <div class="col-md-1 Color">Color:
+
+                </div>
+                <div class="col-md-1" [style.background-color]="productDetailsDetailsArray.color_id.color_code">
+
+                </div>
+            </div>
+
+            <p class="Share">Share <span class="glyphicon glyphicon-share-alt"></span></p>
+
+            <!-- <style>
+                .fa {
+                    padding: 20px;
+                    font-size: 15px;
+                    text-align: center;
+                    text-decoration: none;
+                    border-radius: 50%;
+                    margin: 10px;
+                }
+
+                .fa:hover {
+                    opacity: 0.7;
+                }
+
+                .fa-facebook {
+                    background: #3B5998;
+                    color: white;
+                }
+
+                .fa-google {
+                    background: #dd4b39;
+                    color: white;
+                }
+
+                .fa-whatsapp {
+                    background: #2BD666;
+                    color: white;
+                }
+
+                .fa-pinterest {
+                    background: #cb2027;
+                    color: white;
+                }
+
+                .fa-twitter {
+                    background: #55ACEE;
+                    color: white;
+                }
+            </style>
+
+            <body>
+                <a href="#" class="fa fa-facebook"></a> 
+                <a href="#" class="fa fa-google"></a>
+                <a href="#" class="fa fa-whatsapp"></a>
+                <a href="#" class="fa fa-pinterest"></a>
+                <a href="#" class="fa fa-twitter"></a>
+            </body> -->
+            <div>
+                <div class="row">
+                    <div class="col-3 fb">
+                        <fb-like></fb-like>
+                    </div>
+                    <!-- <div class="col-2 google">
+                        <google-plus></google-plus>
+                    </div> -->
+                    <div class="col-2 tweet">
+                        <tweet></tweet>
+                    </div>
+                    <div class="col-2 share">
+                        <linkedin-share></linkedin-share>
+                    </div>
+                    <div class="col-2 pint">
+                        <pin-it></pin-it>
+                    </div>
+                </div>
+            </div>
+
+            <p>
+                <button type="button" class="btn btn-primary" (click)="addToCart()">ADD TO CART</button>
+                <button type="button" class="btn btn-danger" (click)="rateProduct()">RATE PRODUCT</button>
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<mat-tab-group class="mattab">
+    <mat-tab label="Description">
+        <p>
+            {{productDetailsDetailsArray.product_desc}}
+        </p>
+    </mat-tab>
+    <mat-tab label="Features">
+        <p>
+            Dimension: {{productDetailsDetailsArray.product_dimension}}
+        </p>
+        <p>
+            Material: {{productDetailsDetailsArray.product_material}}
+        </p>
+        <p>
+            Manufacturer: {{productDetailsDetailsArray.product_producer}}
+        </p>
+    </mat-tab>
+</mat-tab-group>

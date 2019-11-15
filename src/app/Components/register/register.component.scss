@@ -1,0 +1,182 @@
+.ContactFormDiv {
+    height: 620px;
+    width: 550px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+}
+
+// .fa-facebook {
+//     background: #3B5998;
+//     color: white;
+//     width: 44%;
+//     font-size: 20px;
+//     margin-right: 1%;
+//     margin-left: 5%;
+// }
+
+// .fa-google {
+//     background: #dd4b39;
+//     color: white;
+//     width: 43%;
+//     font-size: 20px;
+//     margin-left: 2%;
+//     margin-right: 5%;
+// }
+
+.ContactFormTitle {
+    font-size: 25px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 10px;
+    color: #4A3DB5;
+}
+
+.field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.Error {
+    color: red;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.fa:hover {
+    opacity: 0.7;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+    margin-inline-start: 90%;
+    margin-top: -44px;
+    z-index: 1000;
+    font-size: 24px;
+    color: #4A3DB5;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+label, input {
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+  
+input {
+    font-size: 1em;
+    border: 0;
+    border: 1px solid #CDCDCD;
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: text;
+    height: 40px;
+    padding-left: 10px;
+}
+
+label {
+    text-transform: none;
+    letter-spacing: 0rem;
+    color: #4A3DB5;
+    font-weight: normal;
+    font-size: 10px;
+    margin-left: 10px;
+}
+  
+input:focus {
+    outline: 0;
+    border: 1px solid #4A3DB5;
+}
+
+input:placeholder-shown + label {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 3.6rem) scale(1.5);
+}
+
+::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+}
+
+input:focus::-webkit-input-placeholder {
+    opacity: 1;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+}
+
+.GenderSelectionDiv {
+    border: 1px solid #CDCDCD;
+    margin-top: 33px;
+}
+
+.GenderSelection{
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    color: #4A3DB5;
+    font-weight: normal;
+}
+
+.mat-radio-button {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.mat-radio-label-content {
+    font-weight: normal;
+}
+
+.RegisterButton {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.btn-light {
+    background: #3D40A1;
+    color: #FFFFFF;
+}
+
+.btn-light:hover {
+    background: #3D40A1;
+    color: #FFFFFF;
+}

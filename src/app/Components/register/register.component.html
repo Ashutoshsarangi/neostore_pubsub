@@ -1,0 +1,70 @@
+<div class="ContactFormDiv">
+
+    <!-- <a href="#" class="fa fa-facebook" (click)="openFacebook()">&nbsp;&nbsp;&nbsp;Login with Facebook</a>
+    <a href="#" class="fa fa-google" (click)="openGoogle()">&nbsp;&nbsp;&nbsp;Login with Google</a> -->
+
+    <p class="ContactFormTitle">Register to NeoSTORE</p>
+
+    <form name="RegForm">
+
+        <div class="field">
+            <i class="fa fa-user icon"></i>
+            <input type="text" name="firstname" id="firstname" placeholder="First Name">
+            <label for="firstname">First Name</label>
+        </div>
+        <span id="firstname_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-user icon"></i>
+            <input type="text" name="lastname" id="lastname" placeholder="Last Name">
+            <label for="lastname">Last Name</label>
+        </div>
+        <span id="lastname_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-envelope icon"></i>
+            <input type="email" name="email" id="email" placeholder="Email Address">
+            <label for="email">Email Address</label>
+        </div>
+        <span id="email_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-key icon"></i>
+            <input type="password" name="password" id="password" placeholder="Password" maxlength="12">
+            <label for="password">Password</label>
+        </div>
+        <span id="password_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-key icon"></i>
+            <input type="password" name="confirmpassword" id="confirmpassword" placeholder="Confirm Password"
+                maxlength="12">
+            <label for="confirmpassword">Confirm Password</label>
+        </div>
+        <span id="confirmpassword_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-mobile icon"></i>
+            <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" maxlength="10">
+            <label for="mobile">Mobile Number</label>
+        </div>
+        <span id="mobile_error" class="Error"></span>
+
+        <div class="GenderSelectionDiv">
+            <p class="GenderSelection">
+                Gender
+                <i class="fa fa-user icon"></i>
+            </p>
+            <mat-radio-group name="gender" [(ngModel)]="gender" #radioGroup="matRadioGroup">
+                <mat-radio-button value="Male">Male&nbsp;&nbsp;&nbsp;</mat-radio-button>
+                <mat-radio-button value="Female">Female</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
+        <p class="RegisterButton">
+            <button type="button" class="btn btn-light" (click)="formValidation()">Register</button>
+        </p>
+
+    </form>
+
+</div>

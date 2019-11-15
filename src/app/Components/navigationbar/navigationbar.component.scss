@@ -1,0 +1,55 @@
+.navbar {
+    background: #000000;
+    color: #FFFFFF;
+    padding: 0px;
+}
+
+a {
+    color: #FFFFFF;
+}
+
+.nav-link {
+    font-weight: bold;
+    font-size: 20px;
+    padding: 0px;
+    color: #FFFFFF;
+}
+
+.nav-link:hover {
+    color: #FFFFFF;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.navbar-brand:hover {
+    color: #FFFFFF;
+}
+
+.Store {
+    font-weight: bold;
+    font-size: 30px;
+    color: red;
+}
+
+.btn-outline-success {
+    color: #000000;
+    border-color: #FFFFFF;
+    background: #FFFFFF;
+} 
+
+.btn:hover {
+    color: #000000;
+    background: #FFFFFF;
+    border-color: #FFFFFF;
+}
+
+.dropdown-item {
+    color: #000000;
+}
+
+.badge {
+    background-color: red;
+}

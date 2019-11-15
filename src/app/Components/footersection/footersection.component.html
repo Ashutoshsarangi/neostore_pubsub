@@ -1,0 +1,70 @@
+<footer class="page-footer font-small blue pt-4">
+
+    <div class="container-fluid text-center text-md-left">
+
+        <div class="row">
+
+            <div class="col-md-4 mt-md-0 mb-3">
+                <h5 class="AboutCompany">About Company</h5>
+                <p class="AboutCompany1">{{companyAbout}}</p>
+                <p class="AboutCompany1">Contact information</p>
+                <p class="AboutCompany1">Email: {{companyContact}}</p>
+                <p class="AboutCompany1">Phone: {{companyEmail}}</p>
+                <p class="AboutCompany1">{{companyAddress}}</p>
+            </div>
+
+            <div class="col-md-4 mb-md-0 mb-3">
+                <h5 class="AboutCompany">Information</h5>
+                <p class="AboutCompany1">
+                    <a class="nav-link" href="#" (click)="openPDF()">
+                        Terms and Conditions
+                    </a>
+                </p>
+                <p class="AboutCompany1">
+                    <a class="nav-link" href="#" (click)="openPDF1()">
+                        Gurantee and Return Policy
+                    </a>
+                </p>
+                <p class="AboutCompany1">
+                    <a class="nav-link" href="#" routerLink="contactform" routerLinkActive="Active">
+                        Contact Us
+                    </a>
+                </p>
+                <p class="AboutCompany1">
+                    <a class="nav-link" href="#" routerLink="categories-carousel" routerLinkActive="Active">
+                        Privacy Policy
+                    </a>
+                </p>
+                <p class="AboutCompany1">
+                    <a class="nav-link" href="#" routerLink="locateus" routerLinkActive="Active">
+                        Locate Us
+                    </a>
+                </p>
+            </div>
+
+            <div class="col-md-4 mb-md-0 mb-3">
+                <h5 class="AboutCompany">Newsletter</h5>
+                <p class="AboutCompany1">Signup to get exclusive offer from our favorite brands and to be well up in the
+                    news .
+                </p>
+                <p class="InputPara">
+                    <input type="email" [(ngModel)]="email" class="InputEmail" placeholder="Your email..."
+                        aria-label="Your email" aria-describedby="basic-addon2">
+                </p>
+                <p class="SubscribeButtonPara">
+                    <button class="SubscribeButton" mdbBtn color="white" outline="true" size="sm" type="button"
+                        mdbWavesEffect (click)="gotoThankYouSubscribe(email)">
+                        Subscribe
+                    </button>
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="footer-copyright text-center py-3">
+        Copyright 2017 NeoSOFT Technologies All rights reserved | Design By Shubham Soni
+    </div>
+
+</footer>

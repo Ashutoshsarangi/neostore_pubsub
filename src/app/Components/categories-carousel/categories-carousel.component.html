@@ -1,0 +1,45 @@
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">
+    <div class="item" [ngClass]="{ 'active': i === 0 }" *ngFor="let c of categoriesDetailsArray; let i = index">
+      <img class="d-block w-100" src="{{imageUrl}}{{c.product_image}}" style="width:100%;"
+        routerLink="allproducts/:category_id" routerLinkActive="Active"
+        (click)="gotoAllProducts(c.category_id, c.category_name)">
+    </div>
+  </div>
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="glyphicon glyphicon-chevron-left"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="glyphicon glyphicon-chevron-right"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>
+
+<p class="PopularProducts">Popular Products</p>
+
+<p class="ViewAll">
+  <a class="nav-link viewall" href="#" routerLink="allproducts" routerLinkActive="Active">View All</a>
+</p>
+
+<div class="row card-group">
+  <div class="col-3" *ngFor="let p of productDetailsArray;">
+    <div class="card">
+      <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">
+          <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"
+            (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
+            {{p.DashboardProducts[0].product_name}}
+          </a>
+        </h5>
+        <p class="card-text">₹ {{p.DashboardProducts[0].product_cost}}</p>
+        <p class="button"><a class="btn btn-primary" (click)="addToCart(p.DashboardProducts[0])">Add To Cart</a></p>
+        <p class="star">
+          <star-rating value="{{p.DashboardProducts[0].product_rating}}" checkedcolor="orange" uncheckedcolor="black"
+            size="24px" readonly="true" :star-size="5px" :increment="0.01"></star-rating>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+<div class="container">
+
+    <p class="MyAccount">My Account</p>
+    <div class="col-md-3 mt-md-0 Profile">
+        <p>
+            <a class="btn btn-info btn-lg" (click)="openOrdersList()">
+                <span class="glyphicon glyphicon-chevron-down"></span> Orders&nbsp;
+            </a>
+        </p>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="ordersClicked">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <li class="list-group-item list-group-item-action" routerLink="profile/:option"
+                    routerLinkActive="Active" (click)="gotoProfile('Order')">
+                    Orders
+                </li>
+            </div>
+        </div>
+        <p>
+            <a class="btn btn-info btn-lg" (click)="openMyAccountList()">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                Account&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </a>
+        </p>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="myAccountClicked">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <li class="list-group-item list-group-item-action" routerLink="profile/:option"
+                    routerLinkActive="Active" (click)="gotoProfile('Profile')">
+                    Profile
+                </li>
+                <li class="list-group-item list-group-item-action" routerLink="profile/:option"
+                    routerLinkActive="Active" (click)="gotoProfile('Address')">
+                    Addresses
+                </li>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-1 mt-md-0">
+
+    </div>
+
+    <div class="ContactFormDiv">
+        <div class="col-md-8 PasswordDetails">
+            <p class="ContactFormTitle">{{addressHeading}}</p>
+            <form name="RegForm" class="addressForm">
+                <div class="field">
+                    <i class="fa fa-address-card icon"></i>
+                    <input type="text" name="address" id="address" placeholder="Address" maxlength="100">
+                    <label for="address">Address</label>
+                </div>
+                <span id="address_error" class="Error"></span>
+                <div class="field">
+                    <i class="fa fa-calculator icon"></i>
+                    <input type="text" name="pin" id="pin" placeholder="PinCode" maxlength="6">
+                    <label for="pin">Pin Code (*Only digits)</label>
+                </div>
+                <span id="pin_error" class="Error"></span>
+                <div class="row">
+                    <div class="col 6">
+                        <div class="field">
+                            <i class="fa fa-globe icon1"></i>
+                            <input type="text" name="city" id="city" placeholder="City" maxlength="20">
+                            <label for="city">City</label>
+                        </div>
+                        <span id="city_error" class="Error"></span>
+                    </div>
+                    <div class="col 6">
+                        <div class="field">
+                            <i class="fa fa-globe icon1"></i>
+                            <input type="text" name="state" id="state" placeholder="State" maxlength="20">
+                            <label for="state">State</label>
+                        </div>
+                        <span id="state_error" class="Error"></span>
+                    </div>
+                </div>
+                <div class="field">
+                    <i class="fa fa-globe icon"></i>
+                    <input type="text" name="country" id="country" placeholder="Country" maxlength="20">
+                    <label for="country">Country</label>
+                </div>
+                <span id="country_error" class="Error"></span>
+                <p class="formButtons">
+                    <a class="btn btn-light" (click)="save('Address')">
+                        {{buttonText}} <span class="glyphicon glyphicon-floppy-save"></span>
+                    </a>
+                    &nbsp;
+                    &nbsp;
+                    &nbsp;
+                    <a class="btn btn-light" routerLink="profile" routerLinkActive="Active" (click)="cancel('Address')">
+                        Cancel <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>

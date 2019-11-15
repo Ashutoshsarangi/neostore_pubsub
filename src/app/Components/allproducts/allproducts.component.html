@@ -1,0 +1,103 @@
+<div class="container">
+
+    <div class="col-md-2 mt-md-0 socialbutton">
+        <p>
+            <a class="btn btn-info btn-lg" (click)="getAllProducts()">
+                &nbsp;&nbsp;All Products&nbsp;&nbsp;
+            </a>
+        </p>
+        <p>
+            <a class="btn btn-info btn-lg" (click)="openCategoriesList()">
+                <span class="glyphicon glyphicon-chevron-down"></span> Categories&nbsp;
+            </a>
+        </p>
+        <div class="list-group" *ngIf="categoriesClicked">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item list-group-item-action" [ngClass]="{ 'active': i === 0 }"
+                    *ngFor="let c of categoriesDetailsArray;" routerLink="allproducts/:category_id"
+                    routerLinkActive="Active" (click)="setCategoryId(c.category_id,c.category_name)">
+                    {{c.category_name}}</li>
+            </ul>
+        </div>
+        <p>
+            <a class="btn btn-info btn-lg" (click)="openColorsList()">
+                <span class="glyphicon glyphicon-chevron-down"></span>
+                Colors&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </a>
+        </p>
+        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="colorsClicked">
+            <div class="btn-group mr-2" role="group" aria-label="First group">
+                <button type="button" class="btn btn-secondary" *ngFor="let c of allColorsDetailsArray; let i = index"
+                    [style.background-color]="c.color_code" (click)="setColorId(c.color_id,c.color_code)"></button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-7">
+            <p class="ContactFormTitle">&nbsp;&nbsp;&nbsp;{{selectedCategoryName}}</p>
+        </div>
+        <div class="col-md-1" [style.background-color]="selectedColorCode"
+            *ngIf="selectedCategoryName!='All Categories'">
+        </div>
+        <div class="col-md-4">
+            <div class="row">
+                <div class="col-md-5 SortBy">
+                    Sort By:
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default btn-sm"
+                        (click)="setProductRating('product_rating', true)">
+                        <span class="glyphicon glyphicon-star"></span>
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default btn-sm"
+                        (click)="setAscendingDescending('product_cost',true)">
+                        ₹<span class="glyphicon glyphicon-arrow-up"></span>
+                    </button>
+                </div>
+                <div class="col-md-2">
+                    <button type="button" class="btn btn-default btn-sm"
+                        (click)="setAscendingDescending('product_cost',false)">
+                        ₹<span class="glyphicon glyphicon-arrow-down"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row card-group" *ngIf="!notFoundProduct">
+        <div class="col-4" *ngFor="let p of pageOfItems;">
+            <div class="card">
+                <img src="{{imageUrl}}{{p.product_image}}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"
+                            (click)="gotoProductDetails(p._id)">
+                            {{p.product_name}}
+                        </a>
+                    </h5>
+                    <p class="card-text">₹ {{p.product_cost}}</p>
+                    <p class="button"><a class="btn btn-primary" (click)="addToCart(p)">Add To Cart</a></p>
+                    <p class="star">
+                        <star-rating value="{{p.product_rating}}" checkedcolor="orange" uncheckedcolor="black"
+                            size="15px" readonly="true" :star-size="5px" :increment="0.01">
+                        </star-rating>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-footer pb-0 pt-3" *ngIf="!notFoundProduct">
+        <jw-pagination [items]="allProductsDetailsArray" (changePage)="onChangePage($event)"></jw-pagination>
+    </div>
+
+    <div *ngIf="notFoundProduct">
+        <p class="notFound">
+            <img src="assets/NoProductFound/no-product.png" alt="">
+        </p>
+    </div>
+
+</div>

@@ -1,0 +1,555 @@
+.Cart {
+    background: transparent;
+    font-size: 20px;
+}
+
+.badge {
+    background: #4548B5;
+    font-size: 20px;
+    border-radius: 50%;
+}
+
+.horizontalLine {
+    border-bottom: 1px solid #CDCDCD;
+    margin-bottom: 20px;
+}
+
+.CartDetails {
+    margin-top: 40px;
+    margin-bottom: 200px;
+    padding: 15px;
+}
+
+.AddressDetails {
+    margin-top: 20px;
+    margin-bottom: 200px;
+    border-left: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+    border-bottom: 1px solid #000000;
+}
+
+.addAddress1 {
+    text-align: center;
+}
+
+.ContactFormTitle {
+    font-size: 30px;
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 15px;
+}
+
+a.Buy {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.card-header {
+    font-size: 25px;
+}
+
+.Value {
+    text-align: right;
+    position: relative;
+    margin-left: 300px;
+    margin-top: -20px;
+}
+
+.TableHeader {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.Header {
+    border: 1px solid #CDCDCD;
+}
+
+.minus {
+    background: #F1473A;
+    font-size: 15px;
+    border-radius: 50%;
+}
+
+.plus {
+    background: #F1473A;
+    font-size: 15px;
+    border-radius: 50%;
+}
+
+.quan {
+    border: 1px solid #CDCDCD;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 5px;
+}
+
+.ProductImage {
+    height: 50px;
+    width: 70px;
+}
+
+.Details {
+    border-left: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+    border-bottom: 1px solid #000000;
+    margin: 2px;
+    margin-bottom: 20px;
+}
+
+.EmptyCartDiv {
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.emptyCart {
+    text-align: center;
+}
+
+.emptyCartImage {
+    height: 90px;
+    width: 90px;
+}
+
+.emptyCart1 {
+    text-align: center;
+    font-size: 30px;
+}
+
+.emptyCart2 {
+    text-align: center;
+    font-size: 15px;
+}
+
+a.Return {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.glyphicon-trash {
+    color: red;
+}
+
+.NoAddressDiv {
+    margin-top: 40px;
+    margin-bottom: 200px;
+}
+
+.noAddress {
+    text-align: center;
+    font-size: 50px;
+}
+
+a.Add {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 60px;
+}
+
+.addAddress {
+    border-top: 1px solid #CDCDCD;
+    padding-top: 20px;
+}
+
+a.Add1 {
+    background: #DEDEDE;
+    color: #A3A3A3;
+    border-bottom: 1px solid #000000;
+}
+
+a.Add1:hover {
+    background: #4548B5;
+    color: #FFFFFF;
+}
+
+.Addresses {
+    font-size: 25px;
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 20px;
+}
+
+a.Edit {
+    background: #4548B5;
+    color: #FFFFFF;
+    margin-top: 7px;
+}
+
+.select {
+    margin-top: 15px;
+}
+
+.btn-light {
+    background: #DEDEDE;
+    color: #A3A3A3;
+    margin-right: 10px;
+}
+
+.btn-light:hover {
+    background: #3D40A1;
+    color: #FFFFFF;
+}
+
+.MyAccount {
+    font-size: 30px;
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 15px;
+    font-weight: bold;
+}
+
+.avatar {
+    vertical-align: middle;
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+}
+
+.UserName {
+    margin-top: 15px;
+    color: #A32C2C;
+    text-align: center;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.Profile {
+    text-align: center; 
+}
+
+a.btn-info {
+    color: #3C5FBB;
+}
+
+.btn-info { 
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    width: 100%;
+}
+
+.btn-infoSeclected {
+    background-color: #FFFFFF;
+    border-color: #000000;
+    border: 1px solid #000000;
+    width: 100%;
+}
+
+.OrderDetails {
+    margin-top: 50px;
+    margin-bottom: 200px;
+    border-left: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+    border-bottom: 1px solid #000000;
+}
+
+.PlacedOn {
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 15px;
+}
+
+.ProductImage {
+    height: 80px;
+    width: 120px;
+}
+
+.ProductDiv {
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.Download {
+    border-top: 1px solid #CDCDCD;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.ProfileTitle {
+    font-size: 30px;
+    border-bottom: 1px solid #CDCDCD;
+    padding-bottom: 15px;
+}
+
+.ProfileDetails {
+    margin-top: 20px;
+    margin-bottom: 200px;
+    border-left: 1px solid #CDCDCD;
+    border-right: 1px solid #CDCDCD;
+    border-bottom: 1px solid #000000;
+}
+
+.ProfileDetails1 {
+    height: 650px;
+    width: 550px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    border: 1px solid #CDCDCD;
+}
+
+.formButtons{
+    margin-top: 15px;
+    text-align: center;
+}
+
+a.btn.btn-light {
+    color: #FFFFFF;
+}
+
+a.btn.btn-light:hover {
+    color: #FFFFFF;
+}
+
+.btn-light {
+    background: #3D40A1;
+    color: #FFFFFF;
+}
+
+.btn-light:hover {
+    background: #3D40A1;
+    color: #FFFFFF;
+}
+
+.ProfileFieldsL {
+    font-size: 15px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    font-weight: bold;
+}
+
+.ProfileFields {
+    font-size: 15px;
+    padding-right: 30px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.EditButton {
+    border-top: 1px solid #CDCDCD;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.Label {
+    margin-bottom: 22px;
+}
+
+.PasswordDetails {
+    height: 500px;
+    width: 550px;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+    margin: auto;
+    border: 1px solid #CDCDCD;
+}
+
+.ChangePasswordTitle {
+    font-size: 35px;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 15px;
+    color: #4A3DB5;
+}
+
+.ChangePasswordSubTitle {
+    text-align: center;
+    color:red;
+}
+
+.button {
+    text-align: center;
+}
+
+.btn-primary {
+    background: #4A3DB5;
+    color: #FFFFFF;
+    border: 1px solid #4A3DB5;
+}
+
+.btn-primary:hover {
+    background: #4A3DB5;
+    color: #FFFFFF;
+}
+
+.form-control {
+    background: rgb(240, 239, 239);
+}
+
+.field {
+    display: flex;
+    flex-flow: column-reverse;
+    margin-bottom: 1em;
+}
+
+label, input {
+    transition: all 0.2s;
+    touch-action: manipulation;
+}
+  
+input {
+    font-size: 1em;
+    border: 0;
+    border: 1px solid #CDCDCD;
+    font-family: inherit;
+    -webkit-appearance: none;
+    border-radius: 0;
+    padding: 0;
+    cursor: text;
+    height: 40px;
+    padding-left: 10px;
+}
+  
+input:focus {
+    outline: 0;
+    border: 1px solid #4A3DB5;
+}
+  
+label {
+    text-transform: none;
+    letter-spacing: 0rem;
+    color: #4A3DB5;
+    font-weight: normal;
+    font-size: 10px;
+    margin-left: 10px;
+}
+
+input:placeholder-shown + label {
+    cursor: text;
+    max-width: 66.66%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transform-origin: left bottom;
+    transform: translate(0, 3.6rem) scale(1.5);
+}
+
+::-webkit-input-placeholder {
+    opacity: 0;
+    transition: inherit;
+}
+
+input:focus::-webkit-input-placeholder {
+    opacity: 1;
+}
+
+input:not(:placeholder-shown) + label,
+input:focus + label {
+    transform: translate(0, 0) scale(1);
+    cursor: pointer;
+}
+
+.Transit {
+    color: #C97F1A;
+    font-weight: bold;
+}
+
+.OrderBy {
+    color: #000000;
+}
+
+.DateTime {
+    color: #3D40A1;
+}
+
+.Cost {
+    color: #098247;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+    margin-inline-start: 90%;
+    margin-top: -37px;
+    z-index: 1000;
+    color: #4A3DB5;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.container {
+    padding:0px;
+}
+
+.Error {
+    color: red;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.icon1 {
+    padding: 10px;
+    min-width: 40px;
+    margin-inline-start: 93%;
+    margin-top: -44px;
+    z-index: 1000;
+    font-size: 24px;
+}
+
+.icon2 {
+    padding: 10px;
+    min-width: 40px;
+    z-index: 1000;
+    font-size: 24px;
+}
+
+.input-field {
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+}
+
+.GenderSelectionDiv {
+    border: 1px solid #CDCDCD;
+    margin-top: 33px;
+}
+
+.GenderSelection{
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-bottom: 0px;
+    color: #4A3DB5;
+    font-weight: normal;
+}
+
+.mat-radio-button {
+    margin-bottom: 15px;
+    margin-left: 10px;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+    margin-left: 16px;
+}
+
+.mat-radio-label-content {
+    font-weight: normal;
+}

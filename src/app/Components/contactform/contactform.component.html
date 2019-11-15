@@ -1,0 +1,48 @@
+<div class="ContactFormDiv">
+
+    <p class="ContactFormTitle">Contact Us Form</p>
+
+    <form name="RegForm">
+
+        <div class="field">
+            <i class="fa fa-user icon"></i>
+            <input type="text" name="fullname" id="fullname" placeholder="Full Name">
+            <label for="fullname">Full Name</label>
+        </div>
+        <span id="fullname_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-envelope icon"></i>
+            <input type="email" name="email" id="email" placeholder="Email Address">
+            <label for="email">Email Address</label>
+        </div>
+        <span id="email_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-mobile icon"></i>
+            <input type="tel" name="mobile" id="mobile" placeholder="Mobile Number" maxlength="10">
+            <label for="mobile">Mobile Number</label>
+        </div>
+        <span id="mobile_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-edit icon"></i>
+            <input type="text" name="subject" id="subject" placeholder="Subject">
+            <label for="subject">Subject</label>
+        </div>
+        <span id="subject_error" class="Error"></span>
+
+        <div class="field">
+            <i class="fa fa-edit icon"></i>
+            <input type="text" name="message" id="message" placeholder="Message">
+            <label for="message">Message</label>
+        </div>
+        <span id="message_error" class="Error"></span>
+
+        <p class="RegisterButton">
+            <button type="button" class="btn btn-light" (click)="formValidation()">Submit</button>
+        </p>
+
+    </form>
+
+</div>
