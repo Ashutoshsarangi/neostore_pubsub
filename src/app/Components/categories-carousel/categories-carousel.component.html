@@ -19,7 +19,7 @@
 <p class="PopularProducts">Popular Products</p>
 
 <p class="ViewAll">
-  <a class="nav-link viewall" href="#" routerLink="allproducts" routerLinkActive="Active">View All</a>
+  <a class="nav-link viewall" routerLink="allproducts" routerLinkActive="Active">View All</a>
 </p>
 
 <div class="row card-group">
@@ -29,13 +29,13 @@
         (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <div class="card-body">
         <h5 class="card-title">
-          <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"
+          <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
             (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
             {{p.DashboardProducts[0].product_name}}
           </a>
         </h5>
         <p class="card-text">₹ {{p.DashboardProducts[0].product_cost}}</p>
-        <p class="button"><a class="btn btn-primary" (click)="addToCart(p.DashboardProducts[0])">Add To Cart</a></p>
+        <p class="button"><a class="btn btn-light" (click)="addToCart(p.DashboardProducts[0])">Add To Cart</a></p>
         <p class="star">
           <star-rating value="{{p.DashboardProducts[0].product_rating}}" checkedcolor="orange" uncheckedcolor="black"
             size="24px" readonly="true" :star-size="5px" :increment="0.01"></star-rating>

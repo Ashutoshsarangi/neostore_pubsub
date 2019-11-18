@@ -1,11 +1,12 @@
 <mat-dialog-content>
-    <p style="text-align: center;">Rate Your Product</p>
-    <star-rating value="{{rating}}" checkedcolor="red" uncheckedcolor="gray" size="40px" readonly="false"
+    <p class="RatingHeading">Rate Your Product</p>
+    <star-rating value="{{rating}}" checkedcolor="#FCA912" uncheckedcolor="gray" size="40px" readonly="false"
         :star-size="5px" :increment="0.01" (rate)="onRate($event)">
     </star-rating>
 </mat-dialog-content>
 
 <mat-dialog-actions align="center">
-    <button type="button" class="btn btn-light" [style.background-color]="doneButtonColor"
-        [style.color]="doneButtonTextColor" (click)="close()">Done</button>
+    <button type="button" class="btn btn-light1" [style.background-color]="doneButtonColor"
+        [style.color]="doneButtonTextColor" [style.border]="doneButtonBorder" [disabled]="!doneButton"
+        (click)="close()">Done</button>
 </mat-dialog-actions>

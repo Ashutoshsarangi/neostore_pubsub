@@ -32,9 +32,7 @@ export class AddAddressComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.auth.isLoggedIn()) {
-      console.log("CHECKING URL FOR ADD TO ADDESSS");
-      console.log(this.router.url);
+    if (this.auth.isLoggedIn()) {
       this.address_id = this.activatedRoute.snapshot.paramMap.get('address_id');
       if ((this.router.url === '/add-address/' + this.address_id) || (this.router.url === '/profile/add-address/' + this.address_id)) {
         this.addressHeading = "Edit Address";

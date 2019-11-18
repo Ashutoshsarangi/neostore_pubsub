@@ -74,13 +74,13 @@
                     (click)="gotoProductDetails(p._id)">
                 <div class="card-body">
                     <h5 class="card-title">
-                        <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"
+                        <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
                             (click)="gotoProductDetails(p._id)">
                             {{p.product_name}}
                         </a>
                     </h5>
                     <p class="card-text">₹ {{p.product_cost}}</p>
-                    <p class="button"><a class="btn btn-primary" (click)="addToCart(p)">Add To Cart</a></p>
+                    <p class="button"><a class="btn btn-light" (click)="addToCart(p)">Add To Cart</a></p>
                     <p class="star">
                         <star-rating value="{{p.product_rating}}" checkedcolor="orange" uncheckedcolor="black"
                             size="15px" readonly="true" :star-size="5px" :increment="0.01">

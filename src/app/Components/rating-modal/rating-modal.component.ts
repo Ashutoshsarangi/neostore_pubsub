@@ -16,6 +16,8 @@ export class RatingModalComponent implements OnInit {
 
   doneButtonColor = "#DEDEDE";
   doneButtonTextColor = "#A3A3A3";
+  doneButtonBorder = "1px solid #DEDEDE";
+  doneButton: boolean = false;
 
   authorizationToken;
 
@@ -43,8 +45,10 @@ export class RatingModalComponent implements OnInit {
   onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {
     if ($event.newValue > 0) {
       this.productRating = $event.newValue;
-      this.doneButtonColor = "#3D40A1";
+      this.doneButtonColor = "#4A3DB5";
       this.doneButtonTextColor = "#FFFFFF";
+      this.doneButtonBorder = "1px solid #000000";
+      this.doneButton = true;
     }
   }
 

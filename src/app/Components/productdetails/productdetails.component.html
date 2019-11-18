@@ -103,8 +103,8 @@
             </div> -->
 
             <p>
-                <button type="button" class="btn btn-primary" (click)="addToCart()">ADD TO CART</button>
-                <button type="button" class="btn btn-danger" (click)="rateProduct()">RATE PRODUCT</button>
+                <button type="button" class="btn btn-light" (click)="addToCart()">ADD TO CART</button>
+                <button type="button" class="btn btn-light1" (click)="rateProduct()">RATE PRODUCT</button>
             </p>
 
         </div>
@@ -121,13 +121,13 @@
     </mat-tab>
     <mat-tab label="Features">
         <p>
-            Dimension: {{productDetailsDetailsArray.product_dimension}}
+            <span class="FeatureHeadings">Dimension:</span> {{productDetailsDetailsArray.product_dimension}}
         </p>
         <p>
-            Material: {{productDetailsDetailsArray.product_material}}
+            <span class="FeatureHeadings">Material:</span> {{productDetailsDetailsArray.product_material}}
         </p>
         <p>
-            Manufacturer: {{productDetailsDetailsArray.product_producer}}
+            <span class="FeatureHeadings">Manufacturer:</span> {{productDetailsDetailsArray.product_producer}}
         </p>
     </mat-tab>
 </mat-tab-group>
