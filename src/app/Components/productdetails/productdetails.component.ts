@@ -6,6 +6,7 @@ import { environment } from '../../../environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { RatingModalComponent } from '../rating-modal/rating-modal.component';
 import { BehaviourService } from '../../Services/behaviour.service';
+import Swal from 'sweetalert2';
 
 export interface DialogData {
   product_id: any;
@@ -98,7 +99,7 @@ export class ProductdetailsComponent implements OnInit {
         var a = [];
         a = JSON.parse(localStorage.getItem('cartProduct'));
         if (a.some(product => product._id === this.productDetailsResponseObjectParsed.product_details[0].product_id)) {
-          window.alert("Product Already in Cart");
+          Swal.fire('Oops...', "Product Already in Cart", 'error');
         }
         else {
           localStorage.setItem('cartCount', cartCount + 1);
@@ -136,18 +137,18 @@ export class ProductdetailsComponent implements OnInit {
       }
     }
     else {
-      window.alert("Please Login First.");
+      Swal.fire("Please Login First.");
       this.router.navigate(['/login']);
     }
 
   }
 
   addToCartApi(result, authorizationToken) {
-    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((data) => {
-      window.alert("Added Successfully");
+    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 

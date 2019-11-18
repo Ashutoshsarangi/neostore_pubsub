@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { StarRatingComponent } from 'ng-starrating';
 import { ApiService } from '../../Services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-rating-modal',
@@ -44,10 +45,10 @@ export class RatingModalComponent implements OnInit {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.putUpdateProductRatingByCustomer(this.data.product_id, this.productRating, this.authorizationToken).subscribe((response) => {
         this.dialogRef.close(this.productRating);
-        window.alert("Successfully Rated !! Average Rating is " + JSON.parse(JSON.stringify(response)).product_details[0].product_rating);
+        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).product_details[0].product_rating, "success");
       },
         (error) => {
-          window.alert("OOPS");
+          Swal.fire('Oops...', error.error.message, 'error');
         });
     }
   }

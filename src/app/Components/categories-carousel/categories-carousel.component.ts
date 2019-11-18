@@ -3,6 +3,7 @@ import { ApiService } from '../../Services/api.service';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { BehaviourService } from '../../Services/behaviour.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categories-carousel',
@@ -64,7 +65,7 @@ export class CategoriesCarouselComponent implements OnInit {
         var a = [];
         a = JSON.parse(localStorage.getItem('cartProduct'));
         if (a.some(product => product._id === productToAdd.product_id)) {
-          window.alert("Product Already in Cart");
+          Swal.fire("Product Already in Cart");
         }
         else {
           localStorage.setItem('cartCount', cartCount + 1);
@@ -102,18 +103,18 @@ export class CategoriesCarouselComponent implements OnInit {
       }
     }
     else {
-      window.alert("Please Login First.");
+      Swal.fire("Please Login First.");
       this.router.navigate(['/login']);
     }
 
   }
 
   addToCartApi(result, authorizationToken) {
-    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((data) => {
-      window.alert("Added Successfully");
+    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 

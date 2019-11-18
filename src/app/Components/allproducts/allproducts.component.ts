@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviourService } from '../../Services/behaviour.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-allproducts',
@@ -203,7 +204,7 @@ export class AllproductsComponent implements OnInit {
         var a = [];
         a = JSON.parse(localStorage.getItem('cartProduct'));
         if (a.some(product => product.product_id === productToAdd.product_id)) {
-          window.alert("Product Already in Cart");
+          Swal.fire("Product Already in Cart");
         }
         else {
           localStorage.setItem('cartCount', cartCount + 1);
@@ -241,18 +242,18 @@ export class AllproductsComponent implements OnInit {
       }
     }
     else {
-      window.alert("Please Login First.");
+      Swal.fire("Please Login First.");
       this.router.navigate(['/login']);
     }
 
   }
 
   addToCartApi(result, authorizationToken) {
-    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((data) => {
-      window.alert("Added Successfully");
+    this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 

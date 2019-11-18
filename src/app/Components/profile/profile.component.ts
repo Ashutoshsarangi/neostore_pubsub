@@ -27,7 +27,6 @@ export class ProfileComponent implements OnInit {
   profileDetailsObject;
 
   addresses = [];
-  deleteAddressDetails;
 
   imageUrl; //Base API Url.
   pdfUrl; //Base API Url.
@@ -282,14 +281,14 @@ export class ProfileComponent implements OnInit {
       // // formData.append('dob', document.forms["RegForm"]["dob"].value);
       // // formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
       // // formData.append('gender', this.gender);
- 
+
       // this.formData.append('first_name', document.forms["RegForm"]["firstname"].value);
       // this.formData.append('last_name', document.forms["RegForm"]["lastname"].value);
       // this.formData.append('gender', this.gender);
       // this.formData.append('dob', document.forms["RegForm"]["dob"].value);
       // this.formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
       // this.formData.append('email', document.forms["RegForm"]["email"].value);
-  
+
       // if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       //   this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       //   this.apiService.putProfile(this.formData, this.authorizationToken).subscribe((response) => {
@@ -298,7 +297,6 @@ export class ProfileComponent implements OnInit {
       //     this.router.navigate(['/profile/', value]);
       //   },
       //     (error) => {
-      //       window.alert(error.error.message);
       //       this.cancel(value);
       //     });
       if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
@@ -350,8 +348,7 @@ export class ProfileComponent implements OnInit {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.deleteDeladdress(address_id, this.authorizationToken).subscribe((response) => {
-        this.deleteAddressDetails = response;
-        window.alert(this.deleteAddressDetails.message);
+        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
         this.openAddress("Address");
       },
         (error) => {

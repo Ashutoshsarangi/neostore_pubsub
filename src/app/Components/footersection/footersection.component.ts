@@ -3,6 +3,7 @@ import { ApiService } from '../../Services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-footersection',
@@ -87,11 +88,11 @@ export class FootersectionComponent implements OnInit {
     this.email = email;
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (this.email == "") {
-      window.alert("Please enter your email.");
+      Swal.fire("Please enter your email.");
       return false;
     }
     if (!(re.test(String(this.email).toLowerCase()))) {
-      window.alert("Enter correct email");
+      Swal.fire("Enter correct email");
       return false;
     }
     else {

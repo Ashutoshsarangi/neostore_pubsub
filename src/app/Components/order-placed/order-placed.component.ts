@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from '../../Services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-order-placed',
@@ -33,7 +34,7 @@ export class OrderPlacedComponent implements OnInit {
         this.orderDeliverAddress = newArray[0];
       },
         (error) => {
-          window.alert(error.error.message);
+          Swal.fire('Oops...', error.error.message, 'error');
         });
     }
   }

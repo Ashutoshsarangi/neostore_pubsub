@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { BehaviourService } from '../../Services/behaviour.service';
 import { ApiService } from '../../Services/api.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-navigationbar',
@@ -15,7 +16,6 @@ export class NavigationbarComponent implements OnInit {
   subscription: Subscription;
   cartCount: string;
   authorizationToken;
-  logOutResponse = [];
 
   cartDataResponseObjectStringified;
   cartDataResponseObjectParsed;
@@ -63,7 +63,7 @@ export class NavigationbarComponent implements OnInit {
       setTimeout(() => this.router.navigate(['/profile/', value]));
     }
     else {
-      window.alert("Please Login First");
+      Swal.fire("Please Login First");
       this.router.navigate(['/login']);
     }
   }
@@ -94,12 +94,11 @@ export class NavigationbarComponent implements OnInit {
 
   postCartDataWhileLogoutApi(a, authorizationToken) {
     this.logoutWithNoCartData();
-    this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((data) => {
-      this.logOutResponse = JSON.parse(JSON.stringify(data)).message;
-      window.alert(this.logOutResponse);
+    this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((response) => {
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 
