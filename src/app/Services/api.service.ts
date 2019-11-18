@@ -20,8 +20,6 @@ export class ApiService {
     if (localStorage.getItem('userDetails')) {
 
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-      console.log("AUTHORIZATION TOKEN");
-      console.log(this.authorizationToken);
 
       this.httpOptions = {
         headers: new HttpHeaders({

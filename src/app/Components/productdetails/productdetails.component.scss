@@ -1,7 +1,11 @@
+.container {
+    padding-top: 30px;
+}
+
 .ProductSubImage {
     margin-top: 15px;
     height: 80px;
-    width: 120px;
+    width: 170px;
     padding-left: 20px;
 }
 
@@ -67,7 +71,7 @@
 }
 
 ::ng-deep .ngxImageZoomContainer > img{
-    max-height: 250px!important;
+    max-height: 200px!important;
     min-width: 480px!important;
 } 
 

@@ -46,10 +46,12 @@
                     /
                     <span class="Cost">₹ {{o.product_details[0].total_cartCost}}</span>
                 </p>
-                <div class="row ProductDiv">
-                    <div *ngFor="let oo of o.product_details">
-                        <div class="col-3" *ngFor="let ooo of oo.product_details">
-                            <img src="{{imageUrl}}{{ooo.product_image}}" class="ProductImage" />
+                <div style="width: 700px; height: 120px; overflow-y: scroll;">
+                    <div class="row ProductDiv">
+                        <div *ngFor="let oo of o.product_details">
+                            <div class="col-3" *ngFor="let ooo of oo.product_details">
+                                <img src="{{imageUrl}}{{ooo.product_image}}" class="ProductImage" />
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -17,6 +17,8 @@ export class RatingModalComponent implements OnInit {
 
   authorizationToken;
 
+  rating;
+
   constructor(
     public dialogRef: MatDialogRef<RatingModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -26,7 +28,7 @@ export class RatingModalComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.rating = JSON.parse(JSON.stringify(this.data)).product_rating
   }
 
   onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {

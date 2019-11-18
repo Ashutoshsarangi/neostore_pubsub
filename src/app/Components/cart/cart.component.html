@@ -40,11 +40,16 @@
                         <div class="col-6 TableHeader">
                             <div class="row">
                                 <div class="col-4">
-                                    <img src="{{imageUrl}}{{c.product_id.product_image}}" class="ProductImage" />
+                                    <img src="{{imageUrl}}{{c.product_id.product_image}}" class="ProductImage"
+                                        (click)="gotoProductDetails(c.product_id.product_id)" />
                                 </div>
                                 <div class="col-8">
                                     <div class="row">
-                                        {{c.product_id.product_name}}
+                                        <a class="nav-link" href="#" routerLink="productdetails/:id"
+                                            routerLinkActive="Active"
+                                            (click)="gotoProductDetails(c.product_id.product_id)">
+                                            {{c.product_id.product_name}}
+                                        </a>
                                     </div>
                                     <div class="row">
                                         by {{c.product_id.product_producer}}

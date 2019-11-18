@@ -1,7 +1,7 @@
 <mat-dialog-content>
     <p style="text-align: center;">Rate Your Product</p>
-    <star-rating value="0" checkedcolor="red" uncheckedcolor="gray" size="40px" readonly="false" :star-size="5px"
-        :increment="0.01" (rate)="onRate($event)">
+    <star-rating value="{{rating}}" checkedcolor="red" uncheckedcolor="gray" size="40px" readonly="false"
+        :star-size="5px" :increment="0.01" (rate)="onRate($event)">
     </star-rating>
 </mat-dialog-content>
 

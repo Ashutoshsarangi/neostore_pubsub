@@ -167,12 +167,9 @@ export class ProfileComponent implements OnInit {
 
   // fileProgress(event) {
   //   // this.fileData = <File>fileInput.target.files[0];
-  //   // console.log("FILE DATA IN FILE PROGRESS");
-  //   // console.log(this.fileData.name);
   //   // this.preview();
   //   // this.fileData = event.target.files[0];
   //   // this.formData.append('profile_img', this.fileData);
-  //   // console.log(this.formData);
   // }
 
   // preview() {
@@ -184,8 +181,6 @@ export class ProfileComponent implements OnInit {
   //   reader.readAsDataURL(this.fileData);
   //   reader.onload = (_event) => {
   //     this.previewUrl = reader.result;
-  //     console.log("PREVIEW DATA");
-  //     console.log(this.previewUrl);
   //   }
   // }
 
@@ -287,15 +282,14 @@ export class ProfileComponent implements OnInit {
       // // formData.append('dob', document.forms["RegForm"]["dob"].value);
       // // formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
       // // formData.append('gender', this.gender);
-      // console.log(document.forms["RegForm"]["firstname"].value)
+ 
       // this.formData.append('first_name', document.forms["RegForm"]["firstname"].value);
       // this.formData.append('last_name', document.forms["RegForm"]["lastname"].value);
       // this.formData.append('gender', this.gender);
       // this.formData.append('dob', document.forms["RegForm"]["dob"].value);
       // this.formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
       // this.formData.append('email', document.forms["RegForm"]["email"].value);
-      // console.log("FORM DATA");
-      // console.log(this.formData);
+  
       // if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       //   this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       //   this.apiService.putProfile(this.formData, this.authorizationToken).subscribe((response) => {
@@ -441,7 +435,8 @@ export class ProfileComponent implements OnInit {
         this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
         this.apiService.postChangePassword(password1.value, password2.value, password3.value, this.authorizationToken).subscribe((response) => {
           Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-          this.router.navigate(['/categories-carousel']);
+          this.router.navigateByUrl('/profile', { skipLocationChange: true });
+          setTimeout(() => this.router.navigate(['/profile/', "Profile"]));
         },
           (error) => {
             Swal.fire('Oops...', error.error.message, 'error');

@@ -176,7 +176,7 @@ export class CartComponent implements OnInit {
 
   deleteCustomerCart(productId) {
     this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+      Swal.fire("Deleted!", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');
@@ -275,6 +275,10 @@ export class CartComponent implements OnInit {
 
   gotoEditAddress(address_id: any) {
     this.router.navigate(['/add-address/', address_id]);
+  }
+
+  gotoProductDetails(productId: any) {
+    this.router.navigate(['/productdetails/', productId]);
   }
 
 }
