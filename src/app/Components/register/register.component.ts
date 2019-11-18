@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../Services/api.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -14,11 +15,18 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private apiService: ApiService,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.gender = "Male"; //Gender By Default Selected to MALE.
+    if (!this.auth.isLoggedIn()) {
+      Swal.fire("You are already login! Kindly logout for new registration");
+      this.router.navigate(['categories-carousel']);
+    }
+    else {
+      this.gender = "Male"; //Gender By Default Selected to MALE.
+    }
   }
 
   formValidation() {

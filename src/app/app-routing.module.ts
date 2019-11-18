@@ -47,7 +47,6 @@ const routes: Routes = [
   { path: 'locateus', component: LocateusComponent },
 
   { path: 'login', component: LoginComponent },
-  { path: 'productdetails/:id/login', component: LoginComponent },
 
   { path: 'navigationbar', component: NavigationbarComponent },
 
@@ -56,14 +55,17 @@ const routes: Routes = [
 
   { path: 'productdetails/:id', component: ProductdetailsComponent },
 
-  { path: 'login/register', component: RegisterComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: 'login/register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/:option', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'cart/add-address/profile', component: ProfileComponent, canActivate: [AuthGuard] },
 
-  { path: 'thankyou-subscribing/:email', component: ThankyouSubscribingComponent, canActivate: [AuthGuard] }
+  { path: 'thankyou-subscribing/:email', component: ThankyouSubscribingComponent, canActivate: [AuthGuard] },
+
+  { path: '404', component: CategoriesCarouselComponent },
+  { path: '**', redirectTo: '/categories-carousel' }
 
 ];
 

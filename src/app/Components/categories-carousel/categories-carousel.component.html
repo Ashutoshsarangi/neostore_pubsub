@@ -1,7 +1,7 @@
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">
     <div class="item" [ngClass]="{ 'active': i === 0 }" *ngFor="let c of categoriesDetailsArray; let i = index">
-      <img class="d-block w-100" src="{{imageUrl}}{{c.product_image}}" style="width:100%;"
+      <img class="d-block w-100 thumbnail" src="{{imageUrl}}{{c.product_image}}" style="width:100%;"
         routerLink="allproducts/:category_id" routerLinkActive="Active"
         (click)="gotoAllProducts(c.category_id, c.category_name)">
     </div>
@@ -25,7 +25,7 @@
 <div class="row card-group">
   <div class="col-3" *ngFor="let p of productDetailsArray;">
     <div class="card">
-      <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top" alt="..."
+      <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top thumbnail" alt="..."
         (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <div class="card-body">
         <h5 class="card-title">

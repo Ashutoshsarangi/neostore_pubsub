@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-footersection',
@@ -39,7 +40,8 @@ export class FootersectionComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -85,19 +87,25 @@ export class FootersectionComponent implements OnInit {
   }
 
   gotoThankYouSubscribe(email) {
-    this.email = email;
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (this.email == "") {
-      Swal.fire("Please enter your email.");
-      return false;
-    }
-    if (!(re.test(String(this.email).toLowerCase()))) {
-      Swal.fire("Enter correct email");
-      return false;
+    if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
+      this.email = email;
+      var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      if (this.email == "") {
+        Swal.fire("Please enter your email.");
+        return false;
+      }
+      if (!(re.test(String(this.email).toLowerCase()))) {
+        Swal.fire("Enter correct email");
+        return false;
+      }
+      else {
+        this.router.navigate(['/thankyou-subscribing/', this.email]);
+        return true;
+      }
     }
     else {
-      this.router.navigate(['/thankyou-subscribing/', this.email]);
-      return true;
+      Swal.fire("Please Login First!");
+      this.router.navigate(['login']);
     }
   }
 
