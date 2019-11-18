@@ -3,6 +3,7 @@ import { ApiService } from '../../Services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-contactform',
@@ -16,10 +17,15 @@ export class ContactformComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
+    if (!this.auth.isLoggedIn()) {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
+    }
   }
 
   formValidation() {

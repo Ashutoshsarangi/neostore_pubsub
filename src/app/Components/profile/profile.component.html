@@ -230,9 +230,7 @@
                     </div>
                 </div>
                 <div class="col-1 TableHeader">
-                    <button type="button" class="btn btn-danger" (click)="deleteAddress(a.address_id)">
-                        <i class="fa fa-close"></i>
-                    </button>
+                    <span class="glyphicon glyphicon-trash" (click)="deleteAddress(a.address_id)"></span>
                 </div>
             </div>
             <p class="addAddress">
@@ -284,7 +282,7 @@
                 </div>
                 <span id="password3_error" class="Error"></span>
                 <p class="button">
-                    <button type="button" class="btn btn-primary" (click)="formValidation()">Submit</button>
+                    <button type="button" class="btn btn-primary" (click)="formValidation()">Change</button>
                 </p>
             </form>
         </div>

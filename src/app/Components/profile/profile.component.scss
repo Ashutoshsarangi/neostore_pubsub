@@ -21,11 +21,14 @@
 }
 
 .AddressDetails {
-    margin-top: 20px;
     margin-bottom: 200px;
-    border-left: 1px solid #CDCDCD;
-    border-right: 1px solid #CDCDCD;
-    border-bottom: 1px solid #000000;
+    padding-top: 50px;
+    border: 1px solid #CDCDCD;
+    color: #4A3DB5;
+}
+
+.TableHeader {
+    color: #000000;
 }
 
 .addAddress1 {
@@ -90,9 +93,7 @@ a.Buy {
 }
 
 .Details {
-    border-left: 1px solid #CDCDCD;
-    border-right: 1px solid #CDCDCD;
-    border-bottom: 1px solid #000000;
+    border: 1px solid #CDCDCD;
     margin: 2px;
     margin-bottom: 20px;
 }
@@ -150,20 +151,29 @@ a.Add {
     margin-top: 60px;
 }
 
+a.Add:hover {
+    background: #4A3DB5;
+    color: #FFFFFF;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 60px;
+    border: 2px solid #000000;
+}
+
 .addAddress {
     border-top: 1px solid #CDCDCD;
     padding-top: 20px;
 }
 
 a.Add1 {
-    background: #DEDEDE;
-    color: #A3A3A3;
-    border-bottom: 1px solid #000000;
+    background: #4A3DB5;
+    color: #FFFFFF;
 }
 
 a.Add1:hover {
     background: #4A3DB5;
     color: #FFFFFF;
+    border: 2px solid #000000;
 }
 
 .Addresses {
@@ -178,19 +188,27 @@ a.Edit {
     margin-top: 7px;
 }
 
+a.Edit:hover {
+    background: #4A3DB5;
+    color: #FFFFFF;
+    margin-top: 7px;
+    border: 2px solid #000000;
+}
+
 .select {
     margin-top: 15px;
 }
 
-.btn-light {
-    background: #DEDEDE;
-    color: #A3A3A3;
+a.btn-light {
+    background: #4A3DB5;
+    color: #FFFFFF;
     margin-right: 10px;
 }
 
-.btn-light:hover {
+a.btn-light:hover {
     background: #4A3DB5;
     color: #FFFFFF;
+    border: 2px solid #000000;
 }
 
 .MyAccount {
@@ -198,6 +216,7 @@ a.Edit {
     border-bottom: 1px solid #CDCDCD;
     padding-bottom: 15px;
     font-weight: bold;
+    color: #4A3DB5;
 }
 
 .avatar {
@@ -209,7 +228,7 @@ a.Edit {
 
 .UserName {
     margin-top: 15px;
-    color: #A32C2C;
+    color: red;
     text-align: center;
     font-weight: bold;
     font-size: 15px;
@@ -220,7 +239,8 @@ a.Edit {
 }
 
 a.btn-info {
-    color: #3C5FBB;
+    color: #4A3DB5;
+    text-align: left;
 }
 
 .btn-info { 
@@ -238,11 +258,9 @@ a.btn-info {
 }
 
 .OrderDetails {
-    margin-top: 50px;
     margin-bottom: 200px;
-    border-left: 1px solid #CDCDCD;
-    border-right: 1px solid #CDCDCD;
-    border-bottom: 1px solid #000000;
+    padding-top: 50px;
+    border: 1px solid #CDCDCD;
 }
 
 .PlacedOn {
@@ -270,14 +288,13 @@ a.btn-info {
     font-size: 30px;
     border-bottom: 1px solid #CDCDCD;
     padding-bottom: 15px;
+    color: #4A3DB5;
 }
 
 .ProfileDetails {
-    margin-top: 20px;
     margin-bottom: 200px;
-    border-left: 1px solid #CDCDCD;
-    border-right: 1px solid #CDCDCD;
-    border-bottom: 1px solid #000000;
+    padding-top: 50px;
+    border: 1px solid #CDCDCD;
 }
 
 .ProfileDetails1 {
@@ -371,12 +388,12 @@ a.btn.btn-light:hover {
 .btn-primary {
     background: #4A3DB5;
     color: #FFFFFF;
-    border: 1px solid #4A3DB5;
 }
 
 .btn-primary:hover {
     background: #4A3DB5;
     color: #FFFFFF;
+    border: 2px solid #000000;
 }
 
 .form-control {
