@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (!this.auth.isLoggedIn()) {
+    if (this.auth.isLoggedIn()) {
       Swal.fire("You are already login! Kindly logout for new registration");
       this.router.navigate(['categories-carousel']);
     }

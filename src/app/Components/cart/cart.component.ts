@@ -32,6 +32,7 @@ export class CartComponent implements OnInit {
   placeButtonColor = "#DEDEDE";
   placeButtonTextColor = "#A3A3A3";
   placeOrderButton: boolean = false;
+  placeButtonBorder = "2px solid #DEDEDE";
 
   authorizationToken;
 
@@ -52,7 +53,7 @@ export class CartComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if(this.auth.isLoggedIn()) {
+    if (this.auth.isLoggedIn()) {
       this.imageUrl = environment.apiUrl;
       this.getCustomerCartDetails();
     }
@@ -94,8 +95,9 @@ export class CartComponent implements OnInit {
                 if (this.addresses[i].isDeliveryAddress == true) {
                   this.selectedRadio = JSON.stringify(i);
                   this.deliveryAddress = this.addresses[i].address_id;
-                  this.placeButtonColor = "#3D40A1";
+                  this.placeButtonColor = "#4A3DB5";
                   this.placeButtonTextColor = "#FFFFFF";
+                  this.placeButtonBorder = "2px solid #000000";
                   this.placeOrderButton = true;
                 }
               }
@@ -236,9 +238,10 @@ export class CartComponent implements OnInit {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.putUpdateAddress(address.address_id, address.address, address.pincode, address.city, address.state, address.country, value, this.authorizationToken).subscribe((response) => {
         if (response) {
-          this.placeButtonColor = "#3D40A1";
+          this.placeButtonColor = "#4A3DB5";
           this.placeButtonTextColor = "#FFFFFF";
           this.placeOrderButton = true;
+          this.placeButtonBorder = "2px solid #000000";
         }
       },
         (error) => {
