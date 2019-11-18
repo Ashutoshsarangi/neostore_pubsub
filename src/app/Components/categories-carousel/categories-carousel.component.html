@@ -25,7 +25,8 @@
 <div class="row card-group">
   <div class="col-3" *ngFor="let p of productDetailsArray;">
     <div class="card">
-      <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top" alt="...">
+      <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top" alt="..."
+        (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <div class="card-body">
         <h5 class="card-title">
           <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"

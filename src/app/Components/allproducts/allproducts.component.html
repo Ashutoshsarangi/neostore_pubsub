@@ -70,7 +70,8 @@
     <div class="row card-group" *ngIf="!notFoundProduct">
         <div class="col-4" *ngFor="let p of pageOfItems;">
             <div class="card">
-                <img src="{{imageUrl}}{{p.product_image}}" class="card-img-top" alt="...">
+                <img src="{{imageUrl}}{{p.product_image}}" class="card-img-top" alt="..."
+                    (click)="gotoProductDetails(p._id)">
                 <div class="card-body">
                     <h5 class="card-title">
                         <a class="nav-link" href="#" routerLink="productdetails/:id" routerLinkActive="Active"

@@ -4,6 +4,7 @@ import { ApiService } from '../../Services/api.service';
 import { Router } from '@angular/router';
 import { MatRadioChange } from '@angular/material/radio';
 import { BehaviourService } from '../../Services/behaviour.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-cart',
@@ -85,6 +86,9 @@ export class CartComponent implements OnInit {
                 if (this.addresses[i].isDeliveryAddress == true) {
                   this.selectedRadio = JSON.stringify(i);
                   this.deliveryAddress = this.addresses[i].address_id;
+                  this.placeButtonColor = "#3D40A1";
+                  this.placeButtonTextColor = "#FFFFFF";
+                  this.placeOrderButton = true;
                 }
               }
             },
@@ -94,7 +98,7 @@ export class CartComponent implements OnInit {
           }
         }
       }, (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
     }
   }
@@ -112,35 +116,46 @@ export class CartComponent implements OnInit {
 
   decrementQuanity(productId, currentQuantity, productCost, totalCost) {
     if (currentQuantity == 1) {
-      window.alert("Quanity Cannot Be Less Than 1. You can delete the product if you want.");
+      Swal.fire("Quanity Cannot Be Less Than 1. You can delete the product if you want.");
     }
     else if (currentQuantity > 1) {
+      var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
       for (let i = 0; i < this.cartData.length; i++) {
         if (this.cartData[i].product_id == productId) {
           this.cartData[i].quantity = currentQuantity - 1;
+          storageCart[i].quantity = currentQuantity - 1;
           this.cartData[i].total_productCost = JSON.parse(totalCost) - JSON.parse(productCost);
         }
       }
-      localStorage.setItem('cartProduct', JSON.stringify(this.cartData));
-      this.calculateReviewOrder(this.cartData);
+      localStorage.setItem('cartProduct', JSON.stringify(storageCart));
+      this.calculateReviewOrder(storageCart);
     }
   }
 
   incrementQuanity(productId, currentQuantity, productCost, totalCost) {
-    for (let i = 0; i < this.cartData.length; i++) {
-      if (this.cartData[i].product_id == productId) {
-        this.cartData[i].quantity = currentQuantity + 1;
-        this.cartData[i].total_productCost = JSON.parse(totalCost) + JSON.parse(productCost);
-      }
+    if (currentQuantity >= 10) {
+      Swal.fire("Quanity Cannot Be Greater Than 10.");
     }
-    localStorage.setItem('cartProduct', JSON.stringify(this.cartData));
-    this.calculateReviewOrder(this.cartData);
+    else {
+      var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
+      for (let i = 0; i < this.cartData.length; i++) {
+        if (this.cartData[i].product_id == productId) {
+          this.cartData[i].quantity = currentQuantity + 1;
+          storageCart[i].quantity = currentQuantity + 1;
+          this.cartData[i].total_productCost = JSON.parse(totalCost) + JSON.parse(productCost);
+        }
+      }
+      localStorage.setItem('cartProduct', JSON.stringify(storageCart));
+      this.calculateReviewOrder(storageCart);
+    }
   }
 
   deleteProduct(productId) {
     for (let i = 0; i < this.cartData.length; i++) {
       if (this.cartData[i].product_id == productId) {
         this.cartData.splice(i, 1);
+        var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
+        storageCart.splice(i, 1);
         if (this.cartData.length == 0) {
           localStorage.removeItem('cartProduct');
           localStorage.removeItem('cartCount');
@@ -148,7 +163,7 @@ export class CartComponent implements OnInit {
           this.noCartData = true;
         }
         else if (this.cartData.length != 0) {
-          localStorage.setItem('cartProduct', JSON.stringify(this.cartData));
+          localStorage.setItem('cartProduct', JSON.stringify(storageCart));
           var cartCount = JSON.parse(localStorage.getItem('cartCount'));
           localStorage.setItem('cartCount', JSON.stringify(cartCount - 1));
           this.behaviourService.setCount(JSON.stringify(cartCount - 1));
@@ -160,11 +175,11 @@ export class CartComponent implements OnInit {
   }
 
   deleteCustomerCart(productId) {
-    this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((data) => {
-
+    this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
     },
       (error) => {
-
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 
@@ -183,21 +198,19 @@ export class CartComponent implements OnInit {
         if (this.selectedTab >= 2) this.selectedTab = 0;
       },
         (error) => {
-          window.alert(error.error.message);
+          Swal.fire('Oops...', error.error.message, 'error');
           this.noAddressFound = true;
           this.selectedTab += 1;
           if (this.selectedTab >= 2) this.selectedTab = 0;
         });
     }
     else {
-      window.alert("Please Login First.");
+      Swal.fire('Oops...', "Please Login First.", 'error');
       this.router.navigate(['/login']);
     }
   }
 
   radioChange($event: MatRadioChange) {
-    console.log("RADIO SLECTION")
-    console.log($event);
     for (let i = 0; i < this.addresses.length; i++) {
       if ($event.source.name == JSON.stringify(i)) {
         this.selectedRadio = $event.value;
@@ -221,7 +234,7 @@ export class CartComponent implements OnInit {
         }
       },
         (error) => {
-          window.alert(error.error.message);
+          Swal.fire('Oops...', error.error.message, 'error');
         });
     }
   }
@@ -241,7 +254,7 @@ export class CartComponent implements OnInit {
       }
     }
     else {
-      window.alert("Please Login First.");
+      Swal.fire('Oops...', "Please Login First.", 'error');
       this.router.navigate(['/login']);
     }
   }
@@ -249,14 +262,14 @@ export class CartComponent implements OnInit {
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
       this.orderDetails = response;
-      window.alert(this.orderDetails.message);
+      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
       localStorage.removeItem('cartProduct');
       localStorage.removeItem('cartCount');
       this.behaviourService.setCount("0");
       this.router.navigate(['/order-placed/', this.orderDetails.order_details[0].product_details.order_id, this.deliveryAddress]);
     },
       (error) => {
-        window.alert(error.error.message);
+        Swal.fire('Oops...', error.error.message, 'error');
       });
   }
 
