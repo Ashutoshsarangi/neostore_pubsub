@@ -111,7 +111,7 @@ export class CategoriesCarouselComponent implements OnInit {
 
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+      Swal.fire("Great !", "Added Successfully", "success");
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');

@@ -16,39 +16,60 @@ import { ProductdetailsComponent } from './Components/productdetails/productdeta
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RegisterComponent } from './Components/register/register.component';
 import { ThankyouSubscribingComponent } from './Components/thankyou-subscribing/thankyou-subscribing.component';
+import { AuthService } from './Services/auth.service';
+import { AuthGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
+
   { path: '', component: CategoriesCarouselComponent },
-  { path: 'cart/add-address', component: AddAddressComponent },
-  { path: 'add-address/:address_id', component: AddAddressComponent },
-  { path: 'profile/add-address/:address_id', component: AddAddressComponent },
-  { path: 'profile/add-address', component: AddAddressComponent },
+  { path: 'categories-carousel', component: CategoriesCarouselComponent },
+
+  { path: 'add-address', component: AddAddressComponent, canActivate: [AuthGuard] },
+  { path: 'cart/add-address', component: AddAddressComponent, canActivate: [AuthGuard] },
+  { path: 'add-address/:address_id', component: AddAddressComponent, canActivate: [AuthGuard] },
+  { path: 'profile/add-address/:address_id', component: AddAddressComponent, canActivate: [AuthGuard] },
+  { path: 'profile/add-address', component: AddAddressComponent, canActivate: [AuthGuard] },
+
   { path: 'allproducts', component: AllproductsComponent },
   { path: 'allproducts/:category_id/:category_name', component: AllproductsComponent },
   { path: 'categories-carousel/allproducts', component: AllproductsComponent },
   { path: 'cart/allproducts', component: AllproductsComponent },
-  { path: 'cart', component: CartComponent },
-  { path: 'categories-carousel', component: CategoriesCarouselComponent },
-  { path: 'contactform', component: ContactformComponent },
+
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'contactform', component: ContactformComponent, canActivate: [AuthGuard] },
+
   { path: 'footersection', component: FootersectionComponent },
+
   { path: 'login/forgotpassword', component: ForgotpasswordComponent },
+
   { path: 'loader', component: LoaderComponent },
+
   { path: 'locateus', component: LocateusComponent },
+
   { path: 'login', component: LoginComponent },
+  { path: 'productdetails/:id/login', component: LoginComponent },
+
   { path: 'navigationbar', component: NavigationbarComponent },
-  { path: 'cart/order-placed', component: OrderPlacedComponent },
-  { path: 'order-placed/:order_id/:address_id', component: OrderPlacedComponent },
+
+  { path: 'cart/order-placed', component: OrderPlacedComponent, canActivate: [AuthGuard] },
+  { path: 'order-placed/:order_id/:address_id', component: OrderPlacedComponent, canActivate: [AuthGuard] },
+
   { path: 'productdetails/:id', component: ProductdetailsComponent },
+
   { path: 'login/register', component: RegisterComponent },
-  { path: 'profile', component: ProfileComponent },
-  { path: 'profile/:option', component: ProfileComponent },
-  { path: 'cart/add-address/profile', component: ProfileComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'thankyou-subscribing/:email', component: ThankyouSubscribingComponent }
+
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'profile/:option', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'cart/add-address/profile', component: ProfileComponent, canActivate: [AuthGuard] },
+
+  { path: 'thankyou-subscribing/:email', component: ThankyouSubscribingComponent, canActivate: [AuthGuard] }
+
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthService, AuthGuard]
 })
 export class AppRoutingModule { }

@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { MatRadioChange } from '@angular/material/radio';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -48,36 +49,43 @@ export class ProfileComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   //formData = new FormData();
 
   ngOnInit() {
-    this.imageUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
-    this.pdfUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
-    if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
-      this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-      this.apiService.getCustProfile(this.authorizationToken).subscribe((response) => {
-        this.profileDetails = response;
-        if (this.profileDetails.customer_proile) {
-          this.profileDetailsObject = this.profileDetails.customer_proile;
-          this.customerName = this.profileDetailsObject.first_name + " " + this.profileDetailsObject.last_name;
-        }
-      },
-        (error) => {
+    if (this.auth.isLoggedIn()) {
+      this.imageUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
+      this.pdfUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
+      if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
+        this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
+        this.apiService.getCustProfile(this.authorizationToken).subscribe((response) => {
+          this.profileDetails = response;
+          if (this.profileDetails.customer_proile) {
+            this.profileDetailsObject = this.profileDetails.customer_proile;
+            this.customerName = this.profileDetailsObject.first_name + " " + this.profileDetailsObject.last_name;
+          }
+        },
+          (error) => {
 
-        });
+          });
+      }
+      this.selectedButton = this.activatedRoute.snapshot.paramMap.get('option');
+      if (this.selectedButton == "Order") {
+        this.openOrder("Order");
+      }
+      else if (this.selectedButton == "Profile") {
+        this.openProfile("Profile");
+      }
+      else if (this.selectedButton == "Address") {
+        this.openAddress("Address");
+      }
     }
-    this.selectedButton = this.activatedRoute.snapshot.paramMap.get('option');
-    if (this.selectedButton == "Order") {
-      this.openOrder("Order");
-    }
-    else if (this.selectedButton == "Profile") {
-      this.openProfile("Profile");
-    }
-    else if (this.selectedButton == "Address") {
-      this.openAddress("Address");
+    else {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
     }
   }
 

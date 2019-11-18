@@ -4,6 +4,7 @@ import { ApiService } from '../../Services/api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-add-address',
@@ -26,31 +27,40 @@ export class AddAddressComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private httpClient: HttpClient,
-    private router: Router
+    private router: Router,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.address_id = this.activatedRoute.snapshot.paramMap.get('address_id');
-    if ((this.router.url === '/add-address/' + this.address_id) || (this.router.url === '/profile/add-address/' + this.address_id)) {
-      this.addressHeading = "Edit Address";
-      this.buttonText = "Update";
-      if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
-        this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-        this.apiService.getCustAddress(this.authorizationToken).subscribe((data) => {
-          this.addresses = JSON.parse(JSON.stringify(data)).customer_address;
-          var newArray = this.addresses.filter(address =>
-            address.address_id == this.address_id
-          );
-          document.forms["RegForm"]["address"].value = newArray[0].address;
-          document.forms["RegForm"]["pin"].value = newArray[0].pincode;
-          document.forms["RegForm"]["city"].value = newArray[0].city;
-          document.forms["RegForm"]["state"].value = newArray[0].state;
-          document.forms["RegForm"]["country"].value = newArray[0].country;
-        },
-          (error) => {
-            Swal.fire('Oops...', error.error.message, 'error');
-          });
+    if(this.auth.isLoggedIn()) {
+      console.log("CHECKING URL FOR ADD TO ADDESSS");
+      console.log(this.router.url);
+      this.address_id = this.activatedRoute.snapshot.paramMap.get('address_id');
+      if ((this.router.url === '/add-address/' + this.address_id) || (this.router.url === '/profile/add-address/' + this.address_id)) {
+        this.addressHeading = "Edit Address";
+        this.buttonText = "Update";
+        if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
+          this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
+          this.apiService.getCustAddress(this.authorizationToken).subscribe((data) => {
+            this.addresses = JSON.parse(JSON.stringify(data)).customer_address;
+            var newArray = this.addresses.filter(address =>
+              address.address_id == this.address_id
+            );
+            document.forms["RegForm"]["address"].value = newArray[0].address;
+            document.forms["RegForm"]["pin"].value = newArray[0].pincode;
+            document.forms["RegForm"]["city"].value = newArray[0].city;
+            document.forms["RegForm"]["state"].value = newArray[0].state;
+            document.forms["RegForm"]["country"].value = newArray[0].country;
+          },
+            (error) => {
+              Swal.fire('Oops...', error.error.message, 'error');
+            });
+        }
       }
+    }
+    else {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
     }
   }
 
@@ -172,7 +182,12 @@ export class AddAddressComponent implements OnInit {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.putUpdateAddress(this.address_id, address.value, pin.value, city.value, state.value, country.value, false, this.authorizationToken).subscribe((response) => {
             Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-            this.router.navigate(['/profile/', value]);
+            if (this.router.url === "/cart/add-address") {
+              this.router.navigate(['/cart'])
+            }
+            else {
+              this.router.navigate(['/profile/', value]);
+            }
           },
             (error) => {
               Swal.fire('Oops...', error.error.message, 'error');
@@ -186,7 +201,12 @@ export class AddAddressComponent implements OnInit {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.postAddress(address.value, pin.value, city.value, state.value, country.value, this.authorizationToken).subscribe((response) => {
             Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-            this.router.navigate(['/profile/', value]);
+            if (this.router.url === "/cart/add-address") {
+              this.router.navigate(['/cart'])
+            }
+            else {
+              this.router.navigate(['/profile/', value]);
+            }
           },
             (error) => {
               Swal.fire('Oops...', error.error.message, 'error');

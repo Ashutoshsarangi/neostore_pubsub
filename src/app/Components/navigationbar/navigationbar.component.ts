@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { BehaviourService } from '../../Services/behaviour.service';
 import { ApiService } from '../../Services/api.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-navigationbar',
@@ -24,7 +25,8 @@ export class NavigationbarComponent implements OnInit {
   constructor(
     private router: Router,
     private behaviourService: BehaviourService,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private auth: AuthService
   ) {
     this.subscription = this.behaviourService.getCount().subscribe(count => {
       if (count) {
@@ -111,6 +113,7 @@ export class NavigationbarComponent implements OnInit {
     this.behaviourService.clearCount();
     this.behaviourService.clearLogin();
     this.showProfileOption = false;
+    this.auth.logout();
   }
 
 }

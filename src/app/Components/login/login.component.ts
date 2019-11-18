@@ -3,6 +3,7 @@ import { ApiService } from '../../Services/api.service';
 import { Router } from '@angular/router';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 //import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -28,6 +29,7 @@ export class LoginComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private behaviourService: BehaviourService,
+    private auth: AuthService
     //private authService: AuthService
   ) { }
 
@@ -81,6 +83,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('loggedIn', "true");
         this.behaviourService.setLogin(localStorage.getItem('loggedIn'));
         localStorage.setItem('userDetails', JSON.stringify(response));
+        this.auth.sendToken(JSON.parse(JSON.stringify(response)).token);
         this.getCustomerCartDetails();
         this.router.navigate(['categories-carousel']);
       },

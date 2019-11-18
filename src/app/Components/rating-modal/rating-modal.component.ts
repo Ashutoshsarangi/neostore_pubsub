@@ -3,6 +3,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { StarRatingComponent } from 'ng-starrating';
 import { ApiService } from '../../Services/api.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-rating-modal',
@@ -24,12 +25,19 @@ export class RatingModalComponent implements OnInit {
     public dialogRef: MatDialogRef<RatingModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
+    private auth: AuthService
   ) {
 
   }
 
   ngOnInit() {
-    this.rating = JSON.parse(JSON.stringify(this.data)).product_rating
+    if (this.auth.isLoggedIn()) {
+      this.rating = JSON.parse(JSON.stringify(this.data)).product_rating;
+    }
+    else {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
+    }
   }
 
   onRate($event: { oldValue: number, newValue: number, starRating: StarRatingComponent }) {

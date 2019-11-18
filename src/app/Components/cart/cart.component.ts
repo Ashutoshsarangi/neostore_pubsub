@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { MatRadioChange } from '@angular/material/radio';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../Services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -46,12 +47,19 @@ export class CartComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private behaviourService: BehaviourService
+    private behaviourService: BehaviourService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
-    this.imageUrl = environment.apiUrl;
-    this.getCustomerCartDetails();
+    if(this.auth.isLoggedIn()) {
+      this.imageUrl = environment.apiUrl;
+      this.getCustomerCartDetails();
+    }
+    else {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
+    }
   }
 
   getCustomerCartDetails() {

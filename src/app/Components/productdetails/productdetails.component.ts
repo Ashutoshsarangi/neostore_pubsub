@@ -69,12 +69,7 @@ export class ProductdetailsComponent implements OnInit {
 
   rateProduct() {
     if (!localStorage.getItem('loggedIn')) {
-      if (window.confirm("Login First")) {
-        this.router.navigate(['login']);
-      }
-      else {
-        // They clicked no
-      }
+      Swal.fire("Please Login First.");
     }
     else {
       let dialogRef = this.matDialog.open(RatingModalComponent, {
@@ -145,7 +140,7 @@ export class ProductdetailsComponent implements OnInit {
 
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+      Swal.fire("Great !", "Added Successfully", "success");
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');
