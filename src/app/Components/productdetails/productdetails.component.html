@@ -21,7 +21,7 @@
         <div class="details">
 
             <p class="PriceLabel">Price:
-                <span class="Price">₹ {{productDetailsDetailsArray.product_cost}}</span>
+                <span class="Price">{{productDetailsDetailsArray.product_cost | currency:'INR' }}</span>
             </p>
 
             <div class="row">

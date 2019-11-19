@@ -21,9 +21,9 @@
 
         <div class="container CartDetails" *ngIf="!noCartData">
             <div class="row">
-                <div class="col-8 container ProductListTable">
+                <div class="col-9 container ProductListTable">
                     <div class="row Header">
-                        <div class="col-6 TableHeader">
+                        <div class="col-5 TableHeader">
                             Product
                         </div>
                         <div class="col-2 TableHeader">
@@ -37,7 +37,7 @@
                         </div>
                     </div>
                     <div class="row Details" *ngFor="let c of cartData">
-                        <div class="col-6 TableHeader">
+                        <div class="col-5 TableHeader">
                             <div class="row">
                                 <div class="col-4">
                                     <img src="{{imageUrl}}{{c.product_id.product_image}}" class="ProductImage thumbnail"
@@ -69,36 +69,36 @@
                                 (click)="incrementQuanity(c.product_id,c.quantity,c.product_id.product_cost,c.total_productCost)">+</span>
                         </div>
                         <div class="col-2 TableHeader">
-                            {{c.product_id.product_cost}}
+                            {{c.product_id.product_cost | currency:'INR' }}
                         </div>
-                        <div class="col-1 TableHeader">
-                            {{c.total_productCost}}
+                        <div class="col-2 TableHeader">
+                            {{c.total_productCost | currency:'INR'}}
                         </div>
                         <div class="col-1 TableHeader">
                             <span class="glyphicon glyphicon-trash" (click)="deleteProduct(c.product_id)"></span>
                         </div>
                     </div>
                 </div>
-                <div class="col-4 container ReviewOrderTable">
-                    <div class="card" style="width: 40rem;">
+                <div class="col-3 container ReviewOrderTable">
+                    <div class="card">
                         <div class="card-header">
                             Review Order
                         </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Subtotal
-                                <p class="Value">
-                                    {{subtotal}}
-                                </p>
+                            <li class="list-group-item">Subtotal &nbsp;&nbsp;&nbsp;
+                                <!-- <p class="Value"> -->
+                                - &nbsp;&nbsp;{{subtotal | currency:'INR' }}
+                                <!-- </p> -->
                             </li>
-                            <li class="list-group-item">GST(5%)
-                                <p class="Value">
-                                    {{gst}}
-                                </p>
+                            <li class="list-group-item">GST(5%) &nbsp;&nbsp;&nbsp;
+                                <!-- <p class="Value"> -->
+                                - &nbsp;&nbsp;{{gst | currency:'INR' }}
+                                <!-- </p> -->
                             </li>
-                            <li class="list-group-item">Order Total
-                                <p class="Value">
-                                    {{ordertotal}}
-                                </p>
+                            <li class="list-group-item">Order Total &nbsp;
+                                <!-- <p class="Value"> -->
+                                - &nbsp;&nbsp;{{ordertotal | currency:'INR'}}
+                                <!-- </p> -->
                             </li>
                             <a class="btn Buy" (click)="proceedToBuy()">
                                 Proceed To Buy
@@ -131,7 +131,7 @@
 
     </mat-tab>
 
-    <mat-tab label="Address">
+    <mat-tab label="Address" *ngIf="!noCartData">
 
         <div class="container AddressDetails" *ngIf="!noAddressFound">
             <p class="Addresses">Addresses</p>
@@ -175,7 +175,8 @@
                     Add Address
                 </button>
                 <button type="button" class="btn" [style.background-color]="placeButtonColor"
-                    [style.color]="placeButtonTextColor" [style.border]="placeButtonBorder" [disabled]="!placeOrderButton" (click)="placeOrder()">
+                    [style.color]="placeButtonTextColor" [style.border]="placeButtonBorder"
+                    [disabled]="!placeOrderButton" (click)="placeOrder()">
                     Place Order
                 </button>
             </p>

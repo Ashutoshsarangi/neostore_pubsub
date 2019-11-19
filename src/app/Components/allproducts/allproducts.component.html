@@ -79,7 +79,7 @@
                             {{p.product_name}}
                         </a>
                     </h5>
-                    <p class="card-text">₹ {{p.product_cost}}</p>
+                    <p class="card-text">{{p.product_cost | currency:'INR' }}</p>
                     <p class="button"><a class="btn btn-light" (click)="addToCart(p)">Add To Cart</a></p>
                     <p class="star">
                         <star-rating value="{{p.product_rating}}" checkedcolor="orange" uncheckedcolor="black"

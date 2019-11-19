@@ -44,6 +44,7 @@ export class CartComponent implements OnInit {
 
   orderDetails;
   deliveryAddress;
+  cartDataUIBackup;
 
   constructor(
     private apiService: ApiService,
@@ -70,23 +71,24 @@ export class CartComponent implements OnInit {
         this.cartDataResponseObjectStringified = (JSON.stringify(data));
         this.cartDataResponseObjectParsed = JSON.parse(this.cartDataResponseObjectStringified);
         this.cartData = this.cartDataResponseObjectParsed.product_details;
-        this.cartCount = this.cartData.length;
-        this.behaviourService.setCount(this.cartCount);
-        localStorage.setItem('cartCount', JSON.stringify(this.cartCount));
-        for (let i = 0; i < this.cartData.length; i++) {
-          this.cartArray[i] = {
-            product_id: this.cartData[i].product_id.product_id,
-            _id: this.cartData[i].product_id._id,
-            quantity: this.cartData[i].quantity
-          }
-        }
-        localStorage.setItem('cartProduct', JSON.stringify(this.cartArray));
         if (!this.cartData) {
           this.noCartData = true;
         }
         else {
           this.noCartData = false;
-          this.calculateReviewOrder(this.cartData);
+          this.cartDataUIBackup = this.cartData;
+          this.cartCount = this.cartData.length;
+          this.behaviourService.setCount(this.cartCount);
+          localStorage.setItem('cartCount', JSON.stringify(this.cartCount));
+          for (let i = 0; i < this.cartData.length; i++) {
+            this.cartArray[i] = {
+              product_id: this.cartData[i].product_id.product_id,
+              _id: this.cartData[i].product_id._id,
+              quantity: this.cartData[i].quantity
+            }
+          }
+          localStorage.setItem('cartProduct', JSON.stringify(this.cartArray));
+          this.calculateReviewOrder(this.cartData, "OnInit");
           if (localStorage.getItem('loggedIn')) {
             this.apiService.getCustAddress(this.authorizationToken).subscribe((data) => {
               this.addresses = JSON.parse(JSON.stringify(data)).customer_address;
@@ -113,18 +115,39 @@ export class CartComponent implements OnInit {
     }
   }
 
-  calculateReviewOrder(cartDetails) {
+  calculateReviewOrder(cartDetails, value) {
+    console.log("CALCULATE REVIEW ORDER");
+    console.log(cartDetails);
+    console.log("CART BACKUP")
+    console.log(this.cartDataUIBackup);
     this.subtotal = 0;
     this.gst = 0;
     this.ordertotal = 0;
-    for (let i = 0; i < cartDetails.length; i++) {
-      this.subtotal = this.subtotal + JSON.parse(cartDetails[i].total_productCost);
+    if (value == "IncreDecre") {
+      if (this.cartDataUIBackup.length == cartDetails.length) {
+        for (let i = 0; i < cartDetails.length; i++) {
+          if (this.cartDataUIBackup[i].product_id.product_id == cartDetails[i].product_id) {
+            this.subtotal = this.subtotal + JSON.parse(this.cartDataUIBackup[i].total_productCost);
+          }
+        }
+      }
+    }
+    if (value == "Delete" || value == "OnInit") {
+      if (this.cartDataUIBackup.length == cartDetails.length) {
+        for (let i = 0; i < cartDetails.length; i++) {
+          if (this.cartDataUIBackup[i].product_id == cartDetails[i].product_id) {
+            this.subtotal = this.subtotal + JSON.parse(this.cartDataUIBackup[i].total_productCost);
+          }
+        }
+      }
     }
     this.gst = JSON.parse(((5 / 100) * this.subtotal).toFixed(2));
     this.ordertotal = this.subtotal + this.gst;
   }
 
   decrementQuanity(productId, currentQuantity, productCost, totalCost) {
+    console.log("DECREMENT QUANTITY");
+    console.log(productId.product_id, currentQuantity, productCost, totalCost)
     if (currentQuantity == 1) {
       Swal.fire("Quanity Cannot Be Less Than 1. You can delete the product if you want.");
     }
@@ -138,11 +161,13 @@ export class CartComponent implements OnInit {
         }
       }
       localStorage.setItem('cartProduct', JSON.stringify(storageCart));
-      this.calculateReviewOrder(storageCart);
+      this.calculateReviewOrder(storageCart, "IncreDecre");
     }
   }
 
   incrementQuanity(productId, currentQuantity, productCost, totalCost) {
+    console.log("INCREMENT QUANTITY");
+    console.log(productId.product_id, currentQuantity, productCost, totalCost)
     if (currentQuantity >= 10) {
       Swal.fire("Quanity Cannot Be Greater Than 10.");
     }
@@ -156,7 +181,7 @@ export class CartComponent implements OnInit {
         }
       }
       localStorage.setItem('cartProduct', JSON.stringify(storageCart));
-      this.calculateReviewOrder(storageCart);
+      this.calculateReviewOrder(storageCart, "IncreDecre");
     }
   }
 
@@ -164,6 +189,7 @@ export class CartComponent implements OnInit {
     for (let i = 0; i < this.cartData.length; i++) {
       if (this.cartData[i].product_id == productId) {
         this.cartData.splice(i, 1);
+        this.cartDataUIBackup = this.cartData;
         var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
         storageCart.splice(i, 1);
         if (this.cartData.length == 0) {
@@ -180,13 +206,13 @@ export class CartComponent implements OnInit {
         }
       }
     }
-    this.calculateReviewOrder(this.cartData);
     this.deleteCustomerCart(productId.product_id);
   }
 
   deleteCustomerCart(productId) {
     this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
       Swal.fire("Deleted!", JSON.parse(JSON.stringify(response)).message, "success");
+      this.calculateReviewOrder(this.cartData, "Delete");
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');
