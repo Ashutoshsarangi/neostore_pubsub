@@ -5,6 +5,8 @@ import { BehaviourService } from '../../Services/behaviour.service';
 import { ApiService } from '../../Services/api.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-navigationbar',
@@ -26,7 +28,8 @@ export class NavigationbarComponent implements OnInit {
     private router: Router,
     private behaviourService: BehaviourService,
     private apiService: ApiService,
-    private auth: AuthService
+    private auth: AuthService,
+    private matDialog: MatDialog
   ) {
     this.subscription = this.behaviourService.getCount().subscribe(count => {
       if (count) {
@@ -71,49 +74,23 @@ export class NavigationbarComponent implements OnInit {
   }
 
   logout() {
-    if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
-      this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-      if (localStorage.getItem('cartProduct')) {
-        this.postCartDataWhileLogout();
-      }
-      else {
-        this.logoutWithNoCartData();
-      }
+    console.log("Inside Logout");
+    if (!localStorage.getItem('loggedIn')) {
+      console.log("Inside Logout If");
+      Swal.fire("Please Login First.");
     }
-  }
-
-  postCartDataWhileLogout() {
-    var a = [];
-    a = JSON.parse(localStorage.getItem('cartProduct'));
-    a.splice(a.length - 1, 1);
-    var obj = {
-      flag: "logout"
-    };
-    a.push(obj);
-    localStorage.setItem('cartProduct', JSON.stringify(a));
-    this.postCartDataWhileLogoutApi(a, this.authorizationToken);
-  }
-
-  postCartDataWhileLogoutApi(a, authorizationToken) {
-    this.logoutWithNoCartData();
-    this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-    },
-      (error) => {
-        Swal.fire('Oops...', error.error.message, 'error');
+    else {
+      console.log("Inside Logout Else");
+      let dialogRef = this.matDialog.open(ConfirmationComponent, {
+        width: '250px',
+        disableClose: true
       });
-  }
-
-  logoutWithNoCartData() {
-    localStorage.removeItem('registered');
-    localStorage.removeItem('loggedIn');
-    localStorage.removeItem('userDetails');
-    localStorage.removeItem('cartProduct');
-    localStorage.removeItem('cartCount');
-    this.behaviourService.clearCount();
-    this.behaviourService.clearLogin();
-    this.showProfileOption = false;
-    this.auth.logout();
+      dialogRef.afterClosed().subscribe(value => {
+        console.log("CONFIRMATION VALUER");
+        console.log(value);
+        this.showProfileOption = value;
+      });
+    }
   }
 
 }

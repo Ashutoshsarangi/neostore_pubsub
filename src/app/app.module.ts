@@ -4,6 +4,7 @@ import { AddAddressComponent } from './Components/add-address/add-address.compon
 import { AllproductsComponent } from './Components/allproducts/allproducts.component';
 import { CartComponent } from './Components/cart/cart.component';
 import { CategoriesCarouselComponent } from './Components/categories-carousel/categories-carousel.component';
+import { ConfirmationComponent } from './Components/confirmation/confirmation.component';
 import { ContactformComponent } from './Components/contactform/contactform.component';
 import { FootersectionComponent } from './Components/footersection/footersection.component';
 import { ForgotpasswordComponent } from './Components/forgotpassword/forgotpassword.component';
@@ -59,6 +60,7 @@ export function provideConfig() {
     AllproductsComponent,
     CartComponent,
     CategoriesCarouselComponent,
+    ConfirmationComponent,
     ContactformComponent,
     FootersectionComponent,
     ForgotpasswordComponent,
@@ -91,7 +93,8 @@ export function provideConfig() {
     SocialLoginModule
   ],
   entryComponents: [
-    RatingModalComponent
+    RatingModalComponent,
+    ConfirmationComponent
   ],
   providers: [
     ApiService,
