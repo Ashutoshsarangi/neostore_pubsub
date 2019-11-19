@@ -6,6 +6,8 @@ import { MatRadioChange } from '@angular/material/radio';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-cart',
@@ -50,7 +52,8 @@ export class CartComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private behaviourService: BehaviourService,
-    private auth: AuthService
+    private auth: AuthService,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -116,10 +119,6 @@ export class CartComponent implements OnInit {
   }
 
   calculateReviewOrder(cartDetails, value) {
-    console.log("CALCULATE REVIEW ORDER");
-    console.log(cartDetails);
-    console.log("CART BACKUP")
-    console.log(this.cartDataUIBackup);
     this.subtotal = 0;
     this.gst = 0;
     this.ordertotal = 0;
@@ -146,8 +145,6 @@ export class CartComponent implements OnInit {
   }
 
   decrementQuanity(productId, currentQuantity, productCost, totalCost) {
-    console.log("DECREMENT QUANTITY");
-    console.log(productId.product_id, currentQuantity, productCost, totalCost)
     if (currentQuantity == 1) {
       Swal.fire("Quanity Cannot Be Less Than 1. You can delete the product if you want.");
     }
@@ -166,8 +163,6 @@ export class CartComponent implements OnInit {
   }
 
   incrementQuanity(productId, currentQuantity, productCost, totalCost) {
-    console.log("INCREMENT QUANTITY");
-    console.log(productId.product_id, currentQuantity, productCost, totalCost)
     if (currentQuantity >= 10) {
       Swal.fire("Quanity Cannot Be Greater Than 10.");
     }
@@ -186,27 +181,41 @@ export class CartComponent implements OnInit {
   }
 
   deleteProduct(productId) {
-    for (let i = 0; i < this.cartData.length; i++) {
-      if (this.cartData[i].product_id == productId) {
-        this.cartData.splice(i, 1);
-        this.cartDataUIBackup = this.cartData;
-        var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
-        storageCart.splice(i, 1);
-        if (this.cartData.length == 0) {
-          localStorage.removeItem('cartProduct');
-          localStorage.removeItem('cartCount');
-          this.behaviourService.clearCount();
-          this.noCartData = true;
+    let dialogRef = this.matDialog.open(ConfirmationComponent, {
+      width: '250px',
+      data: {
+        from: "Cart"
+      },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        for (let i = 0; i < this.cartData.length; i++) {
+          if (this.cartData[i].product_id == productId) {
+            this.cartData.splice(i, 1);
+            this.cartDataUIBackup = this.cartData;
+            var storageCart = JSON.parse(localStorage.getItem('cartProduct'));
+            storageCart.splice(i, 1);
+            if (this.cartData.length == 0) {
+              localStorage.removeItem('cartProduct');
+              localStorage.removeItem('cartCount');
+              this.behaviourService.clearCount();
+              this.noCartData = true;
+            }
+            else if (this.cartData.length != 0) {
+              localStorage.setItem('cartProduct', JSON.stringify(storageCart));
+              var cartCount = JSON.parse(localStorage.getItem('cartCount'));
+              localStorage.setItem('cartCount', JSON.stringify(cartCount - 1));
+              this.behaviourService.setCount(JSON.stringify(cartCount - 1));
+            }
+          }
         }
-        else if (this.cartData.length != 0) {
-          localStorage.setItem('cartProduct', JSON.stringify(storageCart));
-          var cartCount = JSON.parse(localStorage.getItem('cartCount'));
-          localStorage.setItem('cartCount', JSON.stringify(cartCount - 1));
-          this.behaviourService.setCount(JSON.stringify(cartCount - 1));
-        }
+        this.deleteCustomerCart(productId.product_id);
       }
-    }
-    this.deleteCustomerCart(productId.product_id);
+      else {
+        Swal.fire("Your Product is not deleted!");
+      }
+    });
   }
 
   deleteCustomerCart(productId) {

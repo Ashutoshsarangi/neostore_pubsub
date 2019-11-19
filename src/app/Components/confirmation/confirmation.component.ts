@@ -14,6 +14,8 @@ import { AuthService } from '../../Services/auth.service';
 })
 export class ConfirmationComponent implements OnInit {
 
+  from;
+  dialogHeading;
   authorizationToken;;
 
   constructor(
@@ -28,17 +30,31 @@ export class ConfirmationComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("Confirmation Component");
+    this.from = JSON.parse(JSON.stringify(this.data)).from;
+    if (this.from == "Logout") {
+      this.dialogHeading = "Do you want to logout?";
+    }
+    else if (this.from == "Cart") {
+      this.dialogHeading = "Do you want to delete this product?";
+    }
   }
 
   yes() {
-    console.log("Clicked Yes");
-    this.logout();
+    if (this.from == "Logout") {
+      this.logout();
+    }
+    else if (this.from == "Cart") {
+      this.dialogRef.close(true); //Delete Product Functionality
+    }
   }
 
   no() {
-    console.log("Clicked No");
-    this.dialogRef.close(true);
+    if (this.from == "Logout") {
+      this.dialogRef.close(true); //showProfileOption true;
+    }
+    else if (this.from == "Cart") {
+      this.dialogRef.close(false); //Do Not Delete The Product.
+    }
   }
 
   logout() {
@@ -84,7 +100,7 @@ export class ConfirmationComponent implements OnInit {
     localStorage.removeItem('cartCount');
     this.behaviourService.clearCount();
     this.behaviourService.clearLogin();
-    this.dialogRef.close(false);
+    this.dialogRef.close(false); //showProfileOption false;
     this.auth.logout();
   }
 

@@ -74,20 +74,18 @@ export class NavigationbarComponent implements OnInit {
   }
 
   logout() {
-    console.log("Inside Logout");
     if (!localStorage.getItem('loggedIn')) {
-      console.log("Inside Logout If");
       Swal.fire("Please Login First.");
     }
     else {
-      console.log("Inside Logout Else");
       let dialogRef = this.matDialog.open(ConfirmationComponent, {
         width: '250px',
+        data: {
+          from: "Logout"
+        },
         disableClose: true
       });
       dialogRef.afterClosed().subscribe(value => {
-        console.log("CONFIRMATION VALUER");
-        console.log(value);
         this.showProfileOption = value;
       });
     }
