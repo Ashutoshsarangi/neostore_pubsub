@@ -1,20 +1,3 @@
-<!-- <div class="row">
-    <div class="col-1">
-        <a class="btn Cart">
-            <span class="badge">1</span>
-            Cart
-        </a>
-    </div>
-    <div class="col-9 horizontalLine">
-    </div>
-    <div class="col-2">
-        <a class="btn Cart">
-            <span class="badge">2</span>
-            Address
-        </a>
-    </div>
-</div> -->
-
 <mat-tab-group class="mattab" [selectedIndex]="selectedTab">
 
     <mat-tab label="Cart">
@@ -87,19 +70,13 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Subtotal &nbsp;&nbsp;&nbsp;
-                                <!-- <p class="Value"> -->
                                 - &nbsp;&nbsp;{{subtotal | currency:'INR' }}
-                                <!-- </p> -->
                             </li>
                             <li class="list-group-item">GST(5%) &nbsp;&nbsp;&nbsp;
-                                <!-- <p class="Value"> -->
                                 - &nbsp;&nbsp;{{gst | currency:'INR' }}
-                                <!-- </p> -->
                             </li>
                             <li class="list-group-item">Order Total &nbsp;
-                                <!-- <p class="Value"> -->
                                 - &nbsp;&nbsp;{{ordertotal | currency:'INR'}}
-                                <!-- </p> -->
                             </li>
                             <a class="btn Buy" (click)="proceedToBuy()">
                                 Proceed To Buy
