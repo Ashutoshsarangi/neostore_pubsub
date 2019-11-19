@@ -37,8 +37,8 @@ export class RatingModalComponent implements OnInit {
       this.rating = JSON.parse(JSON.stringify(this.data)).product_rating;
     }
     else {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
   }
 

@@ -62,8 +62,8 @@ export class CartComponent implements OnInit {
       this.getCustomerCartDetails();
     }
     else {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
   }
 

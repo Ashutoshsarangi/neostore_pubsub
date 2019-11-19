@@ -42,8 +42,8 @@ export class OrderPlacedComponent implements OnInit {
       }
     }
     else {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
   }
 

@@ -23,8 +23,8 @@ export class ContactformComponent implements OnInit {
 
   ngOnInit() {
     if (!this.auth.isLoggedIn()) {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
   }
 

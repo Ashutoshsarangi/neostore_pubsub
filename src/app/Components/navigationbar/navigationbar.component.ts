@@ -64,11 +64,11 @@ export class NavigationbarComponent implements OnInit {
 
   goToCart() {
     if (!this.auth.isLoggedIn()) {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
     else {
-      this.router.navigate(["login"]);
+      this.router.navigate(["cart"]);
     }
   }
 

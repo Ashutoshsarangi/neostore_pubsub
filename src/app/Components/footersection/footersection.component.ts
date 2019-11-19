@@ -88,11 +88,11 @@ export class FootersectionComponent implements OnInit {
 
   contactUs() {
     if (!this.auth.isLoggedIn()) {
-      this.auth.logout();
       Swal.fire("Please Login First!");
+      this.auth.logout();
     }
     else {
-      this.router.navigate(["login"]);
+      this.router.navigate(["contactform"]);
     }
   }
 
