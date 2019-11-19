@@ -33,10 +33,8 @@
                 *ngIf="!showProfileOption">Login</a>
             <a class="dropdown-item" href="#" routerLink="login/register" routerLinkActive="Active"
                 *ngIf="!showProfileOption">Register</a>
-            <a class="dropdown-item" href="#" routerLink="profile/:option" routerLinkActive="Active"
-                *ngIf="showProfileOption" (click)="gotoProfile('Profile')">Profile</a>
-            <a class="dropdown-item" href="#" routerLink="categories-carousel" routerLinkActive="Active"
-                *ngIf="showProfileOption" (click)="logout()">Logout</a>
+            <a class="dropdown-item" *ngIf="showProfileOption" (click)="gotoProfile('Profile')">Profile</a>
+            <a class="dropdown-item" *ngIf="showProfileOption" (click)="logout()">Logout</a>
         </div>
     </div>
 

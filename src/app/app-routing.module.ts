@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'cart/allproducts', component: AllproductsComponent },
 
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
-  
+
   { path: 'contactform', component: ContactformComponent, canActivate: [AuthGuard] },
 
   { path: 'footersection', component: FootersectionComponent },
@@ -56,8 +56,8 @@ const routes: Routes = [
 
   { path: 'productdetails/:id', component: ProductdetailsComponent },
 
-  { path: 'login/register', component: RegisterComponent, canActivate: [AuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [AuthGuard] },
+  { path: 'login/register', component: RegisterComponent },
+  { path: 'register', component: RegisterComponent },
 
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'profile/:option', component: ProfileComponent, canActivate: [AuthGuard] },
