@@ -62,6 +62,16 @@ export class NavigationbarComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  goToCart() {
+    if (!this.auth.isLoggedIn()) {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
+    }
+    else {
+      this.router.navigate(["login"]);
+    }
+  }
+
   gotoProfile(value) {
     if (localStorage.getItem('loggedIn')) {
       this.router.navigateByUrl('/profile', { skipLocationChange: true });

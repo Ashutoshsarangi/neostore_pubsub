@@ -86,6 +86,16 @@ export class FootersectionComponent implements OnInit {
     window.open(this.pdfUrl + this.fileName1);
   }
 
+  contactUs() {
+    if (!this.auth.isLoggedIn()) {
+      this.auth.logout();
+      Swal.fire("Please Login First!");
+    }
+    else {
+      this.router.navigate(["login"]);
+    }
+  }
+
   gotoThankYouSubscribe(email) {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.email = email;

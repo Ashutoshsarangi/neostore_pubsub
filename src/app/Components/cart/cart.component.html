@@ -75,7 +75,8 @@
                             {{c.total_productCost | currency:'INR'}}
                         </div>
                         <div class="col-1 TableHeader">
-                            <span class="glyphicon glyphicon-trash" (click)="deleteProduct(c.product_id)"></span>
+                            <span class="glyphicon glyphicon-trash"
+                                (click)="deleteProduct(c.product_id,c.product_id.product_name)"></span>
                         </div>
                     </div>
                 </div>

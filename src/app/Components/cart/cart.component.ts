@@ -180,11 +180,12 @@ export class CartComponent implements OnInit {
     }
   }
 
-  deleteProduct(productId) {
+  deleteProduct(productId, product_name) {
     let dialogRef = this.matDialog.open(ConfirmationComponent, {
       width: '250px',
       data: {
-        from: "Cart"
+        from: "Cart",
+        product_name: product_name
       },
       disableClose: true
     });
@@ -210,17 +211,17 @@ export class CartComponent implements OnInit {
             }
           }
         }
-        this.deleteCustomerCart(productId.product_id);
+        this.deleteCustomerCart(productId.product_id, product_name);
       }
       else {
-        Swal.fire("Your Product is not deleted!");
+        Swal.fire(product_name + " is not deleted!");
       }
     });
   }
 
-  deleteCustomerCart(productId) {
+  deleteCustomerCart(productId, product_name) {
     this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
-      Swal.fire("Deleted!", JSON.parse(JSON.stringify(response)).message, "success");
+      Swal.fire("Deleted!", product_name + " " + JSON.parse(JSON.stringify(response)).message, "success");
       this.calculateReviewOrder(this.cartData, "Delete");
     },
       (error) => {

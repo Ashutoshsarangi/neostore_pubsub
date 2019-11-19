@@ -15,6 +15,7 @@ import { AuthService } from '../../Services/auth.service';
 export class ConfirmationComponent implements OnInit {
 
   from;
+  product_name;
   dialogHeading;
   authorizationToken;;
 
@@ -31,11 +32,12 @@ export class ConfirmationComponent implements OnInit {
 
   ngOnInit() {
     this.from = JSON.parse(JSON.stringify(this.data)).from;
+    this.product_name = JSON.parse(JSON.stringify(this.data)).product_name;
     if (this.from == "Logout") {
       this.dialogHeading = "Do you want to logout?";
     }
     else if (this.from == "Cart") {
-      this.dialogHeading = "Do you want to delete this product?";
+      this.dialogHeading = "Do you want to delete " + this.product_name + "?";
     }
   }
 

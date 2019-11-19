@@ -20,7 +20,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem("userToken");
-    this.myRoute.navigate(["categories-carousel"]);
+    this.myRoute.navigate(["login"]);
   }
 
 }
