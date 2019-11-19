@@ -213,7 +213,7 @@ export class CartComponent implements OnInit {
         }
         this.deleteCustomerCart(productId.product_id, product_name);
       }
-      else {
+      else if (!value) {
         Swal.fire(product_name + " is not deleted!");
       }
     });

@@ -7,6 +7,8 @@ import { environment } from '../../../environments/environment';
 import { MatRadioChange } from '@angular/material/radio';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-profile',
@@ -50,7 +52,8 @@ export class ProfileComponent implements OnInit {
     private apiService: ApiService,
     private httpClient: HttpClient,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private matDialog: MatDialog
   ) { }
 
   //formData = new FormData();
@@ -325,8 +328,22 @@ export class ProfileComponent implements OnInit {
   }
 
   cancel(value) {
-    this.editProfileClicked = false;
-    this.router.navigate(['/profile/', value]);
+    let dialogRef = this.matDialog.open(ConfirmationComponent, {
+      width: '250px',
+      data: {
+        from: "Profile"
+      },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(value1 => {
+      if (value1) {
+        this.editProfileClicked = false;
+        this.router.navigate(['/profile/', value]);
+      }
+      else if (!value1) {
+        Swal.fire("Continue Editing...");
+      }
+    });
   }
 
   openAddress(Address) {

@@ -17,7 +17,7 @@ export class ConfirmationComponent implements OnInit {
   from;
   product_name;
   dialogHeading;
-  authorizationToken;;
+  authorizationToken;
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmationComponent>,
@@ -39,23 +39,32 @@ export class ConfirmationComponent implements OnInit {
     else if (this.from == "Cart") {
       this.dialogHeading = "Do you want to delete " + this.product_name + "?";
     }
+    else if (this.from == "Address" || this.from == "Profile") {
+      this.dialogHeading = "Do you want to cancel the form?";
+    }
   }
 
   yes() {
     if (this.from == "Logout") {
-      this.logout();
+      this.logout(); //Logout.
     }
     else if (this.from == "Cart") {
-      this.dialogRef.close(true); //Delete Product Functionality
+      this.dialogRef.close(true); //Delete Product Functionality.
+    }
+    else if (this.from == "Address" || this.from == "Profile") {
+      this.dialogRef.close(true); //Cancel the form.
     }
   }
 
   no() {
     if (this.from == "Logout") {
-      this.dialogRef.close(true); //showProfileOption true;
+      this.dialogRef.close(true); //Do not logout - showProfileOption true;
     }
     else if (this.from == "Cart") {
       this.dialogRef.close(false); //Do Not Delete The Product.
+    }
+    else if (this.from == "Address" || this.from == "Profile") {
+      this.dialogRef.close(false); //Do Not Cancel The Form.
     }
   }
 
@@ -102,7 +111,7 @@ export class ConfirmationComponent implements OnInit {
     localStorage.removeItem('cartCount');
     this.behaviourService.clearCount();
     this.behaviourService.clearLogin();
-    this.dialogRef.close(false); //showProfileOption false;
+    this.dialogRef.close(false); //Logout - showProfileOption false;
     this.auth.logout();
   }
 

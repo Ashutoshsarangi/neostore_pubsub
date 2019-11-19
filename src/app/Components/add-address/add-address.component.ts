@@ -5,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../confirmation/confirmation.component';
 
 @Component({
   selector: 'app-add-address',
@@ -28,7 +30,8 @@ export class AddAddressComponent implements OnInit {
     private apiService: ApiService,
     private httpClient: HttpClient,
     private router: Router,
-    private auth: AuthService
+    private auth: AuthService,
+    private matDialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -217,7 +220,21 @@ export class AddAddressComponent implements OnInit {
   }
 
   cancel(value) {
-    this.router.navigate(['/profile/', value]);
+    let dialogRef = this.matDialog.open(ConfirmationComponent, {
+      width: '250px',
+      data: {
+        from: "Address"
+      },
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(value1 => {
+      if (value1) {
+        this.router.navigate(['/profile/', value]);
+      }
+      else if (!value1) {
+        Swal.fire("Continue Editing...");
+      }
+    });
   }
 
   openOrdersList() {
