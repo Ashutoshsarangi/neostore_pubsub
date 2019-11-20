@@ -53,3 +53,8 @@ a {
 .badge {
     background-color: red;
 }
+
+.btn-outline-success:not(:disabled):not(.disabled).active, .btn-outline-success:not(:disabled):not(.disabled):active, .show>.btn-outline-success.dropdown-toggle {
+    background: #FFFFFF;
+    color: #000000;
+}

@@ -182,19 +182,25 @@ input:focus + label {
 }
 
 .nav-link {
+    margin-top: 15px;
     color: #4A3DB5;
     padding: 0rem;
 }
 
 .nav-link:hover {
+    margin-top: 15px;
     color: #4A3DB5;
     text-decoration: underline;
 }
 
 .viewall {
-    color: #4A3DB5;
+    margin-top: 15px;
+    color: #000000;
+    font-weight: bold;
 }
 
 a {
-    color: #4A3DB5;
+    margin-top: 15px;
+    color: #000000;
+    font-weight: bold;
 }
