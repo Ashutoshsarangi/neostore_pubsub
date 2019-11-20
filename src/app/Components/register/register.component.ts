@@ -207,6 +207,10 @@ export class RegisterComponent implements OnInit {
 
   }
 
+  gotologin() {
+    this.router.navigate(["login"]);
+  }
+
   // openFacebook() {
   //   window.open('https://www.facebook.com/');
   // }
