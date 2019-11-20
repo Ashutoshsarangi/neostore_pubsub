@@ -3,7 +3,7 @@
     <div class="col-md-6">
         <ngx-image-zoom [thumbImage]=myThumbnail [fullImage]=myFullresImage [magnification]="1"
             [enableScrollZoom]="true" [enableLens]="true" [lensWidth]="250" [lensHeight]="150"></ngx-image-zoom>
-        <div style="width: 520px; height: 120px; overflow-y: scroll;">
+        <div style="width: 100%; overflow-y: hidden;" class="d-flex">
             <div class="col-md-4" *ngFor="let s of productDetailsDetailsArray.subImages_id.product_subImages">
                 <img class="d-block ProductSubImage" src="{{imageUrl}}{{s}}" (click)="changeProductImage(s)">
             </div>

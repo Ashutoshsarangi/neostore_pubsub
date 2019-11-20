@@ -8,7 +8,14 @@
     background-color: #FFFFFF;
     border-color: #FFFFFF;
     color: #000000;
-    border: 1px solid #CDCDCD;
+    border: 3px solid #CDCDCD;
+}
+
+.btn-info:hover { 
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #000000;
+    border: 3px solid #000000;
 }
 
 .ContactFormTitle {
@@ -107,6 +114,13 @@ a.btn.btn-light:hover {
     border-color: #000000;
 }
 
+.btn-secondary:hover {
+    height: 30px;
+    width: 45px;
+    margin: 5px;
+    border: 5px solid #000000;
+}
+
 .card-footer {
     background-color: transparent;
     border: none;
@@ -115,4 +129,18 @@ a.btn.btn-light:hover {
 
 .notFound {
     text-align: center;
+}
+
+button.btn.btn-secondary {
+    border-radius: 0;
+    padding: 0;
+    margin: 2.5px;
+}
+
+.btn-toolbar {
+    margin-left: 0px; 
+}
+
+.list-group-item:hover {
+    border: 5px solid #000000;
 }

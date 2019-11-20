@@ -12,12 +12,11 @@
             </a>
         </p>
         <div class="list-group" *ngIf="categoriesClicked">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-action" [ngClass]="{ 'active': i === 0 }"
-                    *ngFor="let c of categoriesDetailsArray;" routerLink="allproducts/:category_id"
-                    routerLinkActive="Active" (click)="setCategoryId(c.category_id,c.category_name)">
-                    {{c.category_name}}</li>
-            </ul>
+            <li class="list-group-item list-group-item-action" [ngClass]="{ 'active': i === 0 }"
+                *ngFor="let c of categoriesDetailsArray;" routerLink="allproducts/:category_id"
+                routerLinkActive="Active" (click)="setCategoryId(c.category_id,c.category_name)">
+                {{c.category_name}}
+            </li>
         </div>
         <p>
             <a class="btn btn-info btn-lg" (click)="openColorsList()">
@@ -26,10 +25,8 @@
             </a>
         </p>
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" *ngIf="colorsClicked">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-                <button type="button" class="btn btn-secondary" *ngFor="let c of allColorsDetailsArray; let i = index"
-                    [style.background-color]="c.color_code" (click)="setColorId(c.color_id,c.color_code)"></button>
-            </div>
+            <button type="button" class="btn btn-secondary" *ngFor="let c of allColorsDetailsArray; let i = index"
+                [style.background-color]="c.color_code" (click)="setColorId(c.color_id,c.color_code)"></button>
         </div>
     </div>
 
