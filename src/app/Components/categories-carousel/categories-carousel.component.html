@@ -23,7 +23,7 @@
 </p>
 
 <div class="row card-group">
-  <div class="col-3" *ngFor="let p of productDetailsArray;">
+  <div class="col-sm-12 col-md-6 col-lg-3" *ngFor="let p of productDetailsArray;">
     <div class="card" (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top thumbnail" alt="..."
         (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
