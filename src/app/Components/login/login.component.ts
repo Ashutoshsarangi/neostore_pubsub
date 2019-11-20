@@ -38,6 +38,10 @@ export class LoginComponent implements OnInit {
     //   this.user = user;
     //   this.loggedIn = (user != null);
     // });
+    if (this.auth.isLoggedIn()) {
+      Swal.fire("Already logged in");
+      this.router.navigate(["categories-carousel"]);
+    }
   }
 
   formValidation() {
