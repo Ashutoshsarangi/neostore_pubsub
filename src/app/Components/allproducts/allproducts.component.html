@@ -69,7 +69,7 @@
 
     <div class="row card-group" *ngIf="!notFoundProduct">
         <div class="col-4" *ngFor="let p of pageOfItems;">
-            <div class="card">
+            <div class="card" (click)="gotoProductDetails(p._id)">
                 <img src="{{imageUrl}}{{p.product_image}}" class="card-img-top thumbnail" alt="..."
                     (click)="gotoProductDetails(p._id)">
                 <div class="card-body">
@@ -80,7 +80,8 @@
                         </a>
                     </h5>
                     <p class="card-text">{{p.product_cost | currency:'INR' }}</p>
-                    <p class="button"><a class="btn btn-light" (click)="addToCart(p)">Add To Cart</a></p>
+                    <p class="button"><a class="btn btn-light" (click)="addToCart(p); $event.stopPropagation();">Add To
+                            Cart</a></p>
                     <p class="star">
                         <star-rating value="{{p.product_rating}}" checkedcolor="orange" uncheckedcolor="black"
                             size="15px" readonly="true" :star-size="5px" :increment="0.01">

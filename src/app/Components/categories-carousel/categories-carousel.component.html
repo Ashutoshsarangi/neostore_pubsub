@@ -24,7 +24,7 @@
 
 <div class="row card-group">
   <div class="col-3" *ngFor="let p of productDetailsArray;">
-    <div class="card">
+    <div class="card" (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top thumbnail" alt="..."
         (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <div class="card-body">
@@ -35,7 +35,8 @@
           </a>
         </h5>
         <p class="card-text">{{p.DashboardProducts[0].product_cost | currency:'INR' }}</p>
-        <p class="button"><a class="btn btn-light" (click)="addToCart(p.DashboardProducts[0])">Add To Cart</a></p>
+        <p class="button"><a class="btn btn-light"
+            (click)="addToCart(p.DashboardProducts[0]); $event.stopPropagation();">Add To Cart</a></p>
         <p class="star">
           <star-rating value="{{p.DashboardProducts[0].product_rating}}" checkedcolor="orange" uncheckedcolor="black"
             size="24px" readonly="true" :star-size="5px" :increment="0.01"></star-rating>
