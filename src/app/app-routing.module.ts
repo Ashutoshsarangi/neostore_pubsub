@@ -47,7 +47,7 @@ const routes: Routes = [
 
   { path: 'locateus', component: LocateusComponent },
 
-  { path: 'login', component: LoginComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
 
   { path: 'navigationbar', component: NavigationbarComponent },
 
