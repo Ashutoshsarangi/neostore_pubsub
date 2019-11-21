@@ -544,6 +544,10 @@ input:focus + label {
     font-size: 24px;
 }
 
+.fa.fa-calendar.icon {
+    cursor: pointer;
+}
+
 .input-field {
     width: 100%;
     padding: 10px;

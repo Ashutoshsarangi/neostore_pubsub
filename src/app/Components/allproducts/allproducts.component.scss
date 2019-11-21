@@ -61,6 +61,7 @@ a {
     height: 380px;
     margin: 20px;
     border: 1px solid #4A3DB5;
+    cursor: pointer;
 }
 
 .card-img-top {
@@ -150,4 +151,5 @@ button.btn.btn-secondary {
 
 .list-group-item:hover {
     border: 5px solid #000000;
+    cursor: pointer;
 }

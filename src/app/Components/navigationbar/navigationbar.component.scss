@@ -58,3 +58,9 @@ a {
     background: #FFFFFF;
     color: #000000;
 }
+
+a.dropdown-item:hover {
+    background: #4A3DB5;
+    color: #FFFFFF;
+    cursor: pointer;
+}

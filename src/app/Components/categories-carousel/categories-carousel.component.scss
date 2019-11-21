@@ -8,6 +8,7 @@
 
 .carousel-inner>.item>a>img, .carousel-inner>.item>img, .img-responsive, .thumbnail a>img, .thumbnail>img {
     height: 400px;
+    cursor: pointer;
 }
 
 .w-100 {
@@ -66,6 +67,7 @@ a {
     height: 380px;
     margin: 20px;
     border: 1px solid #4A3DB5;
+    cursor: pointer;
 }
 
 .card-img-top {
