@@ -159,9 +159,10 @@
                     </mat-radio-group>
                 </div>
                 <div class="field">
-                    <i class="fa fa-calendar icon"></i>
-                    <input type="date" name="dob" id="dob" placeholder="Date of Birth">
-                    <label for="dob">Date of Birth</label>
+                    <i class="fa fa-calendar icon" (click)="d.toggle()"></i>
+                    <input placeholder="yyyy-mm-dd" name="dob" [(ngModel)]="model" ngbDatepicker #d="ngbDatepicker"
+                        (dateSelect)="dateSelection($event)">
+                    <label for="dob" class="dob">Date of Birth</label>
                 </div>
                 <span id="dob_error" class="Error"></span>
                 <div class="field">

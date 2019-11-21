@@ -28,6 +28,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RatingModule } from 'ng-starrating';
 import { FormsModule } from '@angular/forms';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material';
 import { MatRadioModule } from '@angular/material/radio';
@@ -90,7 +91,9 @@ export function provideConfig() {
     BrowserAnimationsModule,
     NgxImageZoomModule.forRoot(),
     JwSocialButtonsModule,
-    SocialLoginModule
+    SocialLoginModule,
+    FormsModule, 
+    NgbModule
   ],
   entryComponents: [
     RatingModalComponent,

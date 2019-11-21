@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~8.2.8",
     "@angular/platform-browser-dynamic": "~8.2.8",
     "@angular/router": "~8.2.8",
+    "@ng-bootstrap/ng-bootstrap": "^5.1.4",
     "angular-material": "^1.1.20",
     "angularx-social-login": "^2.1.1",
     "jw-angular-pagination": "^1.1.0",

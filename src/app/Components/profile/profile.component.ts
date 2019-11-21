@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
@@ -47,6 +48,8 @@ export class ProfileComponent implements OnInit {
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
 
+  todaysDate;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
@@ -60,6 +63,7 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
+      this.todaysDate = formatDate(new Date(), 'yyyy-mm-dd', 'en');
       this.imageUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
       this.pdfUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
       if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
@@ -175,6 +179,11 @@ export class ProfileComponent implements OnInit {
     this.gender = $event.value;
   }
 
+  dateSelection(event) {
+    console.log("DATE SELECTION");
+    console.log(event);
+  }
+
   // fileProgress(event) {
   //   // this.fileData = <File>fileInput.target.files[0];
   //   // this.preview();
@@ -200,15 +209,18 @@ export class ProfileComponent implements OnInit {
     var lastname = document.forms["RegForm"]["lastname"]; //User Last Name Field;
     var mobile = document.forms["RegForm"]["mobile"]; //User Mobile Number Field.
     var email = document.forms["RegForm"]["email"]; //User Email Field;
+    var dob = document.forms["RegForm"]["dob"]; //User Dob;
 
     //REGEX FOR VALIDATIONS.
     var nameValidationRegex = /^[A-Za-z]+$/;
+    var dateValidationRegex = /^(19|20)\d\d[-](0[1-9]|1[012])[-](0[1-9]|[12][0-9]|3[01])$/;
     //var emailValidationRegex = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
     var emailValidationRegex = /^[A-Za-z]{2,}[A-Za-z0-9]{0,}[.]{0,1}[A-Za-z0-9]{1,}[.]{0,1}[A-Za-z0-9]{1,}@[A-Za-z]{2,}[.]{1}[A-za-z]{2,3}[.]{0,1}[a-z]{0,2}$/;
     var mobileValidationRegex = /^(\+\d{1,3}[- ]?)?\d{10}$/;
 
     if (firstname.value == "") {
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("firstname_error").innerHTML = "* Please enter your first name.";
@@ -218,6 +230,7 @@ export class ProfileComponent implements OnInit {
 
     if (!(nameValidationRegex.test(String(firstname.value)))) {
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("firstname_error").innerHTML = "* Enter correct first name.";
@@ -227,6 +240,7 @@ export class ProfileComponent implements OnInit {
 
     if (lastname.value == "") {
       document.getElementById("firstname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "* Please enter your last name.";
@@ -236,6 +250,7 @@ export class ProfileComponent implements OnInit {
 
     if (!(nameValidationRegex.test(String(lastname.value)))) {
       document.getElementById("firstname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "* Enter correct last name.";
@@ -248,9 +263,30 @@ export class ProfileComponent implements OnInit {
       return false;
     }
 
+    if (dob.value == "") {
+      document.getElementById("firstname_error").innerHTML = "";
+      document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("email_error").innerHTML = "";
+      document.getElementById("mobile_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "* Please enter your dob.";
+      dob.focus();
+      return false;
+    }
+
+    if (!(dateValidationRegex.test(String(dob.value)))) {
+      document.getElementById("firstname_error").innerHTML = "";
+      document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("email_error").innerHTML = "";
+      document.getElementById("mobile_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "* Please enter correct dob.";
+      dob.focus();
+      return false;
+    }
+
     if (mobile.value == "") {
       document.getElementById("firstname_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "* Please enter your mobile number.";
       mobile.focus();
@@ -260,6 +296,7 @@ export class ProfileComponent implements OnInit {
     if (!(mobileValidationRegex.test(String(mobile.value)))) {
       document.getElementById("firstname_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "* Enter correct mobile number.";
       mobile.focus();
@@ -269,6 +306,7 @@ export class ProfileComponent implements OnInit {
     if (email.value == "") {
       document.getElementById("firstname_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "* Please enter your email.";
       email.focus();
@@ -278,6 +316,7 @@ export class ProfileComponent implements OnInit {
     if (!(emailValidationRegex.test(String(email.value).toLowerCase()))) {
       document.getElementById("firstname_error").innerHTML = "";
       document.getElementById("lastname_error").innerHTML = "";
+      document.getElementById("dob_error").innerHTML = "";
       document.getElementById("mobile_error").innerHTML = "";
       document.getElementById("email_error").innerHTML = "* Enter correct email.";
       email.focus();
