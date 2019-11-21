@@ -2,6 +2,7 @@
     <p class="RatingHeading">{{dialogHeading}}</p>
 </mat-dialog-content>
 <mat-dialog-actions align="center">
-    <button type="button" class="btn btn-light1" (click)="yes()">Yes</button>&nbsp;
-    <button type="button" class="btn btn-light1" (click)="no()">No</button>
+    <button *ngIf="from != 'ChangePassword'" type="button" class="btn btn-light1" (click)="yes()">Yes</button>&nbsp;
+    <button *ngIf="from != 'ChangePassword'" type="button" class="btn btn-light1" (click)="no()">No</button>
+    <button *ngIf="from == 'ChangePassword'" type="button" class="btn btn-light1" (click)="logout()">Ok</button>
 </mat-dialog-actions>

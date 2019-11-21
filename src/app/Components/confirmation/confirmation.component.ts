@@ -36,6 +36,9 @@ export class ConfirmationComponent implements OnInit {
     if (this.from == "Logout") {
       this.dialogHeading = "Do you want to logout?";
     }
+    else if (this.from == "ChangePassword") {
+      this.dialogHeading = "You password has been changed and you are about to logout...";
+    }
     else if (this.from == "Cart") {
       this.dialogHeading = "Do you want to delete " + this.product_name + "?";
     }

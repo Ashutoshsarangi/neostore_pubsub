@@ -500,8 +500,7 @@ export class ProfileComponent implements OnInit {
         this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
         this.apiService.postChangePassword(password1.value, password2.value, password3.value, this.authorizationToken).subscribe((response) => {
           Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-          this.router.navigateByUrl('/profile', { skipLocationChange: true });
-          setTimeout(() => this.router.navigate(['/profile/', "Profile"]));
+          this.logout();
         },
           (error) => {
             Swal.fire('Oops...', error.error.message, 'error');
@@ -513,6 +512,21 @@ export class ProfileComponent implements OnInit {
       }
     }
 
+  }
+
+  logout() {
+    if (!localStorage.getItem('loggedIn')) {
+      Swal.fire("Please Login First.");
+    }
+    else {
+      let dialogRef = this.matDialog.open(ConfirmationComponent, {
+        width: '250px',
+        data: {
+          from: "ChangePassword"
+        },
+        disableClose: true
+      });
+    }
   }
 
 }
