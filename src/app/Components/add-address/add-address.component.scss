@@ -14,8 +14,12 @@
     background-color: #FFFFFF;
     border-color: #FFFFFF;
     color: #000000;
-    border: 1px solid #CDCDCD;
+    border: 3px solid #CDCDCD;
     margin-top: 20px;
+}
+
+.list-group-item:hover {
+    border: 5px solid #000000;
 }
 
 .list-group-flush:last-child .list-group-item:last-child {
@@ -172,4 +176,15 @@ a.btn.btn-light:hover {
 .btn-light:hover {
     background: #4A3DB5;
     color: #FFFFFF;
+}
+
+.btn-info:hover { 
+    background-color: #FFFFFF;
+    border-color: #FFFFFF;
+    color: #000000;
+    border: 3px solid #000000;
+}
+
+.Profile {
+    border-right: 3px solid #000000;
 }
