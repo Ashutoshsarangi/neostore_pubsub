@@ -52,6 +52,9 @@ a.Buy {
 
 .Header {
     border: 1px solid #CDCDCD;
+    font-weight: bold;
+    background: #4A3DB5;
+    color:#FFFFFF;
 }
 
 .minus {
@@ -143,6 +146,12 @@ a.Add {
     font-size: 25px;
     border-bottom: 1px solid #CDCDCD;
     padding-bottom: 20px;
+    color: #4A3DB5;
+}
+
+.AddressHeadings {
+    color: #C97F1A;
+    font-weight: bold;
 }
 
 a.Edit {
@@ -191,4 +200,29 @@ a.btn.btn-light:hover {
 
 .thumbnail:hover {
     border: 5px solid #000000;
+}
+
+a {
+    color: #4A3DB5;
+}
+
+a.nav-link:hover {
+    color: #4A3DB5;
+}
+
+.Producer {
+    color: #C97F1A;
+}
+
+.TableHeader1 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: green;
+}
+
+.TableHeader2 {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    color: rgb(4, 77, 4);
+    font-weight: bold;
 }

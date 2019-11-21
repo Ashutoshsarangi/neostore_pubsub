@@ -44,7 +44,7 @@
                     <span class="DateTime"> {{o.product_details[0].createdAt | date: 'EEEE, dd/MM/yyyy, h:mm a'}}
                     </span>
                     /
-                    <span class="Cost">₹ {{o.product_details[0].total_cartCost}}</span>
+                    <span class="Cost">{{o.product_details[0].total_cartCost | currency:'INR'}}</span>
                 </p>
                 <div style="width: 100%; overflow-y: hidden;">
                     <div class="ProductDiv d-flex">
@@ -81,22 +81,22 @@
             <p class="ProfileTitle">Profile</p>
             <div class="row">
                 <div class="col-3 ProfileFieldsL">
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         First Name
                     </p>
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         Last Name
                     </p>
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         Gender
                     </p>
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         Date of Birth
                     </p>
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         Mobile Number
                     </p>
-                    <p class="Label">
+                    <p class="Label AddressHeadings">
                         Email
                     </p>
                 </div>
@@ -126,9 +126,7 @@
             </div>
             <p class="EditButton">
                 <a class="btn Edit" (click)="gotoEditProfile()">
-                    <span class="glyphicon glyphicon-pencil">
-                        Edit
-                    </span>
+                    Edit
                 </a>
             </p>
         </div>
@@ -206,18 +204,21 @@
             <div class="row Details" *ngFor="let a of addresses; let i =index;">
                 <div class="col-11 TableHeader">
                     <div class="row">
-                        <div class="col-8">
+                        <div class="col-12">
                             <div>
-                                {{a.address}}
+                                <span class="AddressHeadings">Address: &nbsp;</span>{{a.address}}
                             </div>
                             <div>
-                                {{a.city}}
+                                <span class="AddressHeadings">City: &nbsp;</span>{{a.city}}
                             </div>
                             <div>
-                                {{a.pincode}}
+                                <span class="AddressHeadings">Pincode: &nbsp;</span>{{a.pincode}}
                             </div>
                             <div>
-                                {{a.country}}
+                                <span class="AddressHeadings">State: &nbsp;</span>{{a.state}}
+                            </div>
+                            <div>
+                                <span class="AddressHeadings">Country: &nbsp;</span>{{a.country}}
                             </div>
                             <div class="row">
                                 <div class="col-3">

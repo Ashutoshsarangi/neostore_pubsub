@@ -35,10 +35,10 @@
                                         </a>
                                     </div>
                                     <div class="row">
-                                        by {{c.product_id.product_producer}}
+                                        by <span class="Producer">&nbsp;{{c.product_id.product_producer}}</span>
                                     </div>
                                     <div class="row">
-                                        Status: <span style="color: green">{{c.product_id.product_stock}} In
+                                        Status: &nbsp;<span style="color: green">{{c.product_id.product_stock}} In
                                             Stock</span>
                                     </div>
                                 </div>
@@ -51,10 +51,10 @@
                             <span class="badge plus"
                                 (click)="incrementQuanity(c.product_id,c.quantity,c.product_id.product_cost,c.total_productCost)">+</span>
                         </div>
-                        <div class="col-2 TableHeader">
+                        <div class="col-2 TableHeader1">
                             {{c.product_id.product_cost | currency:'INR' }}
                         </div>
-                        <div class="col-2 TableHeader">
+                        <div class="col-2 TableHeader2">
                             {{c.total_productCost | currency:'INR'}}
                         </div>
                         <div class="col-1 TableHeader">
@@ -118,16 +118,19 @@
                     <div class="row">
                         <div class="col-8">
                             <div>
-                                {{a.address}}
+                                <span class="AddressHeadings">Address: &nbsp;</span>{{a.address}}
                             </div>
                             <div>
-                                {{a.city}}
+                                <span class="AddressHeadings">City: &nbsp;</span>{{a.city}}
                             </div>
                             <div>
-                                {{a.pincode}}
+                                <span class="AddressHeadings">Pincode: &nbsp;</span>{{a.pincode}}
                             </div>
                             <div>
-                                {{a.country}}
+                                <span class="AddressHeadings">State: &nbsp;</span>{{a.state}}
+                            </div>
+                            <div>
+                                <span class="AddressHeadings">Country: &nbsp;</span>{{a.country}}
                             </div>
                             <div class="row">
                                 <div class="col-3 select">

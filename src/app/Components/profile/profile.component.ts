@@ -102,6 +102,10 @@ export class ProfileComponent implements OnInit {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.getOrderDetails(this.authorizationToken).subscribe((response) => {
         this.orderDetails = response;
+        // var orderDetailsTemp = this.orderDetails.sort(function (a, b) {
+        //   return a._id - b._id;
+        // });
+        // console.log(orderDetailsTemp)
         if (this.orderDetails.product_details.length == 0) {
           this.noOrderFound = true;
         }
