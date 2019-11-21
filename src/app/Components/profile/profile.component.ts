@@ -47,6 +47,7 @@ export class ProfileComponent implements OnInit {
   previewUrl: any = null;
   fileUploadProgress: string = null;
   uploadedFilePath: string = null;
+  profile_img;
 
   todaysDate;
 
@@ -58,8 +59,6 @@ export class ProfileComponent implements OnInit {
     private auth: AuthService,
     private matDialog: MatDialog
   ) { }
-
-  //formData = new FormData();
 
   ngOnInit() {
     if (this.auth.isLoggedIn()) {
@@ -185,16 +184,13 @@ export class ProfileComponent implements OnInit {
   }
 
   dateSelection(event) {
-    console.log("DATE SELECTION");
-    console.log(event);
+
   }
 
-  // fileProgress(event) {
-  //   // this.fileData = <File>fileInput.target.files[0];
-  //   // this.preview();
-  //   // this.fileData = event.target.files[0];
-  //   // this.formData.append('profile_img', this.fileData);
-  // }
+  fileProgress(event) {
+    this.fileData = event.target.files[0] || event.dataTransfer.files;
+    this.profile_img = event.target.files[0];
+  }
 
   // preview() {
   //   var mimeType = this.fileData.type;
@@ -329,35 +325,27 @@ export class ProfileComponent implements OnInit {
     }
 
     else {
-      // // const formData = new FormData();
-      // // formData.append('profile_img', this.fileData.name);
-      // // formData.append('first_name', document.forms["RegForm"]["firstname"].value);
-      // // formData.append('last_name', document.forms["RegForm"]["lastname"].value);
-      // // formData.append('email', document.forms["RegForm"]["email"].value);
-      // // formData.append('dob', document.forms["RegForm"]["dob"].value);
-      // // formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
-      // // formData.append('gender', this.gender);
-
-      // this.formData.append('first_name', document.forms["RegForm"]["firstname"].value);
-      // this.formData.append('last_name', document.forms["RegForm"]["lastname"].value);
-      // this.formData.append('gender', this.gender);
-      // this.formData.append('dob', document.forms["RegForm"]["dob"].value);
-      // this.formData.append('phone_no', document.forms["RegForm"]["mobile"].value);
-      // this.formData.append('email', document.forms["RegForm"]["email"].value);
-
-      // if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
-      //   this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-      //   this.apiService.putProfile(this.formData, this.authorizationToken).subscribe((response) => {
-      //     this.editProfileClicked = false;
-      //     this.openProfile("Profile");
-      //     this.router.navigate(['/profile/', value]);
-      //   },
-      //     (error) => {
-      //       this.cancel(value);
-      //     });
       if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
         this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-        this.apiService.putProfile(document.forms["RegForm"]["firstname"].value, document.forms["RegForm"]["lastname"].value, document.forms["RegForm"]["email"].value, document.forms["RegForm"]["dob"].value, document.forms["RegForm"]["mobile"].value, this.gender, this.authorizationToken).subscribe((response) => {
+        var firstname = document.forms["RegForm"]["firstname"].value;
+        var lastname = document.forms["RegForm"]["lastname"].value;
+        var email = document.forms["RegForm"]["email"].value;
+        var dob = document.forms["RegForm"]["dob"].value;
+        var mobile = document.forms["RegForm"]["mobile"].value;
+        const formData = new FormData();
+        formData.append('profile_img', this.profile_img);
+        formData.append('first_name', firstname);
+        formData.append('last_name', lastname);
+        formData.append('email', email);
+        formData.append('dob', dob);
+        formData.append('phone_no', mobile);
+        formData.append('gender', this.gender);
+        console.log("------IN PROFILE COMPONENT-------");
+        console.log(formData);
+        formData.forEach((value, key) => {
+          console.log(key + " " + value)
+        });
+        this.apiService.putProfile(formData, this.authorizationToken).subscribe((response) => {
           Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
           this.editProfileClicked = false;
           this.openProfile("Profile");
@@ -367,6 +355,16 @@ export class ProfileComponent implements OnInit {
             Swal.fire('Oops...', error.error.message, 'error');
             this.cancel(value);
           });
+        //   this.apiService.putProfile(document.forms["RegForm"]["firstname"].value, document.forms["RegForm"]["lastname"].value, document.forms["RegForm"]["email"].value, document.forms["RegForm"]["dob"].value, document.forms["RegForm"]["mobile"].value, this.gender, this.authorizationToken).subscribe((response) => {
+        //     Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+        //     this.editProfileClicked = false;
+        //     this.openProfile("Profile");
+        //     this.router.navigate(['/profile/', value]);
+        //   },
+        //     (error) => {
+        //       Swal.fire('Oops...', error.error.message, 'error');
+        //       this.cancel(value);
+        //     });
         return true;
       }
     }

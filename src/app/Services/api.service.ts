@@ -54,7 +54,7 @@ export class ApiService {
 
   //Getting all the products to be displayed in the Product List.
   public getAllProducts() {
-    return this.httpClient.get(this.baseUrl + `getAllProducts`);
+    return this.httpClient.get(this.baseUrl + `commonProducts`);
   }
 
   //Getting all the categories to be displayed in the Product List.
@@ -307,44 +307,40 @@ export class ApiService {
     return this.httpClient.put(this.baseUrl + `updateAddress`, param, this.httpOptions).map(data => data);
   }
 
-  // //Updating the Profile Details on Edit Profile Form.
-  // public putProfile(formData, authorizationToken) {
-  //   // let param = {
-  //   //   profile_img: formData.profile_img,
-  //   //   first_name: formData.first_name,
-  //   //   last_name: formData.last_name,
-  //   //   email: formData.email,
-  //   //   dob: formData.dob,
-  //   //   phone_no: formData.phone_no,
-  //   //   gender: formData.gender
-  //   // }
-  //   this.httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'Content-Type': 'application/x-www-form-urlencoded',
-  //       'Authorization': authorizationToken
-  //     })
-  //   };
-  //   return this.httpClient.put(this.baseUrl + `profile`, formData, this.httpOptions).map(data => data);
-  // }
-
   //Updating the Profile Details on Edit Profile Form.
-  public putProfile(first_name, last_name, email, dob, phone_no, gender, authorizationToken) {
-    let param = {
-      first_name: first_name,
-      last_name: last_name,
-      email: email,
-      dob: dob,
-      phone_no: phone_no,
-      gender: gender
-    }
+  public putProfile(formData, authorizationToken) {
+    console.log("------IN API SERVICE-------");
+    console.log(formData);
+    formData.forEach((value, key) => {
+      console.log(key + " " + value)
+    });
     this.httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundaryML86K1ytomwnlbn3',
         'Authorization': authorizationToken
       })
     };
-    return this.httpClient.put(this.baseUrl + `profile`, param, this.httpOptions).map(data => data);
+    return this.httpClient.put(this.baseUrl + `profile`, formData, this.httpOptions).map(data => data);
   }
+
+  // //Updating the Profile Details on Edit Profile Form.
+  // public putProfile(first_name, last_name, email, dob, phone_no, gender, authorizationToken) {
+  //   let param = {
+  //     first_name: first_name,
+  //     last_name: last_name,
+  //     email: email,
+  //     dob: dob,
+  //     phone_no: phone_no,
+  //     gender: gender
+  //   }
+  //   this.httpOptions = {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json',
+  //       'Authorization': authorizationToken
+  //     })
+  //   };
+  //   return this.httpClient.put(this.baseUrl + `profile`, param, this.httpOptions).map(data => data);
+  // }
 
   //Deleting the Customer Address from Profile Section
   public deleteDeladdress(address_id, authorizationToken) {

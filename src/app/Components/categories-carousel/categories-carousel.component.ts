@@ -44,8 +44,6 @@ export class CategoriesCarouselComponent implements OnInit {
       this.topRatingProductResponseObjectStringified = (JSON.stringify(data));
       this.topRatingProductResponseObjectParsed = JSON.parse(this.topRatingProductResponseObjectStringified);
       this.productDetailsArray = this.topRatingProductResponseObjectParsed.product_details;
-      console.log("TOP RATED PRODUCTS");
-      console.log(this.productDetailsArray);
       for (let i = 0; i <= this.productDetailsArray.length; i++) {
         if (this.productDetailsArray[i].DashboardProducts[0].product_rating == "NaN") {
           var productDetailsArrayTemp = this.productDetailsArray.splice(i, 1);
