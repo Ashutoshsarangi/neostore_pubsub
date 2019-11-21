@@ -28,18 +28,20 @@
       <img src="{{imageUrl}}{{p.DashboardProducts[0].product_image}}" class="card-img-top thumbnail" alt="..."
         (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
       <div class="card-body">
-        <h5 class="card-title">
-          <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
-            (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
-            {{p.DashboardProducts[0].product_name}}
-          </a>
-        </h5>
+        <div style="height: 50px;">
+          <h5 class="card-title">
+            <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
+              (click)="gotoProductDetails(p.DashboardProducts[0]._id)">
+              {{p.DashboardProducts[0].product_name}}
+            </a>
+          </h5>
+        </div>
         <p class="card-text">{{p.DashboardProducts[0].product_cost | currency:'INR' }}</p>
         <p class="button"><a class="btn btn-light"
             (click)="addToCart(p.DashboardProducts[0]); $event.stopPropagation();">Add To Cart</a></p>
         <p class="star">
           <star-rating value="{{p.DashboardProducts[0].product_rating}}" checkedcolor="orange" uncheckedcolor="black"
-            size="24px" readonly="true" :star-size="5px" :increment="0.01"></star-rating>
+            size="20px" readonly="true" :star-size="5px" :increment="0.01"></star-rating>
         </p>
       </div>
     </div>

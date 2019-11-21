@@ -43,19 +43,19 @@
                     Sort By:
                 </div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-default btn-sm"
+                    <button type="button" class="btn btn-secondary"
                         (click)="setProductRating('product_rating', true)">
                         <span class="glyphicon glyphicon-star"></span>
                     </button>
                 </div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-default btn-sm"
+                    <button type="button" class="btn btn-secondary"
                         (click)="setAscendingDescending('product_cost',true)">
                         ₹<span class="glyphicon glyphicon-arrow-up"></span>
                     </button>
                 </div>
                 <div class="col-md-2">
-                    <button type="button" class="btn btn-default btn-sm"
+                    <button type="button" class="btn btn-secondary"
                         (click)="setAscendingDescending('product_cost',false)">
                         ₹<span class="glyphicon glyphicon-arrow-down"></span>
                     </button>
@@ -65,23 +65,25 @@
     </div>
 
     <div class="row card-group" *ngIf="!notFoundProduct">
-        <div class="col-4" *ngFor="let p of pageOfItems;">
+        <div class="col-sm-12 col-md-6 col-lg-3" *ngFor="let p of pageOfItems;">
             <div class="card" (click)="gotoProductDetails(p._id)">
                 <img src="{{imageUrl}}{{p.product_image}}" class="card-img-top thumbnail" alt="..."
                     (click)="gotoProductDetails(p._id)">
                 <div class="card-body">
-                    <h5 class="card-title">
-                        <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
-                            (click)="gotoProductDetails(p._id)">
-                            {{p.product_name}}
-                        </a>
-                    </h5>
+                    <div style="height: 50px;">
+                        <h5 class="card-title">
+                            <a class="nav-link" routerLink="productdetails/:id" routerLinkActive="Active"
+                                (click)="gotoProductDetails(p._id)">
+                                {{p.product_name}}
+                            </a>
+                        </h5>
+                    </div>
                     <p class="card-text">{{p.product_cost | currency:'INR' }}</p>
                     <p class="button"><a class="btn btn-light" (click)="addToCart(p); $event.stopPropagation();">Add To
                             Cart</a></p>
                     <p class="star">
                         <star-rating value="{{p.product_rating}}" checkedcolor="orange" uncheckedcolor="black"
-                            size="15px" readonly="true" :star-size="5px" :increment="0.01">
+                            size="20px" readonly="true" :star-size="5px" :increment="0.01">
                         </star-rating>
                     </p>
                 </div>

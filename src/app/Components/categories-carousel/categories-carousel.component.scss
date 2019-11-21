@@ -58,8 +58,12 @@ a {
     padding: 0;
 }
 
+.col-sm-12, .col-md-6, .col-lg-3 {
+    padding: 0px;
+}
+
 .card {
-    height: 350px;
+    height: 380px;
     margin: 20px;
     border: 1px solid #4A3DB5;
 }
