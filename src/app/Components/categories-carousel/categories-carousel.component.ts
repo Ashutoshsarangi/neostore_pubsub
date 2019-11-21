@@ -45,7 +45,7 @@ export class CategoriesCarouselComponent implements OnInit {
       this.topRatingProductResponseObjectParsed = JSON.parse(this.topRatingProductResponseObjectStringified);
       this.productDetailsArray = this.topRatingProductResponseObjectParsed.product_details;
       for (let i = 0; i <= this.productDetailsArray.length; i++) {
-        if (this.productDetailsArray[i].DashboardProducts[0].product_rating == "NaN") {
+        if (this.productDetailsArray[i].DashboardProducts[0].product_rating == "NaN" || this.productDetailsArray[i].DashboardProducts[0].product_rating == "" || this.productDetailsArray[i].DashboardProducts[0].product_rating == null || this.productDetailsArray[i].DashboardProducts[0].product_rating == undefined) {
           var productDetailsArrayTemp = this.productDetailsArray.splice(i, 1);
         }
       }
