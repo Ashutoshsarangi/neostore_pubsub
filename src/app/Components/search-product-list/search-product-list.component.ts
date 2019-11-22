@@ -25,7 +25,6 @@ export class SearchProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log("ENTEREED INTO SEARCH PRODUCT LIST")
     this.allProductsDetailsArray = JSON.parse(JSON.stringify(this.data)).array;
   }
 

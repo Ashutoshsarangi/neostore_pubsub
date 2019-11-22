@@ -7,9 +7,6 @@ export class FilterPipe implements PipeTransform {
 
   transform(allProductsDetailsArray: any[], searchText: string): any[] {
 
-    console.log("PRODUCT ARRAYS");
-    console.log(allProductsDetailsArray);
-
     if (!allProductsDetailsArray) {
       return [];
     }
