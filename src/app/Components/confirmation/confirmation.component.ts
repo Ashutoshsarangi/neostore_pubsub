@@ -37,7 +37,7 @@ export class ConfirmationComponent implements OnInit {
       this.dialogHeading = "Do you want to logout?";
     }
     else if (this.from == "ChangePassword") {
-      this.dialogHeading = "You password has been changed and you are about to logout...";
+      this.logout();
     }
     else if (this.from == "Cart") {
       this.dialogHeading = "Do you want to delete " + this.product_name + "?";
@@ -98,7 +98,12 @@ export class ConfirmationComponent implements OnInit {
   postCartDataWhileLogoutApi(a, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((response) => {
       this.logoutWithNoCartData();
-      Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+      if (this.from == "ChangePassword") {
+        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message + " Kindly relogin with your new password!!", "success");
+      }
+      else {
+        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+      }
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');
@@ -106,7 +111,12 @@ export class ConfirmationComponent implements OnInit {
   }
 
   logoutWithNoCartData() {
-    Swal.fire("Great !", "You have successfully logged out!", "success");
+    if (this.from == "ChangePassword") {
+      Swal.fire("Great !", "You have been logged out!! Kindly relogin with your new password!!");
+    }
+    else {
+      Swal.fire("Great !", "You have successfully logged out!", "success");
+    }
     localStorage.removeItem('registered');
     localStorage.removeItem('loggedIn');
     localStorage.removeItem('userDetails');

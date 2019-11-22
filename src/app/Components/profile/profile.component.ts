@@ -499,8 +499,9 @@ export class ProfileComponent implements OnInit {
       if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
         this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
         this.apiService.postChangePassword(password1.value, password2.value, password3.value, this.authorizationToken).subscribe((response) => {
-          Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-          this.logout();
+          Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success").then(() => {
+            this.logout();
+          });
         },
           (error) => {
             Swal.fire('Oops...', error.error.message, 'error');
