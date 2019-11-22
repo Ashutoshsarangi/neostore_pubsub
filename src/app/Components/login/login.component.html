@@ -117,8 +117,9 @@
         <span id="email_error" class="Error"></span>
 
         <div class="field">
-            <i class="fa fa-key icon"></i>
-            <input type="password" name="password" id="password" placeholder="Password" maxlength="12">
+            <i class="fa fa-eye icon1" *ngIf="passwordType == 'text'" (click)="togglePasswordType()"></i>
+            <i class="fa fa-eye-slash icon1" *ngIf="passwordType == 'password'" (click)="togglePasswordType()"></i>
+            <input type="{{passwordType}}" name="password" id="password" placeholder="Password" maxlength="12">
             <label for="password">Password</label>
         </div>
         <span id="password_error" class="Error"></span>

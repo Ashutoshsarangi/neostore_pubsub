@@ -535,16 +535,28 @@ input:focus + label {
     margin-top: -44px;
     z-index: 1000;
     font-size: 24px;
+    color: #4A3DB5;
 }
 
 .icon2 {
     padding: 10px;
     min-width: 40px;
+    margin-inline-start: 93%;
+    margin-top: -44px;
     z-index: 1000;
     font-size: 24px;
+    color: #4A3DB5;
 }
 
 .fa.fa-calendar.icon {
+    cursor: pointer;
+}
+
+.fa.fa-eye.icon1 {
+    cursor: pointer;
+}
+
+.fa.fa-eye-slash.icon1 {
     cursor: pointer;
 }
 

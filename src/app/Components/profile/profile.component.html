@@ -265,20 +265,28 @@
             </p>
             <form name="RegForm">
                 <div class="field">
-                    <i class="fa fa-key icon"></i>
-                    <input type="password" name="password1" id="password1" placeholder="Old Password" maxlength="12">
+                    <i class="fa fa-eye icon1" *ngIf="passwordType1 == 'text'" (click)="togglePasswordType1()"></i>
+                    <i class="fa fa-eye-slash icon1" *ngIf="passwordType1 == 'password'"
+                        (click)="togglePasswordType1()"></i>
+                    <input type="{{passwordType1}}" name="password1" id="password1" placeholder="Old Password"
+                        maxlength="12">
                     <label for="password1">Old Password</label>
                 </div>
                 <span id="password1_error" class="Error"></span>
                 <div class="field">
-                    <i class="fa fa-key icon"></i>
-                    <input type="password" name="password2" id="password2" placeholder="New Password" maxlength="12">
+                    <i class="fa fa-eye icon1" *ngIf="passwordType2 == 'text'" (click)="togglePasswordType2()"></i>
+                    <i class="fa fa-eye-slash icon1" *ngIf="passwordType2 == 'password'"
+                        (click)="togglePasswordType2()"></i>
+                    <input type="{{passwordType2}}" name="password2" id="password2" placeholder="New Password"
+                        maxlength="12">
                     <label for="password2">New Password</label>
                 </div>
                 <span id="password2_error" class="Error"></span>
                 <div class="field">
-                    <i class="fa fa-key icon"></i>
-                    <input type="password" name="password3" id="password3" placeholder="Confirm Password"
+                    <i class="fa fa-eye icon1" *ngIf="passwordType3 == 'text'" (click)="togglePasswordType3()"></i>
+                    <i class="fa fa-eye-slash icon1" *ngIf="passwordType3 == 'password'"
+                        (click)="togglePasswordType3()"></i>
+                    <input type="{{passwordType3}}" name="password3" id="password3" placeholder="Confirm Password"
                         maxlength="12">
                     <label for="password3">Confirm Password</label>
                 </div>

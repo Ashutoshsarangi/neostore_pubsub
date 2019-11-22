@@ -26,6 +26,8 @@ export class LoginComponent implements OnInit {
 
   //user: SocialUser;
 
+  passwordType = "password";
+
   constructor(
     private apiService: ApiService,
     private router: Router,
@@ -160,5 +162,14 @@ export class LoginComponent implements OnInit {
   // openTwitter() {
   //   window.open('https://twitter.com/login');
   // }
+
+  togglePasswordType() {
+    if (this.passwordType == "text") {
+      this.passwordType = "password";
+    }
+    else if (this.passwordType == "password") {
+      this.passwordType = "text";
+    }
+  }
 
 }

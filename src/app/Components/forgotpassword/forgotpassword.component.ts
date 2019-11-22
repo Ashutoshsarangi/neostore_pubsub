@@ -14,6 +14,9 @@ export class ForgotpasswordComponent implements OnInit {
   verifyCodeForm: boolean = false;
   verifiedToken;
 
+  passwordType1 = "password";
+  passwordType2 = "password";
+
   constructor(
     private apiService: ApiService,
     private router: Router
@@ -131,6 +134,24 @@ export class ForgotpasswordComponent implements OnInit {
       return true;
     }
 
+  }
+
+  togglePasswordType1() {
+    if (this.passwordType1 == "text") {
+      this.passwordType1 = "password";
+    }
+    else if (this.passwordType1 == "password") {
+      this.passwordType1 = "text";
+    }
+  }
+
+  togglePasswordType2() {
+    if (this.passwordType2 == "text") {
+      this.passwordType2 = "password";
+    }
+    else if (this.passwordType2 == "password") {
+      this.passwordType2 = "text";
+    }
   }
 
 }

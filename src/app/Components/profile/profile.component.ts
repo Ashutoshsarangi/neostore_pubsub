@@ -51,6 +51,10 @@ export class ProfileComponent implements OnInit {
 
   todaysDate;
 
+  passwordType1 = "password";
+  passwordType2 = "password";
+  passwordType3 = "password";
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
@@ -527,6 +531,33 @@ export class ProfileComponent implements OnInit {
         },
         disableClose: true
       });
+    }
+  }
+
+  togglePasswordType1() {
+    if (this.passwordType1 == "text") {
+      this.passwordType1 = "password";
+    }
+    else if (this.passwordType1 == "password") {
+      this.passwordType1 = "text";
+    }
+  }
+
+  togglePasswordType2() {
+    if (this.passwordType2 == "text") {
+      this.passwordType2 = "password";
+    }
+    else if (this.passwordType2 == "password") {
+      this.passwordType2 = "text";
+    }
+  }
+
+  togglePasswordType3() {
+    if (this.passwordType3 == "text") {
+      this.passwordType3 = "password";
+    }
+    else if (this.passwordType3 == "password") {
+      this.passwordType3 = "text";
     }
   }
 
