@@ -1,0 +1,6 @@
+<input class="form-control mr-sm-2" id="searchBar" type="search" name="search" placeholder="Search Product by Name"
+    aria-label="Search" [(ngModel)]="searchText">
+<li class="list-group-item list-group-item-action" [ngClass]="{ 'active': i === 0 }"
+    *ngFor="let data of allProductsDetailsArray | filter: searchText">
+    {{data.product_name}}
+</li>

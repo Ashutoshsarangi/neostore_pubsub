@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { SearchProductListComponent } from '../search-product-list/search-product-list.component';
 
 @Component({
   selector: 'app-navigationbar',
@@ -23,6 +24,10 @@ export class NavigationbarComponent implements OnInit {
   cartDataResponseObjectStringified;
   cartDataResponseObjectParsed;
   cartData;
+
+  allProductsResponseObjectStringified; //All Products Response Object in Stringified Format.
+  allProductsResponseObjectParsed; //All Products Response Object after Parsing.
+  allProductsDetailsArray; //All Products Array.
 
   constructor(
     private router: Router,
@@ -52,14 +57,46 @@ export class NavigationbarComponent implements OnInit {
   ngOnInit() {
     if (localStorage.getItem('loggedIn')) {
       this.showProfileOption = true;
+      this.cartCount = JSON.parse(localStorage.getItem('cartCount'));
     } else {
       this.showProfileOption = false;
     }
-    this.cartCount = JSON.parse(localStorage.getItem('cartCount'));
+    this.getAllProducts();
   }
 
   ngOnDestroy() {
     this.subscription.unsubscribe();
+  }
+
+  openSearchProductList() {
+    let dialogRef = this.matDialog.open(SearchProductListComponent, {
+      width: '250px',
+      height: '300px',
+      data: {
+        array: this.allProductsDetailsArray
+      },
+    });
+    dialogRef.afterClosed().subscribe(value => {
+
+    });
+  }
+
+  //Getting all products.
+  getAllProducts() {
+    localStorage.removeItem('category_id'); //Remove the Category Filter.
+    localStorage.removeItem('color_id'); //Remove the Color Filter.
+    localStorage.removeItem('sortBy'); //Remove the Product Rating and Ascending Filter.
+    localStorage.removeItem('sortIn'); //Remove the Product Cost and Ascending/Descending Filter.
+    this.apiService.getAllProducts().subscribe((data) => {
+      this.allProductsResponseObjectStringified = (JSON.stringify(data));
+      this.allProductsResponseObjectParsed = JSON.parse(this.allProductsResponseObjectStringified);
+      if (this.allProductsResponseObjectParsed.success == true) {
+        this.allProductsDetailsArray = this.allProductsResponseObjectParsed.product_details;
+      }
+      else if (this.allProductsResponseObjectParsed.success == false) {
+        this.allProductsDetailsArray = [];
+      }
+    });
   }
 
   goToCart() {

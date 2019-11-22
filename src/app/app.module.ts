@@ -17,6 +17,7 @@ import { ProductdetailsComponent } from './Components/productdetails/productdeta
 import { ProfileComponent } from './Components/profile/profile.component';
 import { RatingModalComponent } from './Components/rating-modal/rating-modal.component';
 import { RegisterComponent } from './Components/register/register.component';
+import { SearchProductListComponent } from './Components/search-product-list/search-product-list.component';
 import { ThankyouSubscribingComponent } from './Components/thankyou-subscribing/thankyou-subscribing.component';
 import { LoaderInterceptor } from './Interceptors/loader.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -30,7 +31,7 @@ import { RatingModule } from 'ng-starrating';
 import { FormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTabsModule } from '@angular/material';
+import { MatTabsModule, MatListModule } from '@angular/material';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDialogModule } from '@angular/material/dialog';
 import { JwPaginationComponent } from 'jw-angular-pagination';
@@ -39,6 +40,7 @@ import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { AppPasswordDirective } from './Directives/app-password.directive';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 const config = new AuthServiceConfig([
   {
@@ -78,7 +80,9 @@ export function provideConfig() {
     JwPaginationComponent,
     AddAddressComponent,
     OrderPlacedComponent,
-    AppPasswordDirective
+    AppPasswordDirective,
+    FilterPipe,
+    SearchProductListComponent
   ],
   imports: [
     BrowserModule,
@@ -88,6 +92,7 @@ export function provideConfig() {
     FormsModule,
     MatProgressSpinnerModule,
     MatTabsModule,
+    MatListModule,
     MatRadioModule,
     MatDialogModule,
     BrowserAnimationsModule,
@@ -99,7 +104,8 @@ export function provideConfig() {
   ],
   entryComponents: [
     RatingModalComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    SearchProductListComponent
   ],
   providers: [
     ApiService,
