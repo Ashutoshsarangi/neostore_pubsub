@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { EmailValidator } from '@angular/forms';
 //import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Component({
@@ -41,6 +42,14 @@ export class LoginComponent implements OnInit {
     if (this.auth.isLoggedIn()) {
       Swal.fire("Already logged in");
       this.router.navigate(["categories-carousel"]);
+    }
+    else {
+      if (document.forms["RegForm"]["email"] != null) {
+        document.forms["RegForm"]["email"].focus();
+      }
+      if (document.forms["RegForm"]["password"] != null) {
+        document.forms["RegForm"]["password"].focus();
+      }
     }
   }
 

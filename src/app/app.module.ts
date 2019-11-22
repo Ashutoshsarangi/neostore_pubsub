@@ -38,6 +38,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxImageZoomModule } from 'ngx-image-zoom';
 import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
+import { AppPasswordDirective } from './Directives/app-password.directive';
 
 const config = new AuthServiceConfig([
   {
@@ -76,7 +77,8 @@ export function provideConfig() {
     ThankyouSubscribingComponent,
     JwPaginationComponent,
     AddAddressComponent,
-    OrderPlacedComponent
+    OrderPlacedComponent,
+    AppPasswordDirective
   ],
   imports: [
     BrowserModule,
@@ -92,7 +94,7 @@ export function provideConfig() {
     NgxImageZoomModule.forRoot(),
     JwSocialButtonsModule,
     SocialLoginModule,
-    FormsModule, 
+    FormsModule,
     NgbModule
   ],
   entryComponents: [
