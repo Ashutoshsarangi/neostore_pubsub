@@ -70,7 +70,7 @@ export class NavigationbarComponent implements OnInit {
 
   openSearchProductList() {
     let dialogRef = this.matDialog.open(SearchProductListComponent, {
-      width: '250px',
+      width: '400px',
       height: '300px',
       data: {
         array: this.allProductsDetailsArray

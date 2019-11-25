@@ -32,6 +32,7 @@ const routes: Routes = [
 
   { path: 'allproducts', component: AllproductsComponent },
   { path: 'allproducts/:category_id/:category_name', component: AllproductsComponent },
+  { path: 'allproducts/:_id/:category_id/:category_name/:color_id', component: AllproductsComponent },
   { path: 'categories-carousel/allproducts', component: AllproductsComponent },
   { path: 'cart/allproducts', component: AllproductsComponent },
 
