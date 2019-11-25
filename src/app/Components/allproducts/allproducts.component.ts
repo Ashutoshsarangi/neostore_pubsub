@@ -56,6 +56,7 @@ export class AllproductsComponent implements OnInit {
   ngOnInit() {
 
     this.imageUrl = environment.apiUrl; //Getting the base API Url from environment.ts file.
+    this.selectedCategoryName = "All Categories";
 
     this.getAllProducts(); //Fetching all products.
     this.getAllCategories(); //Fetching all categories.
