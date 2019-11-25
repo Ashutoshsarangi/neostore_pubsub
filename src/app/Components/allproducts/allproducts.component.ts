@@ -19,12 +19,6 @@ export class AllproductsComponent implements OnInit {
   selectedCategoryIdFromCarousel: any; //Category Id from Carousel on Dashboard.
   selectedCategoryNameFromCarousel: any; //Category Name from Carousel on Dashboard.
 
-  selectedProductIdFromSearchList: any; //Product Id from Search List opened from Navigation Bar.
-  selectedCategoryIdFromSearchList: any; //Category Id from Search List opened from Navigation Bar.
-  selectedCategoryNameFromSearchList: any; //Category Name from Search List opened from Navigation Bar.
-  selectedColorIdFromSearchList: any; //Color Id from Search List opened from Navigation Bar.
-  selectedColorCodeFromSearchList: any; //Color Code from Search List opened from Navigation Bar.
-
   selectedCategoryName; //Binding Selected Category Name with the UI.
   selectedColorCode; //Binding Selected Color Code with the UI.
 
@@ -72,37 +66,6 @@ export class AllproductsComponent implements OnInit {
     //Getting Selected Category Name from Carousel on Dashboard.
     this.selectedCategoryNameFromCarousel = this.activatedRoute.snapshot.paramMap.get('category_name');
 
-    //Getting Selected Product Id from Search List opened from Navigation Bar.
-    this.selectedProductIdFromSearchList = this.activatedRoute.snapshot.paramMap.get('_id');
-    //Getting Selected Category Id from Search List opened from Navigation Bar.
-    this.selectedCategoryIdFromSearchList = this.activatedRoute.snapshot.paramMap.get('category_id');
-    //Getting Selected Category Name from Search List opened from Navigation Bar.
-    this.selectedCategoryNameFromSearchList = this.activatedRoute.snapshot.paramMap.get('category_name');
-    //Getting Selected Color Id from Search List opened from Navigation Bar.
-    this.selectedColorIdFromSearchList = this.activatedRoute.snapshot.paramMap.get('color_id');
-    //Getting Selected Color Code from Search List opened from Navigation Bar.
-    this.selectedColorCodeFromSearchList = this.activatedRoute.snapshot.paramMap.get('color_code');
-
-    // this.activatedRoute.params.subscribe(routeParams => {
-    //   this.selectedProductIdFromSearchList = routeParams._id;
-    // });
-
-    // this.activatedRoute.params.subscribe(routeParams => {
-    //   this.selectedCategoryIdFromSearchList = routeParams.category_id;
-    // });
-
-    // this.activatedRoute.params.subscribe(routeParams => {
-    //   this.selectedCategoryNameFromSearchList = routeParams.category_name;
-    // });
-
-    // this.activatedRoute.params.subscribe(routeParams => {
-    //   this.selectedColorIdFromSearchList = routeParams.color_id;
-    // });
-
-    // this.activatedRoute.params.subscribe(routeParams => {
-    //   this.selectedColorCodeFromSearchList = routeParams.color_code;
-    // });
-
     //When clicked on Products Option given in Navigation Bar.
     if (this.router.url === '/allproducts') {
       this.selectedCategoryName = "All Categories";
@@ -111,14 +74,6 @@ export class AllproductsComponent implements OnInit {
     else if (this.router.url === '/allproducts/' + this.selectedCategoryIdFromCarousel + '/' + this.selectedCategoryNameFromCarousel) {
       localStorage.setItem('category_id', this.selectedCategoryIdFromCarousel);
       this.selectedCategoryName = this.selectedCategoryNameFromCarousel;
-      this.getProductAccordingToFilters();
-    }
-    //When clicked on Search List opened from Navigation Bar.
-    else if (this.router.url === '/allproducts/' + this.selectedProductIdFromSearchList + '/' + this.selectedCategoryIdFromSearchList + '/' + this.selectedCategoryNameFromSearchList + '/' + this.selectedColorIdFromSearchList) {
-      localStorage.setItem('category_id', this.selectedCategoryIdFromSearchList);
-      this.selectedCategoryName = this.selectedCategoryNameFromSearchList;
-      localStorage.setItem('color_id', this.selectedColorIdFromSearchList);
-      this.selectedColorCode = this.selectedColorCodeFromSearchList;
       this.getProductAccordingToFilters();
     }
     //When clicked on View All option on Dashboard.
@@ -227,12 +182,6 @@ export class AllproductsComponent implements OnInit {
       if (this.allProductsResponseObjectParsed.success == true) {
         this.notFoundProduct = false; //Products Found.
         this.allProductsDetailsArray = this.allProductsResponseObjectParsed.product_details;
-        if (this.router.url === '/allproducts/' + this.selectedProductIdFromSearchList + '/' + this.selectedCategoryIdFromSearchList + '/' + this.selectedCategoryNameFromSearchList + '/' + this.selectedColorIdFromSearchList) {
-          var allProductsDetailsArrayTemp = this.allProductsDetailsArray.filter(product =>
-            product._id == this.selectedProductIdFromSearchList
-          );
-          this.allProductsDetailsArray = allProductsDetailsArrayTemp;
-        }
       }
       else if (this.allProductsResponseObjectParsed.success == false) {
         this.notFoundProduct = true; //No Products Found.
