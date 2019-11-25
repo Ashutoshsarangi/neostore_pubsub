@@ -10,6 +10,7 @@ import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { formatDate } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -55,13 +56,19 @@ export class ProfileComponent implements OnInit {
   passwordType2 = "password";
   passwordType3 = "password";
 
+  today;
+  maxYear;
+  maxMonth;
+  maxDay;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private httpClient: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -159,6 +166,10 @@ export class ProfileComponent implements OnInit {
 
   gotoEditProfile() {
     this.editProfileClicked = true;
+    this.today = new Date();
+    this.maxDay = this.today.getDate();
+    this.maxMonth = this.today.getMonth() + 1;
+    this.maxYear = this.today.getFullYear();
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.getCustProfile(this.authorizationToken).subscribe((response) => {
@@ -388,7 +399,8 @@ export class ProfileComponent implements OnInit {
         this.router.navigate(['/profile/', value]);
       }
       else if (!value1) {
-        Swal.fire("Continue Editing...");
+        //Swal.fire("Continue Editing...");
+        this.toastr.success("Continue Editing...");
       }
     });
   }

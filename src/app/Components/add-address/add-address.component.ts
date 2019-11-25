@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-add-address',
@@ -31,7 +32,8 @@ export class AddAddressComponent implements OnInit {
     private httpClient: HttpClient,
     private router: Router,
     private auth: AuthService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -232,7 +234,8 @@ export class AddAddressComponent implements OnInit {
         this.router.navigate(['/profile/', value]);
       }
       else if (!value1) {
-        Swal.fire("Continue Editing...");
+        //Swal.fire("Continue Editing...");
+        this.toastr.success("Continue Editing...");
       }
     });
   }
