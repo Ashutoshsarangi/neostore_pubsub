@@ -47,6 +47,9 @@ export class ConfirmationComponent implements OnInit {
     else if (this.from == "Address" || this.from == "Profile") {
       this.dialogHeading = "Do you want to cancel the form?";
     }
+    else if (this.from == "AddressDelete") {
+      this.dialogHeading = "Do you want to delete this Address ?";
+    }
   }
 
   yes() {
@@ -59,6 +62,9 @@ export class ConfirmationComponent implements OnInit {
     else if (this.from == "Address" || this.from == "Profile") {
       this.dialogRef.close(true); //Cancel the form.
     }
+    else if (this.from == "AddressDelete") {
+      this.dialogRef.close(true); //Delete Address Functionality.
+    }
   }
 
   no() {
@@ -70,6 +76,9 @@ export class ConfirmationComponent implements OnInit {
     }
     else if (this.from == "Address" || this.from == "Profile") {
       this.dialogRef.close(false); //Do Not Cancel The Form.
+    }
+    else if (this.from == "AddressDelete") {
+      this.dialogRef.close(false); //Do Not Delete The Address.
     }
   }
 

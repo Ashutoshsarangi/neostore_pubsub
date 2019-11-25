@@ -184,7 +184,8 @@ export class AddAddressComponent implements OnInit {
         if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.putUpdateAddress(this.address_id, address.value, pin.value, city.value, state.value, country.value, false, this.authorizationToken).subscribe((response) => {
-            Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+            //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+            this.toastr.success(JSON.parse(JSON.stringify(response)).message, "Great !");
             if (this.router.url === "/cart/add-address") {
               this.router.navigate(['/cart'])
             }
@@ -203,7 +204,8 @@ export class AddAddressComponent implements OnInit {
         if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.postAddress(address.value, pin.value, city.value, state.value, country.value, this.authorizationToken).subscribe((response) => {
-            Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+            //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+            this.toastr.success(JSON.parse(JSON.stringify(response)).message, "Great !");
             if (this.router.url === "/cart/add-address") {
               this.router.navigate(['/cart'])
             }

@@ -429,16 +429,28 @@ export class ProfileComponent implements OnInit {
   }
 
   deleteAddress(address_id: any) {
-    if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
-      this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
-      this.apiService.deleteDeladdress(address_id, this.authorizationToken).subscribe((response) => {
-        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
-        this.openAddress("Address");
+    let dialogRef = this.matDialog.open(ConfirmationComponent, {
+      width: '250px',
+      data: {
+        from: "AddressDelete"
       },
-        (error) => {
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(value => {
+      if (value) {
+        if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
+          this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
+          this.apiService.deleteDeladdress(address_id, this.authorizationToken).subscribe((response) => {
+            //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+            this.toastr.success(JSON.parse(JSON.stringify(response)).message, "Deleted !");
+            this.openAddress("Address");
+          },
+            (error) => {
 
-        });
-    }
+            });
+        }
+      }
+    });
   }
 
   openPassword(Password) {
