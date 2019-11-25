@@ -5,6 +5,7 @@ import { environment } from '../../../environments/environment';
 import { ActivatedRoute } from '@angular/router';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-allproducts',
@@ -52,7 +53,8 @@ export class AllproductsComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private behaviourService: BehaviourService
+    private behaviourService: BehaviourService,
+    private toastr: ToastrService
   ) {
     //this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
@@ -80,6 +82,26 @@ export class AllproductsComponent implements OnInit {
     this.selectedColorIdFromSearchList = this.activatedRoute.snapshot.paramMap.get('color_id');
     //Getting Selected Color Code from Search List opened from Navigation Bar.
     this.selectedColorCodeFromSearchList = this.activatedRoute.snapshot.paramMap.get('color_code');
+
+    // this.activatedRoute.params.subscribe(routeParams => {
+    //   this.selectedProductIdFromSearchList = routeParams._id;
+    // });
+
+    // this.activatedRoute.params.subscribe(routeParams => {
+    //   this.selectedCategoryIdFromSearchList = routeParams.category_id;
+    // });
+
+    // this.activatedRoute.params.subscribe(routeParams => {
+    //   this.selectedCategoryNameFromSearchList = routeParams.category_name;
+    // });
+
+    // this.activatedRoute.params.subscribe(routeParams => {
+    //   this.selectedColorIdFromSearchList = routeParams.color_id;
+    // });
+
+    // this.activatedRoute.params.subscribe(routeParams => {
+    //   this.selectedColorCodeFromSearchList = routeParams.color_code;
+    // });
 
     //When clicked on Products Option given in Navigation Bar.
     if (this.router.url === '/allproducts') {
@@ -283,7 +305,8 @@ export class AllproductsComponent implements OnInit {
 
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", "Added Successfully", "success");
+      //Swal.fire("Great !", "Added Successfully", "success");
+      this.toastr.success('Added Successfully', 'Great !');
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');

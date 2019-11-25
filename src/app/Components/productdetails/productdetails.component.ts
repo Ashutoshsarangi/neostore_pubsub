@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { RatingModalComponent } from '../rating-modal/rating-modal.component';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 export interface DialogData {
   product_id: any;
@@ -45,7 +46,8 @@ export class ProductdetailsComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private matDialog: MatDialog,
-    private behaviourService: BehaviourService
+    private behaviourService: BehaviourService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -140,7 +142,8 @@ export class ProductdetailsComponent implements OnInit {
 
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", "Added Successfully", "success");
+      //Swal.fire("Great !", "Added Successfully", "success");
+      this.toastr.success('Added Successfully', 'Great !');
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');

@@ -41,6 +41,7 @@ import { JwSocialButtonsModule } from 'jw-angular-social-buttons';
 import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLoginProvider } from 'angularx-social-login';
 import { AppPasswordDirective } from './Directives/app-password.directive';
 import { FilterPipe } from './Pipes/filter.pipe';
+import { ToastrModule } from 'ngx-toastr';
 
 const config = new AuthServiceConfig([
   {
@@ -100,7 +101,12 @@ export function provideConfig() {
     JwSocialButtonsModule,
     SocialLoginModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: "toast-bottom-center",
+      preventDuplicates: true
+    })
   ],
   entryComponents: [
     RatingModalComponent,

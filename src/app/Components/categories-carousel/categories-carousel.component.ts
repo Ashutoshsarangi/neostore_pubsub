@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { BehaviourService } from '../../Services/behaviour.service';
 import Swal from 'sweetalert2';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories-carousel',
@@ -27,7 +28,8 @@ export class CategoriesCarouselComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private router: Router,
-    private behaviourService: BehaviourService
+    private behaviourService: BehaviourService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -117,7 +119,8 @@ export class CategoriesCarouselComponent implements OnInit {
 
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      Swal.fire("Great !", "Added Successfully", "success");
+      //Swal.fire("Great !", "Added Successfully", "success");
+      this.toastr.success('Added Successfully', 'Great !');
     },
       (error) => {
         Swal.fire('Oops...', error.error.message, 'error');
