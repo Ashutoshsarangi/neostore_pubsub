@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -53,7 +54,8 @@ export class CartComponent implements OnInit {
     private router: Router,
     private behaviourService: BehaviourService,
     private auth: AuthService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -214,18 +216,25 @@ export class CartComponent implements OnInit {
         this.deleteCustomerCart(productId.product_id, product_name);
       }
       else if (!value) {
-        Swal.fire(product_name + " is not deleted!");
+        //Swal.fire(product_name + " is not deleted!");
+        this.toastr.error(product_name + " is not deleted!", 'Oops !', {
+          timeOut: 3000
+        });
       }
     });
   }
 
   deleteCustomerCart(productId, product_name) {
     this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
-      Swal.fire("Deleted!", product_name + " " + JSON.parse(JSON.stringify(response)).message, "success");
+      //Swal.fire("Deleted!", product_name + " " + JSON.parse(JSON.stringify(response)).message, "success");
+      this.toastr.success(product_name + " " + JSON.parse(JSON.stringify(response)).message, 'Deleted !');
       this.calculateReviewOrder(this.cartData, "Delete");
     },
       (error) => {
-        Swal.fire('Oops...', error.error.message, 'error');
+        //Swal.fire('Oops...', error.error.message, 'error');
+        this.toastr.error(error.error.message, 'Oops !', {
+          timeOut: 3000
+        });
       });
   }
 
