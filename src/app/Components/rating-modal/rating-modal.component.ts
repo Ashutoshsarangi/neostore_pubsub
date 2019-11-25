@@ -4,6 +4,7 @@ import { StarRatingComponent } from 'ng-starrating';
 import { ApiService } from '../../Services/api.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-rating-modal',
@@ -27,7 +28,8 @@ export class RatingModalComponent implements OnInit {
     public dialogRef: MatDialogRef<RatingModalComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private apiService: ApiService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toastr: ToastrService
   ) {
 
   }
@@ -57,7 +59,8 @@ export class RatingModalComponent implements OnInit {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       this.apiService.putUpdateProductRatingByCustomer(this.data.product_id, this.productRating, this.authorizationToken).subscribe((response) => {
         this.dialogRef.close(this.productRating);
-        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).product_details[0].product_rating, "success");
+        //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).product_details[0].product_rating, "success");
+        this.toastr.success("Average Rating is " + JSON.parse(JSON.stringify(response)).product_details[0].product_rating, 'Great !');
       },
         (error) => {
           Swal.fire('Oops...', error.error.message, 'error');

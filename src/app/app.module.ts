@@ -103,7 +103,7 @@ export function provideConfig() {
     FormsModule,
     NgbModule,
     ToastrModule.forRoot({
-      timeOut: 1000,
+      timeOut: 3000,
       positionClass: "toast-bottom-center",
       preventDuplicates: true
     })

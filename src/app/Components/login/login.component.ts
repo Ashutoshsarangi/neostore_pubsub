@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
 import { EmailValidator } from '@angular/forms';
 //import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +33,8 @@ export class LoginComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private behaviourService: BehaviourService,
-    private auth: AuthService
+    private auth: AuthService,
+    private toastr: ToastrService
     //private authService: AuthService
   ) { }
 
@@ -95,7 +97,8 @@ export class LoginComponent implements OnInit {
 
     else {
       this.apiService.postLogin(email.value, password.value).subscribe((response) => {
-        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+        //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+        this.toastr.success(JSON.parse(JSON.stringify(response)).message, 'Great !');
         localStorage.setItem('loggedIn', "true");
         this.behaviourService.setLogin(localStorage.getItem('loggedIn'));
         localStorage.setItem('userDetails', JSON.stringify(response));

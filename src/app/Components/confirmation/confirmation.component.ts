@@ -6,6 +6,7 @@ import { BehaviourService } from '../../Services/behaviour.service';
 import { ApiService } from '../../Services/api.service';
 import Swal from 'sweetalert2';
 import { AuthService } from '../../Services/auth.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-confirmation',
@@ -26,6 +27,7 @@ export class ConfirmationComponent implements OnInit {
     private behaviourService: BehaviourService,
     private apiService: ApiService,
     private auth: AuthService,
+    private toastr: ToastrService
   ) {
 
   }
@@ -75,15 +77,15 @@ export class ConfirmationComponent implements OnInit {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
       if (localStorage.getItem('cartProduct')) {
-        this.postCartDataWhileLogout();
+        this.postCartDataWhileLogout('HasCartData');
       }
       else {
-        this.logoutWithNoCartData();
+        this.logoutWithNoCartData('NoCartData');
       }
     }
   }
 
-  postCartDataWhileLogout() {
+  postCartDataWhileLogout(value) {
     var a = [];
     a = JSON.parse(localStorage.getItem('cartProduct'));
     a.splice(a.length - 1, 1);
@@ -92,17 +94,18 @@ export class ConfirmationComponent implements OnInit {
     };
     a.push(obj);
     localStorage.setItem('cartProduct', JSON.stringify(a));
-    this.postCartDataWhileLogoutApi(a, this.authorizationToken);
+    this.postCartDataWhileLogoutApi(a, this.authorizationToken, value);
   }
 
-  postCartDataWhileLogoutApi(a, authorizationToken) {
+  postCartDataWhileLogoutApi(a, authorizationToken, value) {
     this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((response) => {
-      this.logoutWithNoCartData();
+      this.logoutWithNoCartData(value);
       if (this.from == "ChangePassword") {
         Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message + " Kindly relogin with your new password!!", "success");
       }
       else {
-        Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+        //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
+        this.toastr.success(JSON.parse(JSON.stringify(response)).message, 'Great !');
       }
     },
       (error) => {
@@ -110,12 +113,13 @@ export class ConfirmationComponent implements OnInit {
       });
   }
 
-  logoutWithNoCartData() {
-    if (this.from == "ChangePassword") {
+  logoutWithNoCartData(value) {
+    if (this.from == "ChangePassword" && value == "NoCartData") {
       Swal.fire("Great !", "You have been logged out!! Kindly relogin with your new password!!");
     }
-    else {
-      Swal.fire("Great !", "You have successfully logged out!", "success");
+    else if (this.from != "ChangePassword" && value == "NoCartData") {
+      //Swal.fire("Great !", "You have successfully logged out!", "success");
+      this.toastr.success("You have successfully logged out!", 'Great !');
     }
     localStorage.removeItem('registered');
     localStorage.removeItem('loggedIn');
