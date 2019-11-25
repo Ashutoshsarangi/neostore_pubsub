@@ -52,7 +52,9 @@ export class ProductdetailsComponent implements OnInit {
 
   ngOnInit() {
     this.imageUrl = environment.apiUrl;
-    this.product_id = this.activatedRoute.snapshot.paramMap.get('id');
+    this.activatedRoute.params.subscribe(routeParams => {
+      this.product_id = routeParams.id;
+    });
     this.apiService.getProductByProdId(this.product_id).subscribe((data) => {
       this.productDetailsResponseObjectStringified = (JSON.stringify(data));
       this.productDetailsResponseObjectParsed = JSON.parse(this.productDetailsResponseObjectStringified);

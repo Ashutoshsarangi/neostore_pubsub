@@ -32,9 +32,8 @@ export class SearchProductListComponent implements OnInit {
 
   goToAllProducts(data) {
     this.dialogRef.close();
-    //this.router.navigateByUrl('/allproducts', { skipLocationChange: true });
-    //setTimeout(() => this.router.navigate(['/allproducts/', data.product_id, data.category_id.category_id, data.category_id.category_name, data.color_id.color_id]));
-    this.router.navigate(['/allproducts/', data._id, data.category_id.category_id, data.category_id.category_name, data.color_id.color_id]);
+    this.router.navigateByUrl('/productdetails', { skipLocationChange: true });
+    setTimeout(() => this.router.navigate(['/productdetails/', data._id]));
   }
 
 }
