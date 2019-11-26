@@ -69,6 +69,9 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name getCustomerCartDetails - Fetching Cart Details of User 
+ */
   getCustomerCartDetails() {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -120,6 +123,12 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+ * Calculating Review Order Section.
+ * @param {Object[]} cartDetails - Cart Products.
+ * @param {string} cartDetails[].product_id - Product Id.
+ * @param {string} cartDetails[].total_productCost - Product Total Cost.
+ */
   calculateReviewOrder(cartDetails, value) {
     this.subtotal = 0;
     this.gst = 0;
@@ -146,6 +155,13 @@ export class CartComponent implements OnInit {
     this.ordertotal = this.subtotal + this.gst;
   }
 
+  /**
+ * Decrementing Quantity of Product.
+ * @param {Object} productId - Product Object.
+ * @param {number} currentQuantity - Product Quantity.
+ * @param {string} productCost - Product Cost.
+ * @param {string} totalCost - Product Total Cost.
+ */
   decrementQuanity(productId, currentQuantity, productCost, totalCost) {
     if (currentQuantity == 1) {
       Swal.fire("Quanity Cannot Be Less Than 1. You can delete the product if you want.");
@@ -164,6 +180,13 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+ * Incrementing Quantity of Product.
+ * @param {Object} productId - Product Object.
+ * @param {number} currentQuantity - Product Quantity.
+ * @param {string} productCost - Product Cost.
+ * @param {string} totalCost - Product Total Cost.
+ */
   incrementQuanity(productId, currentQuantity, productCost, totalCost) {
     if (currentQuantity >= 10) {
       Swal.fire("Quanity Cannot Be Greater Than 10.");
@@ -182,6 +205,11 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+* Deleting Product.
+* @param {Object} productId - Product Object.
+* @param {string} product_name - Product Name.
+*/
   deleteProduct(productId, product_name) {
     let dialogRef = this.matDialog.open(ConfirmationComponent, {
       width: '250px',
@@ -216,7 +244,6 @@ export class CartComponent implements OnInit {
         this.deleteCustomerCart(productId.product_id, product_name);
       }
       else if (!value) {
-        //Swal.fire(product_name + " is not deleted!");
         this.toastr.error(product_name + " is not deleted!", 'Oops !', {
           timeOut: 3000
         });
@@ -224,20 +251,26 @@ export class CartComponent implements OnInit {
     });
   }
 
+  /**
+* Deleting Product API.
+* @param {Object} productId - Product Object.
+* @param {string} product_name - Product Name.
+*/
   deleteCustomerCart(productId, product_name) {
     this.apiService.deleteCustomerCart(productId, this.authorizationToken).subscribe((response) => {
-      //Swal.fire("Deleted!", product_name + " " + JSON.parse(JSON.stringify(response)).message, "success");
       this.toastr.success(product_name + " " + JSON.parse(JSON.stringify(response)).message, 'Deleted !');
       this.calculateReviewOrder(this.cartData, "Delete");
     },
       (error) => {
-        //Swal.fire('Oops...', error.error.message, 'error');
         this.toastr.error(error.error.message, 'Oops !', {
           timeOut: 3000
         });
       });
   }
 
+  /** @function
+ * @name proceedToBuy - Checkout Function. 
+ */
   proceedToBuy() {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -265,6 +298,10 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name radioChange - Address Selection Option. 
+ * @param {Object} $event - Selection Object of Mat Radio.
+ */
   radioChange($event: MatRadioChange) {
     for (let i = 0; i < this.addresses.length; i++) {
       if ($event.source.name == JSON.stringify(i)) {
@@ -278,6 +315,12 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /**
+* Updating Delivery Address.
+* @param {Object} address - Address Object.
+* @param {boolean} [value=true] - Set as Delivery Address.
+* @param {boolean} [value=false] - Do not Set as Delivery Address.
+*/
   setDeliveryAddress(address, value) {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -295,6 +338,9 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name placeOrder - Final Place Order on Successful Delivery Address Update. 
+ */
   placeOrder() {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -315,6 +361,11 @@ export class CartComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name addToCartApi - Add to Cart API on Checkout.
+ * @param {Object[]} result - Cart Details.
+ * @param {string} authorizationToken - Authorization Token.
+ */
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
       this.orderDetails = response;
@@ -329,10 +380,18 @@ export class CartComponent implements OnInit {
       });
   }
 
+  /** @function
+ * @name gotoEditAddress - Open Edit Address Form.
+ * @param {number} address_id - Address Id.
+ */
   gotoEditAddress(address_id: any) {
     this.router.navigate(['/add-address/', address_id]);
   }
 
+  /** @function
+ * @name gotoProductDetails - Go to Product Details From Cart.
+ * @param {string} productId - Product Id.
+ */
   gotoProductDetails(productId: any) {
     this.router.navigate(['/productdetails/', productId]);
   }

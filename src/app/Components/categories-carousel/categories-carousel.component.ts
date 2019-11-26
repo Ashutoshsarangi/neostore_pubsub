@@ -56,14 +56,27 @@ export class CategoriesCarouselComponent implements OnInit {
 
   }
 
+  /**
+ * Go To All Products Section When Clicked on Carousel.
+ * @param {string} category_id - Category Id.
+ * @param {string} category_name - Category Name.
+ */
   gotoAllProducts(category_id: any, category_name: any) {
     this.router.navigate(['/allproducts/', category_id, category_name]);
   }
 
+  /**
+ * Go To Product Details Section When Clicked on Cards.
+ * @param {string} productId - Product Id.
+ */
   gotoProductDetails(productId: any) {
     this.router.navigate(['/productdetails/', productId]);
   }
 
+  /**
+* Add To Cart.
+* @param {Object} productToAdd - Product to add.
+*/
   addToCart(productToAdd) {
 
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
@@ -117,9 +130,13 @@ export class CategoriesCarouselComponent implements OnInit {
 
   }
 
+  /**
+* Add To Cart API.
+* @param {Object} result - Product to add.
+* @param {string} authorizationToken - Authorization Token.
+*/
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      //Swal.fire("Great !", "Added Successfully", "success");
       this.toastr.success('Added Successfully', 'Great !');
     },
       (error) => {

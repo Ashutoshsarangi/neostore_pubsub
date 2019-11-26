@@ -253,9 +253,9 @@ export class AllproductsComponent implements OnInit {
 
   }
 
+  //ADD TO CART API.
   addToCartApi(result, authorizationToken) {
     this.apiService.postAddProductToCartCheckout(result, authorizationToken).subscribe((response) => {
-      //Swal.fire("Great !", "Added Successfully", "success");
       this.toastr.success('Added Successfully', 'Great !');
     },
       (error) => {

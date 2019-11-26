@@ -28,6 +28,9 @@ export class ContactformComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name formValidation - Contact us form Validation. 
+ */
   formValidation() {
 
     var fullname = document.forms["RegForm"]["fullname"]; //User Full Name Field;

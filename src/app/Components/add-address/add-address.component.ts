@@ -16,14 +16,25 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddAddressComponent implements OnInit {
 
+  /** @type {number} */
   address_id;
+
+  /** @type {string} */
   addressHeading = "Add new address";
+
+  /** @type {string} */
   buttonText = "Save";
+
+  /** @type {Array} */
   addresses = [];
 
+  /** @type {string} */
   authorizationToken;
 
+  /** @type {boolean} */
   ordersClicked: boolean = false;
+
+  /** @type {boolean} */
   myAccountClicked: boolean = false;
 
   constructor(
@@ -67,6 +78,10 @@ export class AddAddressComponent implements OnInit {
     }
   }
 
+  /**
+ * Adding new user address into his/her profile.
+ * @param {string} [value=Address] - Used to redirect to address section in profile after adding new address.
+ */
   save(value) {
 
     var address = document.forms["RegForm"]["address"]; //User Address.
@@ -184,7 +199,6 @@ export class AddAddressComponent implements OnInit {
         if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.putUpdateAddress(this.address_id, address.value, pin.value, city.value, state.value, country.value, false, this.authorizationToken).subscribe((response) => {
-            //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
             this.toastr.success(JSON.parse(JSON.stringify(response)).message, "Great !");
             if (this.router.url === "/cart/add-address") {
               this.router.navigate(['/cart'])
@@ -204,7 +218,6 @@ export class AddAddressComponent implements OnInit {
         if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
           this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
           this.apiService.postAddress(address.value, pin.value, city.value, state.value, country.value, this.authorizationToken).subscribe((response) => {
-            //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
             this.toastr.success(JSON.parse(JSON.stringify(response)).message, "Great !");
             if (this.router.url === "/cart/add-address") {
               this.router.navigate(['/cart'])
@@ -223,6 +236,10 @@ export class AddAddressComponent implements OnInit {
     }
   }
 
+  /**
+ * Cancelling the address form.
+ * @param {string} [value=Address] - Used to redirect to address section in profile after cancelling the form.
+ */
   cancel(value) {
     let dialogRef = this.matDialog.open(ConfirmationComponent, {
       width: '250px',
@@ -236,12 +253,14 @@ export class AddAddressComponent implements OnInit {
         this.router.navigate(['/profile/', value]);
       }
       else if (!value1) {
-        //Swal.fire("Continue Editing...");
         this.toastr.success("Continue Editing...");
       }
     });
   }
 
+  /** @function
+ * @name openOrdersList - Opening and Closing of Order Button List having only one option. [Orders]
+ */
   openOrdersList() {
     if (this.ordersClicked == false) {
       this.ordersClicked = true;
@@ -252,6 +271,9 @@ export class AddAddressComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name openMyAccountList - Opening and Closing of Account Button List having two options. [Profile & Addresses]
+ */
   openMyAccountList() {
     if (this.myAccountClicked == false) {
       this.myAccountClicked = true;
@@ -262,6 +284,12 @@ export class AddAddressComponent implements OnInit {
     }
   }
 
+  /**
+ * Going to the My Account Section in Profile.
+ * @param {string} [value=Order] - Used to redirect to order section.
+ * @param {string} [value=Profile] - Used to redirect to profile section.
+ * @param {string} [value=Address] - Used to redirect to address section.
+ */
   gotoProfile(value) {
     if (localStorage.getItem('loggedIn')) {
       this.router.navigateByUrl('/profile', { skipLocationChange: true });

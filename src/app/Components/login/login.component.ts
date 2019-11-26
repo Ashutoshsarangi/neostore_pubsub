@@ -7,6 +7,7 @@ import { AuthService } from '../../Services/auth.service';
 import { EmailValidator } from '@angular/forms';
 //import { AuthService, FacebookLoginProvider, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 import { ToastrService } from 'ngx-toastr';
+import { EventManager } from '../../Services/custom.services';
 
 @Component({
   selector: 'app-login',
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private behaviourService: BehaviourService,
     private auth: AuthService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private evtManager: EventManager
     //private authService: AuthService
   ) { }
 
@@ -57,6 +59,9 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name formValidation - Validating Email & Password and Hitting Login API, getting user details.
+ */
   formValidation() {
 
     var email = document.forms["RegForm"]["email"]; //User Email Field;
@@ -97,13 +102,13 @@ export class LoginComponent implements OnInit {
 
     else {
       this.apiService.postLogin(email.value, password.value).subscribe((response) => {
-        //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
         this.toastr.success(JSON.parse(JSON.stringify(response)).message, 'Great !');
         localStorage.setItem('loggedIn', "true");
         this.behaviourService.setLogin(localStorage.getItem('loggedIn'));
         localStorage.setItem('userDetails', JSON.stringify(response));
         this.auth.sendToken(JSON.parse(JSON.stringify(response)).token);
         this.getCustomerCartDetails();
+        this.evtManager.globalEvnt().publish('userData', { name: 'ashu', age: 123 });
         this.router.navigate(['categories-carousel']);
       },
         (error) => {
@@ -114,6 +119,9 @@ export class LoginComponent implements OnInit {
 
   }
 
+  /** @function
+ * @name getCustomerCartDetails - Getting Customer Cart Details on Successful Login.
+ */
   getCustomerCartDetails() {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -166,6 +174,9 @@ export class LoginComponent implements OnInit {
   //   window.open('https://twitter.com/login');
   // }
 
+  /** @function
+ * @name togglePasswordType - Show and Hide Functionality for Password.
+ */
   togglePasswordType() {
     if (this.passwordType == "text") {
       this.passwordType = "password";

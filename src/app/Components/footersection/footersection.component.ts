@@ -78,14 +78,23 @@ export class FootersectionComponent implements OnInit {
 
   }
 
+  /** @function
+ * @name openPDF - Open PDF of Terms and Conditions.
+ */
   openPDF() {
     window.open(this.pdfUrl + this.fileName);
   }
 
+  /** @function
+ * @name openPDF1 - Open PDF of Guarantee and Return Policy.
+ */
   openPDF1() {
     window.open(this.pdfUrl + this.fileName1);
   }
 
+  /** @function
+ * @name contactUs - Open Contact Us Form.
+ */
   contactUs() {
     if (!this.auth.isLoggedIn()) {
       Swal.fire("Please Login First!");
@@ -96,6 +105,10 @@ export class FootersectionComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name gotoThankYouSubscribe - Go To Thank You Subscribe on Successful Subscription.
+ * @param {string} email - Email Id entered by user.
+ */
   gotoThankYouSubscribe(email) {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.email = email;

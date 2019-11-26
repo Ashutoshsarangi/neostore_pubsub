@@ -52,6 +52,9 @@ export class ConfirmationComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name yes - Delete the respective thing on yes.
+ */
   yes() {
     if (this.from == "Logout") {
       this.logout(); //Logout.
@@ -67,6 +70,9 @@ export class ConfirmationComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name no - Do not Delete the respective thing on no and Dismiss the modal.
+ */
   no() {
     if (this.from == "Logout") {
       this.dialogRef.close(true); //Do not logout - showProfileOption true;
@@ -82,6 +88,9 @@ export class ConfirmationComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name logout - Logout Functionality.
+ */
   logout() {
     if (localStorage.getItem('loggedIn') && localStorage.getItem('userDetails')) {
       this.authorizationToken = "Bearer " + JSON.parse(localStorage.getItem('userDetails')).token;
@@ -94,6 +103,11 @@ export class ConfirmationComponent implements OnInit {
     }
   }
 
+  /** @function
+ * @name postCartDataWhileLogout - If there is data in cart, save it.
+ * @param {string} [value=HasCartData] - If data is present in cart.
+ * @param {string} [value=NoCartData] - If no data is present in cart.
+ */
   postCartDataWhileLogout(value) {
     var a = [];
     a = JSON.parse(localStorage.getItem('cartProduct'));
@@ -106,6 +120,11 @@ export class ConfirmationComponent implements OnInit {
     this.postCartDataWhileLogoutApi(a, this.authorizationToken, value);
   }
 
+  /** @function
+ * @name postCartDataWhileLogoutApi - If there is data in cart, save it - Checkout API with {flag: 'logout'}.
+ * @param {string} [value=HasCartData] - If data is present in cart.
+ * @param {string} [value=NoCartData] - If no data is present in cart.
+ */
   postCartDataWhileLogoutApi(a, authorizationToken, value) {
     this.apiService.postAddProductToCartCheckout(a, authorizationToken).subscribe((response) => {
       this.logoutWithNoCartData(value);
@@ -113,7 +132,6 @@ export class ConfirmationComponent implements OnInit {
         Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message + " Kindly relogin with your new password!!", "success");
       }
       else {
-        //Swal.fire("Great !", JSON.parse(JSON.stringify(response)).message, "success");
         this.toastr.success(JSON.parse(JSON.stringify(response)).message, 'Great !');
       }
     },
@@ -122,12 +140,16 @@ export class ConfirmationComponent implements OnInit {
       });
   }
 
+  /** @function
+* @name logoutWithNoCartData - If there is no data in cart, just logout by removing the keys from localstorage.
+* @param {string} [value=HasCartData] - If data is present in cart.
+* @param {string} [value=NoCartData] - If no data is present in cart.
+*/
   logoutWithNoCartData(value) {
     if (this.from == "ChangePassword" && value == "NoCartData") {
       Swal.fire("Great !", "You have been logged out!! Kindly relogin with your new password!!");
     }
     else if (this.from != "ChangePassword" && value == "NoCartData") {
-      //Swal.fire("Great !", "You have successfully logged out!", "success");
       this.toastr.success("You have successfully logged out!", 'Great !');
     }
     localStorage.removeItem('registered');

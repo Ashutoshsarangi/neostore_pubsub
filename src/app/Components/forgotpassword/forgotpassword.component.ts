@@ -24,6 +24,9 @@ export class ForgotpasswordComponent implements OnInit {
 
   ngOnInit() { }
 
+  /** @function
+ * @name formValidation - Validating Email and Hitting Forget Password Api.
+ */
   formValidation() {
 
     var email = document.forms["RegForm"]["email"]; //User Email Field;
@@ -57,6 +60,9 @@ export class ForgotpasswordComponent implements OnInit {
 
   }
 
+  /** @function
+* @name formValidation1 - Validating Password Fields and Hitting Recover Password Api.
+*/
   formValidation1() {
 
     var code = document.forms["RegForm"]["code"]; //User Verfication Code.
@@ -136,6 +142,9 @@ export class ForgotpasswordComponent implements OnInit {
 
   }
 
+  /** @function
+* @name togglePasswordType1 - Show and Hide Functionality for Password.
+*/
   togglePasswordType1() {
     if (this.passwordType1 == "text") {
       this.passwordType1 = "password";
@@ -145,6 +154,9 @@ export class ForgotpasswordComponent implements OnInit {
     }
   }
 
+  /** @function
+* @name togglePasswordType2 - Show and Hide Functionality for Confirm Password.
+*/
   togglePasswordType2() {
     if (this.passwordType2 == "text") {
       this.passwordType2 = "password";

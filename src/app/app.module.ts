@@ -42,6 +42,7 @@ import { SocialLoginModule, AuthServiceConfig, FacebookLoginProvider, GoogleLogi
 import { AppPasswordDirective } from './Directives/app-password.directive';
 import { FilterPipe } from './Pipes/filter.pipe';
 import { ToastrModule } from 'ngx-toastr';
+import { EventManager } from './Services/custom.services';
 
 const config = new AuthServiceConfig([
   {
@@ -125,7 +126,8 @@ export function provideConfig() {
     {
       provide: AuthServiceConfig,
       useFactory: provideConfig
-    }
+    },
+    EventManager
   ],
   bootstrap: [AppComponent]
 })

@@ -8,6 +8,7 @@ import { AuthService } from '../../Services/auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ConfirmationComponent } from '../confirmation/confirmation.component';
 import { SearchProductListComponent } from '../search-product-list/search-product-list.component';
+import { EventManager } from '../../Services/custom.services'
 
 @Component({
   selector: 'app-navigationbar',
@@ -34,7 +35,8 @@ export class NavigationbarComponent implements OnInit {
     private behaviourService: BehaviourService,
     private apiService: ApiService,
     private auth: AuthService,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private evtManager: EventManager
   ) {
     this.subscription = this.behaviourService.getCount().subscribe(count => {
       if (count) {
@@ -55,6 +57,10 @@ export class NavigationbarComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.evtManager.globalEvnt().subscribe('userData', function (data) {
+      console.log('Hey i am herew');
+      console.log(data);
+    });
     if (localStorage.getItem('loggedIn')) {
       this.showProfileOption = true;
       this.cartCount = JSON.parse(localStorage.getItem('cartCount'));
@@ -68,6 +74,7 @@ export class NavigationbarComponent implements OnInit {
     this.subscription.unsubscribe();
   }
 
+  /** @function @name */
   openSearchProductList() {
     let dialogRef = this.matDialog.open(SearchProductListComponent, {
       width: '400px',
@@ -99,6 +106,9 @@ export class NavigationbarComponent implements OnInit {
     });
   }
 
+  /** @function 
+   * @name goToCart - Go To Cart.
+   */
   goToCart() {
     if (!this.auth.isLoggedIn()) {
       Swal.fire("Please Login First!");
@@ -109,6 +119,10 @@ export class NavigationbarComponent implements OnInit {
     }
   }
 
+  /** @function 
+   * @name gotoProfile - Go To Profile.
+   * @param {string} [value=Profile] - Go To Profile from Dropdown.
+   */
   gotoProfile(value) {
     if (localStorage.getItem('loggedIn')) {
       this.router.navigateByUrl('/profile', { skipLocationChange: true });
@@ -120,6 +134,9 @@ export class NavigationbarComponent implements OnInit {
     }
   }
 
+  /** @function 
+   * @name logout - Logout Functionality - Opening Confirmation Dialog Box
+   */
   logout() {
     if (!localStorage.getItem('loggedIn')) {
       Swal.fire("Please Login First.");
