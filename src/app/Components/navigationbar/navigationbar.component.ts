@@ -57,10 +57,12 @@ export class NavigationbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.evtManager.globalEvnt().subscribe('userData', function (data) {
+    console.log(this.evtManager.eventManager().subscribe);
+    this.evtManager.eventManager().subscribe('userData', (data) => {
       console.log('Hey i am herew');
       console.log(data);
     });
+    console.log('11');
     if (localStorage.getItem('loggedIn')) {
       this.showProfileOption = true;
       this.cartCount = JSON.parse(localStorage.getItem('cartCount'));

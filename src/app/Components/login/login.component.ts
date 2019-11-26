@@ -108,7 +108,7 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('userDetails', JSON.stringify(response));
         this.auth.sendToken(JSON.parse(JSON.stringify(response)).token);
         this.getCustomerCartDetails();
-        this.evtManager.globalEvnt().publish('userData', { name: 'ashu', age: 123 });
+        this.evtManager.eventManager().publish('userData', { name: 'ashu', age: 123 });
         this.router.navigate(['categories-carousel']);
       },
         (error) => {
